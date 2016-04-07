@@ -1,0 +1,655 @@
+*::-webkit-input-placeholder {
+	color: #c0c0c0;
+	opacity: 1;
+}
+*:-moz-placeholder {
+	color: #c0c0c0;
+	opacity: 1;
+}
+*::-moz-placeholder {
+	color: #c0c0c0;
+	opacity: 1;
+}
+*:-ms-input-placeholder {
+	color: #c0c0c0;
+	opacity: 1;
+}
+*:focus::-webkit-input-placeholder {
+	transition: 300ms;
+	opacity: 0;
+}
+*:focus:-moz-placeholder {
+	transition: 300ms;
+	opacity: 0;
+}
+*:focus::-moz-placeholder {
+	transition: 300ms;
+	opacity: 0;
+}
+*:focus:-ms-input-placeholder {
+	transition: 300ms;
+	opacity: 0;
+}
+.b-grey {
+	background: #f2f2f2;
+}
+.b-blue {
+	background: #1f2a35;
+}
+.over-pay .item {
+	width: 95.3%;
+	height: 175px;
+	margin: 0 auto;
+	margin-top: 41px;
+	text-align: right;
+}
+.over-pay .op-item:first-child .item {
+	margin: 0;
+	margin-top: 41px;
+}
+.over-pay .op-item:last-child .item {
+	margin-top: 41px;
+	margin-left: 4.7%;
+}
+.over-pay .item .img {
+	height: 159px;
+	width: 92.6%;
+	overflow: hidden;
+}
+.over-pay .item img {
+	width: 100%;
+	height: auto;
+}
+.over-pay .item .name {
+	position: relative;
+	top: -18px;
+	display: inline-block;
+	padding: 6px 31px;
+	background: rgba(0, 0, 0, 0.8);
+	font-family: "FuturisLightC";
+	font-size: 1.22em;
+	line-height: 1.1;
+}
+.get-price {
+	padding: 56px 0;
+	font-family: "FuturisLightC";
+	line-height: 1.3;
+	color: #ffffff;
+}
+.get-price p {
+	font-size: 1.33em;
+	padding-right: 20px;
+}
+.get-price p:last-of-type {
+	padding: 0px;
+	margin-top: 10px;
+	font-family: "FuturisC";
+	font-size: 1.44em;
+	font-weight: 600;
+
+}
+.get-price button {
+	display: inline-block;
+	width: 90%;
+	padding: 8px 10px;
+	margin-top: 25px;
+	border: 4px solid #59c9ff;
+	font-family: "FuturaBoockC", sans-serif;
+	font-size: 1.44em;
+}
+.slider-container .slider {
+	width: 89%;
+	max-width: 1600px;
+	margin: 0 auto;
+	margin-top: 31px;
+}
+.slider img {
+	width: 100%;
+	height: auto;
+}
+.slider-container .slick-slider .slick-arrow,
+.slider-container .slick-slider .slick-arrow:focus {
+	width: 39px;
+	height: 78px;
+	background: url(../img/slider-arrow.png);
+	z-index: 2;
+}
+.slider-container .slick-slider .slick-arrow:hover,
+.slider-container .slick-slider .slick-arrow:active {
+	background: url(../img/slider-arrow-active.png);
+}
+.slider-container .slick-slider .slick-arrow:before {
+	display: none;
+}
+.slider-container .slick-slider .slick-next {
+	right: 74px;
+	margin-top: -39px;
+	-webkit-transform: rotate(180deg);
+	-ms-transform: rotate(180deg);
+	-o-transform: rotate(180deg);
+	transform: rotate(180deg);
+}
+.slider-container .slick-slider .slick-prev {
+	left: 74px;
+}
+.slick-slide img {
+	position: relative;
+	transform: scale(1.42);
+	transition: 300ms ease;
+	opacity: 0.25;
+}
+.slick-slide.slick-active img {
+	z-index: 2;
+}
+.slick-slide.slick-center img {
+	position: relative;
+	transform: scale(1.9)!important;
+	z-index: 3;
+	opacity: 1;
+}
+.slider .slick-list {
+	padding: 9% 0;
+}
+.slider-container .slider-btn {
+	display: block;
+	position: relative;
+	top: -38px;
+	width: 93%;
+	padding: 10px 11px;
+	margin: 0 auto;
+	font-size: 1.44em;
+}
+.slider-container {
+	padding-bottom: 34px;
+}
+.slick-slide .item-nv {
+	opacity: 0;
+}
+
+
+
+
+
+input[type=range] {
+	display: inline-block;
+	vertical-align: middle;
+	width: 66%;
+	-webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+	background: transparent;
+	padding: 0px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+	-webkit-appearance: none;
+}
+
+input[type=range]:focus {
+	outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+}
+
+input[type=range]::-ms-track {
+	width: 100%;
+	cursor: pointer;
+	background: transparent; /* Hides the slider so custom styles can be added */
+	border-color: transparent;
+	color: transparent;
+}
+input[type=range]::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	height: 26px;
+	width: 7px;
+	background: #3cb3ed;
+	cursor: pointer;
+	margin-top: -12px; 
+}
+
+/* All the same stuff for Firefox */
+input[type=range]::-moz-range-thumb {
+	height: 26px;
+	width: 7px;
+	border-radius: 0px;
+	border: none;
+	background: #3cb3ed;
+	cursor: pointer;
+}
+/* All the same stuff for IE */
+input[type=range]::-ms-thumb {
+	height: 26px;
+	width: 7px;
+	outline: none;
+	background: #3cb3ed;
+	cursor: pointer;
+}
+input[type=range]::-webkit-slider-runnable-track {
+	width: 100%;
+	height: 2px;
+	cursor: pointer;
+	background: #c8c8c8;
+}
+input[type=range]::-moz-range-track {
+	width: 100%;	 
+	height: 2px;
+	cursor: pointer;
+	background: #c8c8c8;
+}
+input[type=range]::-ms-track {
+	width: 100%;
+	height: 2px;
+	cursor: pointer;
+	background: #c8c8c8;
+}
+/*input[type=range]::-ms-fill-lower {
+ background: #2a6495;
+ border: 0.2px solid #010101;
+ border-radius: 2.6px;
+ box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range]::-ms-fill-upper {
+ background: #3071a9;
+ border: 0.2px solid #010101;
+ border-radius: 2.6px;
+ box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}*/
+.calc-container {
+	padding: 30px 0 79px 0;
+	font-family: "FuturisLightC", sans-serif;
+	background: url(../img/calc.jpg);
+	background-size: cover;
+}
+.calc-container h4 {
+	padding: 0 10px;
+	font-size: 30px;
+	font-weight: 500;
+}
+.calc {
+	width: 93.9%;
+	margin: 0 auto;
+	margin-top: 42px;
+	padding: 30px 37px 21px 45px;
+	background: #e6eef1;
+}
+.calc .top {
+	display: block;
+	font-size: 1.33em;
+}
+.calc input[type="radio"] {
+	display: none;
+}
+.calc label {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	background: #c8c8c8;
+	border-radius: 50%;
+	transition: 50ms ease;
+}
+.calc input[type="radio"]:checked + label {
+	transform: scale(1.2);
+	background: #3cb3ed;
+}
+.ls {
+	width: 82.5%;
+}
+.rs {
+	padding-left: 9%;
+}
+.ls > div,
+.rs > div {
+	margin-bottom: 13px;
+}
+.range-val {
+	vertical-align: middle;
+	height: 39px;
+	width: 28%;
+	margin-right: 3%;
+	text-align: center;
+}
+.personal-data {
+	padding-top: 20px;
+}
+.personal-data input {
+	width: 100%;
+}
+.range-val {
+	font-family: "FuturisLightC";
+	color: #424242;
+}
+.services {
+	position: relative;
+	padding: 34px 0 72px 0;
+	background-size: cover;
+}
+.services:before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 50%;
+	background: url(../img/services-bg-l.jpg) no-repeat;
+	background-size: cover;
+	z-index: -1;
+}
+.services:after {
+	content: "";
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	width: 50%;
+	background: url(../img/services-bg-r.jpg) no-repeat;
+	background-size: cover;
+	z-index: -1;
+}
+.service-item {
+	width: 89%;
+	padding: 24px 1% 0px 7%;
+	margin-top: 55px;
+	background: rgba(255, 255, 255, 0.86);
+	font-family: "FuturaBoockC";
+}
+.services .col-md-6:nth-child(2) .service-item {
+	float: right;
+}
+.service-item h6 {
+	font-family: "FuturaDemiC";
+	text-align: left;
+	text-transform: uppercase;
+	color: #444040;
+}
+.service-item ul {
+	list-style-position: inside;
+}
+.service-item .s-price {
+	margin-top: 5px;
+	font-size: 1.11em;
+	font-family: "FuturisLightC";
+	color: #b9b9b9;
+}
+.service-item .s-price span {
+	margin-right: 5px;
+	font-family: "FuturaDemiC";
+	font-size: 2.39em;
+	font-weight: 800;
+	color: #3cb3ed;
+}
+.service-item ul,
+.service-item p {
+	margin-top: 10px;
+	font-size: 1.11em;
+	line-height: 1.7;
+}
+.service-item button {
+	position: relative;
+	top: 22px;
+	width: 45%;
+	padding: 5px 10px;
+}
+.features {
+	padding: 61px 0 63px 0;
+}
+.features .content {
+	width: 92%;
+	margin: 0 auto;
+	text-align: left;
+}
+.features .feature-item:first-child .content {
+	margin: 0;
+}
+.features .feature-item:last-child .content {
+	float: right;
+	margin: 0;
+}
+.features p {
+	font-size: 0.89em;
+	line-height: 1.2;
+	color: #424242;
+}
+.features .img {
+	display: inline-block;
+	vertical-align: top;
+	width: 25%;
+	margin-bottom: 10px;
+	text-align: center;
+}
+.features h6 {
+	display: inline-block;
+	vertical-align: top;
+	width: 70%;
+	margin-bottom: 10px;
+	font-weight: 800;
+	text-align: left;
+	color: #1e88e5;
+}
+.caruosel-container {
+	position: relative;
+	min-height: 650px;
+	padding-bottom: 120px;
+}
+.caruosel-container:before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: block;
+	background: url(../img/carousel-bg.jpg) no-repeat;
+	background-size: cover;
+	z-index: -1;
+	opacity: 0.2;
+}
+.caruosel-container h4 {
+	position: relative;
+	font-family: "FuturaDemiC";
+	z-index: 1;
+}
+.carousel {
+	position: relative;
+	width: 90%;
+	margin: 0 auto;
+	z-index: 1;
+}
+.carousel .slick-slide {
+	height: 344px;
+}
+.carousel .slick-slide iframe {
+	width: 100%;
+	height: 100%;
+}
+.back {
+	position: absolute;
+	top: -53px;
+	right: 30px;
+	width: 47%;
+	height: 451px;
+	background: url(../img/carousel-back.jpg);
+}
+.caruosel-container .row {
+	position: relative;
+	margin-top: 92px;
+}
+.caruosel-container .back button {
+	position: absolute;
+	bottom: -28px;
+	left: 76px;
+	width: 327px;
+	padding: 10px 20px;
+	font-size: 1.44em;
+}
+.carousel .slick-dots li button {
+	width: 17px;
+	height: 17px;
+	background: #b6b6b6;
+}
+.carousel .slick-dots li button:hover {
+	background: #0079b4;
+}
+.carousel .slick-dots li.slick-active button {
+	background: #3cb3ed;
+}
+.carousel .slick-dots li button:before {
+	display: none;
+}
+.you-get {
+	padding: 30px 0 48px 0;
+	font-family: "FuturaBoockC";
+	background: url("../img/g-bg.png") #1f2a35 center no-repeat;
+	background-size: cover;
+	text-align: center;
+	color: #d2dde3;
+}
+.you-get h4 {
+	font-weight: 400;
+	color: #fff;
+}
+.you-get-item .img {
+	height: 67px;
+	vertical-align: middle;
+	margin-bottom: 10px;
+	margin-top: 36px;
+	line-height: 67px;
+}
+.you-get-item .content {
+	width: 85%;
+	margin: 0 auto;
+	margin-bottom: 60px;
+	font-size: 1.33em;
+	line-height: 1.2;
+}
+.you-get-item:first-child .content {
+	margin-left: 0px;
+}
+.you-get button {
+	display: block;
+	width: 100%;
+	font-size: 1.44em;
+	padding: 10px 11px;
+}
+footer {
+	padding: 29px 0 34px 0;
+	background: #353131;
+	font-family: "FuturisLightC";
+	color: #fff;
+	font-size: 0.90em;
+}
+footer a,
+footer a:hover,
+footer a:active {
+	text-decoration: underline;
+	color: #70aff5;
+}
+footer .social {
+	display: inline-block;
+	width: 37px;
+	height: 37px;
+	background: url(../img/social.png) no-repeat;
+	background-position: 9px 10px;
+	background-color: #5f82a9;
+}
+footer .social:hover {
+	transition: 300ms ease;
+	opacity: 0.8;
+}
+footer .social.fb {
+	margin-left: 27px;
+	background-position: -25px;
+	background-color: #496194;
+}
+footer .social.pc {
+	margin-left: 27px;
+	background-position: -58px;
+	background-color: #d76145;
+}
+footer .social a {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+#map {
+	height: 500px;
+}
+.map-titile {
+	font-family: "FuturaDemiC";
+	font-size: 26px;
+}
+.gm-style .gm-style-iw {
+	padding: 5px 0 32px 10px;
+	font-family: "FuturaBoockC";
+	font-size: 20px;
+	text-align: left;
+	line-height: 1.1;
+	overflow: visible;
+	color: #353131;
+}
+.gm-style .gm-style-iw:before {
+	content: "";
+	position: absolute;
+	top: -8px;
+	left: -15px;
+	right: -15px;
+	height: 3px;
+	background: #16a8d6;
+}
+.gm-style .gm-style-iw h2 {
+	padding: 15px 0 10px 0;
+	font-family: "FuturaBoockC";
+	font-weight: 500;
+	font-size: 20px;
+	text-align: left;
+	color: #9a9898;
+}
+#toggle {
+    display: none;
+    float: right;
+    margin-top: 25px;
+    margin-right: 30px;
+    width: 28px;
+    height: 22px;
+}
+#toggle.on span {
+    background-color: transparent;
+}
+#toggle.on span:before {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+#toggle.on span:after {
+    transform: rotate(-45deg) translate(7px, -8px);
+}
+#toggle span, #toggle span:after, #toggle span:before {
+    width: 100%;
+    height: 3px;
+    background-color: #fff;
+    transition: all 0.3s;
+    backface-visibility: hidden;
+    border-radius: 2px;
+}
+#toggle span {
+    position: relative;
+    display: block;
+    margin-top: 9px;
+}
+#toggle span:after, #toggle span:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: -9px;
+}
+#toggle span:after {
+    top: 9px;
+}
+button a {
+	display: block;
+}
+.popup {
+	position: relative;
+	width: 90%;
+	max-width: 500px;
+	margin: 20px auto;
+	padding: 50px 10px 50px 40px;
+	border-top: 3px solid #16a8d6;
+	background: #FFF;
+}
+.popup input {
+	border: 1px solid #ddd;
+}

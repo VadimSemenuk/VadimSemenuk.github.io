@@ -1,0 +1,45 @@
+ @font-face {
+	font-family: "FuturaBoockC";
+	src: url("../fonts/futuraBoockC/FTR45__C.eot");
+	src: url("../fonts/futuraBoockC/FTR45__C.eot?#iefix") format("embedded-opentype"),
+			 url("../fonts/futuraBoockC/FTR45__C.woff") format("woff"),
+			 url("../fonts/futuraBoockC/FTR45__C.ttf") format("truetype");
+	font-style: normal;
+	font-weight: normal;
+}
+@font-face {
+	font-family: "FuturaDemiC";
+	src: url("../fonts/futuraDemiC/FuturaDemiC.eot");
+	src: url("../fonts/futuraDemiC/FuturaDemiC.eot?#iefix") format("embedded-opentype"),
+			 url("../fonts/futuraDemiC/FuturaDemiC.woff") format("woff"),
+			 url("../fonts/futuraDemiC/FuturaDemiC.ttf") format("truetype");
+	font-style: normal;
+	font-weight: normal;
+}
+ @font-face {
+	font-family: "FuturisC";
+	src: url("../fonts/FuturisC/FuturisC.eot");
+	src: url("../fonts/FuturisC/FuturisC.eot?#iefix") format("embedded-opentype"),
+			 url("../fonts/FuturisC/FuturisC.woff") format("woff"),
+			 url("../fonts/FuturisC/FuturisC.ttf") format("truetype");
+	font-style: normal;
+	font-weight: normal;
+}
+@font-face {
+	font-family: "FuturaLight";
+	src: url("../fonts/futuraLight/FuturaLight.eot");
+	src: url("../fonts/futuraLight/FuturaLight.eot?#iefix") format("embedded-opentype"),
+			 url("../fonts/futuraLight/FuturaLight.woff") format("woff"),
+			 url("../fonts/futuraLight/FuturaLight.ttf") format("truetype");
+	font-style: normal;
+	font-weight: normal;
+}
+@font-face {
+	font-family: "FuturisLightC";
+	src: url("../fonts/FuturisLightC/FuturisLightC.eot");
+	src: url("../fonts/FuturisLightC/FuturisLightC.eot?#iefix") format("embedded-opentype"),
+			 url("../fonts/FuturisLightC/FuturisLightC.woff") format("woff"),
+			 url("../fonts/FuturisLightC/FuturisLightC.ttf") format("truetype");
+	font-style: normal;
+	font-weight: normal;
+}

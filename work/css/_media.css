@@ -1,0 +1,271 @@
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 991px) {
+	.services:before {
+		height: 50%;
+		width: 100%;
+		right: 0px;
+	}
+	.services:after {
+		top: 50%;
+		height: 50%;
+		width: 100%;
+		left: 0px;
+	}
+	.logo {
+		padding-top: 10px;
+		text-align: center;
+	}
+	header nav {
+		margin: 0;
+		text-align: center;
+	}
+	.rectangle .text {
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+	.rectangle .negative-offset-2 {
+		margin-left: -8.3%;
+	}
+	header .form {
+		bottom: auto;
+		top: 50%;
+		-webkit-transform: translate(0%, -50%);
+		-ms-transform: translate(0%, -50%);
+		-o-transform: translate(0%, -50%);
+		transform: translate(0%, -50%);
+	}
+	.content-bg .economy {
+		margin-right: 0px;
+	}
+	.over-pay .item .img {
+		height: 120px;
+	}
+	.service-item {
+		margin: 0 auto;
+		margin-top: 55px;
+	}
+	.services .col-md-6:nth-child(2) .service-item {
+		float: none;
+	}
+	.features .content {
+		margin-top: 30px;
+	}
+	.features .feature-item:first-child .content,
+	.features .feature-item:last-child .content {
+		margin: 0px auto;
+		margin-top: 30px;
+	}
+	.carousel .slick-slide {
+		height: 280px;
+	}
+	.back {
+		top: -44px;
+		height: 371px;
+	}
+	.caruosel-container .back button {
+		left: 20px;
+		width: 300px;
+		padding: 10px 14px;
+	}
+	.caruosel-container {
+		min-height: 550px;
+		padding-bottom: 90px;
+	}
+	.get-price button {
+		display: block;
+		margin: 0 auto;
+		margin-top: 25px;
+	}
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 767px) {
+
+	#toggle {
+		display: block;
+	}
+	.logo {
+		margin-bottom: 10px;
+		padding-left: 40px;
+		text-align: left;
+	}
+	header .top {
+		position: relative;
+	}
+	nav {
+		display: none;
+		position: absolute;
+		top: 60px;
+		right: 10%;
+		width: 300px;
+		background: rgba(0, 0, 0, 0.9);
+		z-index: 1;
+	}
+	nav ul li {
+		display: block;
+		padding: 10px 0;
+		border-bottom: 1px solid #fff;
+		text-align: left;
+		transition: 200ms ease;
+	}
+	nav ul li:hover {
+		border-bottom: 1px solid #3cb3ed;
+	}
+	nav ul li a {
+		display: block;
+		height: 100%;
+	}
+	.rectangle .negative-offset-2 {
+		margin-left: 0px;
+	}
+	.rectangle .text {
+		padding: 20px 5%;
+		text-align: center;
+	}
+	.rectangle:before,
+	.rectangle:after {
+		display: none;
+	}
+	.rectangle {
+		border-left: 4px solid #fff;
+		padding-bottom: 20px;
+	}
+	header .form {
+		float: none;
+		position: static;
+		width: 58%;
+		margin: 0 auto;
+		-webkit-transform: translate(0, 0);
+		-ms-transform: translate(0, 0);
+		-o-transform: translate(0, 0);
+		transform: translate(0, 0);
+	}
+	.over-pay .item .img {
+		height: 150px;
+	}
+	.over-pay .op-item:first-child .item {
+		margin: 0 auto;
+		margin-top: 41px;
+	}
+	.over-pay .op-item:last-child .item {
+		margin: 0 auto;
+		margin-top: 41px;
+	}
+	body {
+		font-size: 15px;
+	}
+	.rs {
+		padding-left: 0px;
+	}
+	.feature-item .content {
+		text-align: center;
+	}
+	.features .feature-item:last-child .content {
+		float: none;
+	}
+	.carousel .slick-dots {
+		width: auto;
+	}
+	.you-get-item:first-child .content {
+		margin: 0 auto;
+	}
+	footer .social  {
+		margin: 10px 0;
+	}
+	.back {
+		background: transparent;
+		width: 100%;
+	}
+	.caruosel-container .row {
+		margin-top: 40px;
+	}
+	.caruosel-container .back button {
+		left: auto;
+		right: 0px;
+	}
+	.slider-container .slider-btn {
+		top: 10px;
+	}
+	.get-price button,
+	.slider-container .slider-btn,
+	.you-get button,
+	.caruosel-container .back button {
+		display: block;
+		width: 280px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.slider-container .slick-slider .slick-next {
+		right: 20px;
+	}
+	.slider-container .slick-slider .slick-prev {
+		left: 20px;
+	}
+
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width : 480px) {
+	.logo {
+		padding-left: 20px;
+	}
+	.slick-slide img {
+		opacity: 1 !important;
+	}
+	.slick-slide img {
+		transform: none !important;
+	}
+	.call .phone-n,
+	.call button {
+		display: block;
+		width: 300px;
+		margin-right: 0px;
+		margin: 0 auto;
+		text-align: center;
+	}
+	.carousel .slick-dots {
+		width: 100%;
+	}
+	.caruosel-container .back button, 
+	.back {
+		left: 50%;
+		-webkit-transform: translate(-50%, 0);
+		-ms-transform: translate(-50%, 0);
+		-o-transform: translate(-50%, 0);
+		transform: translate(-50%, 0);
+	}
+	.caruosel-container .back button {
+		bottom: -80px;
+	}
+	.service-item button {
+		width: 138px;
+	}
+	header .form {
+		width: 73%;
+	}
+	h1 {
+		font-size: 35px;
+	}
+	.calc {
+		padding: 30px 10px 21px 10px;
+	}
+	.range-val {
+		padding: 0 5px;
+	}
+}
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+	.caruosel-container .back button {
+		left: 50%;
+		margin-left: -166px;
+	}
+	.rectangle .text {
+		margin-left: 40px;
+	}
+}
+@media only screen and (min-width : 768px) {
+	header nav {
+		display: block !important;
+	}
+}
