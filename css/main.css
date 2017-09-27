@@ -1,0 +1,248 @@
+*::-webkit-input-placeholder {
+	color: #a3a3a3;
+	opacity: 1;
+}
+*:-moz-placeholder {
+	color: #a3a3a3;
+	opacity: 1;
+}
+*::-moz-placeholder {
+	color: #a3a3a3;
+	opacity: 1;
+}
+*:-ms-input-placeholder {
+	color: #a3a3a3;
+	opacity: 1;
+}
+* {
+	padding: 0px;
+	margin: 0px;
+}
+
+body input:focus:required:invalid,
+body textarea:focus:required:invalid {
+	
+}
+body input:required:valid,
+body textarea:required:valid {
+	
+}
+
+h1 {
+	font-size: 20px;
+	line-height: 1;
+}
+
+a {
+	color: #1f61e4;
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;	
+}
+
+.btn:hover {
+	color: #1f61e4;
+	cursor: pointer;
+}
+
+html {
+	height: 100%;
+}
+body {
+	font-size: 16px;
+	min-width: 320px;
+	position: relative;
+	line-height: 1.6;
+	font-family: "Slack-Lato", "appleLogo", sans-serif;
+	overflow-x: hidden;
+	height: 100%;
+}
+.container {
+	display: -webkit-flex;
+	display: flex;
+	align-items: stretch;
+	height: 100%;
+}
+aside {
+	background: #4d5250;
+	width: 100px;
+	color: #c8c9c9;
+	flex-basis: 220px;
+	flex-shrink: 0;
+}
+aside > div {
+	padding: 0 17px;
+}
+aside .top {
+	padding-top: 10px;
+	padding-bottom: 11px;
+}
+aside > div:hover {
+	background: #383c3a;
+	cursor: pointer;
+}
+.user-name {
+	font-size: 14px;
+	line-height: 1;
+}
+.user-name .status {
+	width: 9px;
+	height: 9px;
+	display: inline-block;
+	vertical-align: middle;
+	background: #99d04a;
+	border-radius: 50%;
+}
+.user-name span {
+	display: inline-block;
+	vertical-align: middle;
+}
+.group-name-container {
+	display: flex;
+}
+.group-name {
+	display: flex;
+	align-items: flex-start;
+	flex-grow: 1;
+}
+.notifications-i {
+	flex-basis: 20px;
+	flex-shrink: 0; 
+	font-size: 17px;
+}
+.arrow-bot-i {
+	align-self: flex-end;
+	padding-left: 5px;
+	padding-bottom: 5px;
+}
+.group-name .arrow-bot-i {
+	font-size: 10px;	
+}
+.group-name h1 {
+	color: #fff;
+	text-transform: uppercase;
+}
+
+/* aside */
+/* content */
+
+.content {
+	flex-grow: 1;
+}
+/* head */
+.head {
+	padding: 8px 20px;
+	padding-top: 8px;
+	padding-right: 0px;
+	border-bottom: 1px solid #e8e8e8;
+	display: flex;
+	align-items: center;
+}
+.channel-info {
+	flex-grow: 1;
+}
+.channel-name {
+	font-size: 17px;
+	line-height: 1;
+	padding-bottom: 4px;
+}
+.channel-info-items .channel-info-item {
+	display: inline-block;
+	border-right: 1px solid #c4c5c6;
+	padding: 0 5px;
+	font-size: 13px;
+	vertical-align: middle;
+	line-height: 1;
+	color: #717274;
+}
+.channel-info-items .channel-info-item .hovered {
+	display: none;
+}
+.channel-info-items .channel-info-item:hover {
+	color: #1f61e4;
+}
+.star-i:hover {
+	color: #d6bb27;
+}
+.channel-info-items .channel-info-item:hover .hovered {
+	display: inline-block;
+}
+.channel-info-items .channel-info-item span {
+	display: inline-block;
+	vertical-align: middle;
+}
+.channel-info .channel-info-item:last-of-type {
+	border: none;
+}
+.channel-info .channel-info-item:first-of-type {
+	padding-left: 0px;
+}
+.channel-info .topic {
+	font-style: italic;
+	position: relative
+}
+.channel-info .topic .add-topic {
+	position: relative;
+}
+.channel-info .topic .add-topic:after {
+	content: "";
+	position: absolute;
+	top: -2px;
+	bottom: -4px;
+	left: -3px;
+	right: -3px;
+	border: 1px solid #E3E6E7;
+	border-radius: 4px;
+	z-index: -1;
+	display: none;
+}
+.channel-info .topic .add-topic:hover:after {
+	display: block;
+}
+.channel-info .topic .hovered {
+	font-style: normal;
+	padding-left: 5px;
+}
+
+.channel-work {
+	display: flex;
+	align-self: center;
+	color: #757678;
+}
+.channel-work .icon {
+	font-size: 20px;
+	width: 32px;
+	text-align: center;	
+}
+.channel-work input {
+	border: none;
+	outline: none;
+	display: block;
+	align-items: center;
+	padding: 3px 0;
+	width: 240px;
+	transition: 100ms ease all;
+}
+.channel-work .search {
+	box-sizing: content-box;
+	border: 1px solid #a0a0a2;
+	border-radius: 5px;
+	display: flex;
+	margin: 0 4px;
+}
+.channel-work .search .icon {
+	font-size: 19px;
+}
+.channel-work .del-i {
+	visibility: hidden;
+}
+.channel-work input:focus {
+	width: 220px;
+}
+.channel-work input:input + .del-i {
+	visibility: visible;	
+}
+.channel-work .at-i:hover {
+	color: #b90e0e;
+}
