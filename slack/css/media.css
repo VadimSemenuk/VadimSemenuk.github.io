@@ -1,27 +1,39 @@
 /*==========  Desktop First Method  ==========*/
 
 /* Large Devices, Wide Screens */
-@media only screen and (max-width : 1420px) {
+@media only screen and (max-width : 1430px) {
 	.channel-work input {
 		width: 190px;
+	}
+	.channel-work input:focus {
+		width: 270px;
 	}
 }
 @media only screen and (max-width : 1340px) {
 	.channel-work input {
 		width: 140px;
 	}
+	.channel-work input:focus {
+		width: 220px;
+	}
 }
 @media only screen and (max-width : 1260px) {
 	.channel-work input {
 		width: 120px;
+	}
+	.channel-work input:focus {
+		width: 200px;
 	}
 }
 @media only screen and (max-width : 1055px) {
 	.channel-work input {
 		width: 110px;
 	}
+	.channel-work input:focus {
+		width: 180px;
+	}
 }
-@media only screen and (max-width : 843px) {
+@media only screen and (max-width : 860px) {
 	.channel-work input {
 		width: 70px;
 	}
