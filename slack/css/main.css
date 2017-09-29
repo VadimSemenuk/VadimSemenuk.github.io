@@ -52,6 +52,22 @@ a:hover {
 	text-decoration: underline;	
 }
 
+summary {
+	outline: none;
+}
+summary::-webkit-details-marker { 
+	display:none; 
+}
+summary::-moz-details-marker { 
+	display:none; 
+}
+summary::-ms-details-marker { 
+	display:none; 
+}
+summary::-o-details-marker { 
+	display:none; 
+}
+
 .btn:not(.no-hover-color):hover {
 	color: #1f61e4;
 	cursor: pointer;
@@ -216,7 +232,7 @@ aside .top {
 	height: 9px;
 	display: inline-block;
 	vertical-align: middle;
-	background: #99d04a;
+	background: #7fcbaf;
 	border-radius: 50%;
 	margin-right: 3px;
 }
@@ -486,11 +502,37 @@ aside .sig-name i {
 	justify-content: center;
 	color: #808082;
 	transition: 100ms ease all;
+	cursor: pointer;
 }
 .msg-input-container .add-i:hover {
 	color: #fff;
 	background: #56b68b;
 	border-color: #29a979;
+}
+.msg-input-container .smile-i,
+.msg-input-container .at-i {
+	position: absolute;
+	font-size: 20px;
+	color: #808082;
+	right: 28px;
+	height: 41px;
+	padding: 0 5px;
+	padding-top: 5px;
+	transition: 100ms ease all;
+}
+.msg-input-container .at-i {
+	position: absolute;
+	font-size: 20px;
+	color: #808082;
+	right: 59px;
+	padding-top: 5px;
+}
+.msg-input-container .smile-i:hover,
+.msg-input-container .at-i:hover {
+	transform: scale(1.2);
+}
+.msg-input-container .smile-i:hover {
+	color: #f4b848;
 }
 .msg-input {
 	border: 2px solid #bcbcbd;
@@ -505,13 +547,17 @@ aside .sig-name i {
 	border-left: none;
 	outline: none;
 }
-.msg-input textarea {
-	outline: none;
-	border: none;
-	display: block;
-	height: 100%;
-	resize: none;
+[placeholder]:empty:before {
+    content: attr(placeholder);
+	color: #645C5C; 
+	position: absolute;
+	font-size: 16px;
+	top: 10px;
 }
+[placeholder]:not(:empty):before {
+    content: "";
+}
+/* day head */
 .day-head {
 	text-align: center;
 	margin-top: 15px;
@@ -587,7 +633,7 @@ aside .sig-name i {
 	vertical-align: bottom;
 	margin-left: 5px;
 }
-.message-item .user-image {
+.user-image {
 	width: 33px;
 	height: 33px;
 	border-radius: 3px;
@@ -692,7 +738,7 @@ aside .sig-name i {
 }
 .message-item .reaction-item.active {
 	border-color: #2187C6;
-	background: rgba(33, 135, 198, 0.1);
+	background: #eaf5fc;
 }
 .message-item .reaction-item.active .count {
 	color: #2187C6;
@@ -716,6 +762,24 @@ aside .sig-name i {
 .message-item .reaction-item .icon {
 	color: #f4b848;
 }
+.message-content .user-link {
+	color: #186ea3;
+	background: #eef7fd;
+	border-radius: 3px;
+	padding-bottom: 2px;
+	cursor: pointer;
+}
+.message-content .user-link.self {
+	background: #fff5cc;
+}
+.message-content .user-link:hover {
+	color: #045B8F;	
+	background: #e0f0fa;
+	text-decoration: none;
+}
+.message-content .user-link.self:hover {
+	background: #fff5cc;	
+}
 /* aside-chat */
 .aside-chat-wrapper {
 	flex-basis: 406px;
@@ -731,6 +795,15 @@ aside .sig-name i {
 	overflow-y: scroll;
 	width: 419px;
 	height: 100%;
+}
+.aside-chat-container .message-item {
+	padding: 0px;
+}
+.aside-chat-container .message-item:hover {
+	background: inherit;
+}
+.aside-chat-container .message-item:hover .actions {
+	display: none;
 }
 .about-channel-items .ac-item {
 	border-bottom: 1px solid #e8e8e8;	
@@ -775,14 +848,14 @@ aside .sig-name i {
 	cursor: pointer;
 }
 .about-channel-items .ac-item:hover h3,
-.about-channel-items .ac-item:hover > .icon {
+.about-channel-items .ac-item-head:hover > .icon {
 	color: #222;
 }
 .about-channel-items .ac-item:hover > .name .icon {
 	color: #615F5F;
 }
 .about-channel-items .ac-item .name > .icon {
-	margin: 0 7px;
+	margin: 0 10px;
 	font-size: 18px;
 }
 .ac-item.highlights .name .icon {
@@ -816,7 +889,7 @@ aside .sig-name i {
 	color: #CE1429;
 }
 /* pinned-item */
-.ac-pinned-item {
+.ac-content-item{
 	border: 1px solid #e8e8e8;
 	margin: 9px 11px;	
 	padding: 10px;
@@ -825,7 +898,7 @@ aside .sig-name i {
 	max-height: 121px;
 	overflow: hidden;
 }
-.ac-pinned-item:after {
+.ac-content-item:after {
 	content: "";
 	position: absolute;
 	bottom: 0px;
@@ -834,31 +907,103 @@ aside .sig-name i {
 	height: 30px;
 	box-shadow: 0px -18px 10px -5px #fff inset;
 }
-.ac-pinned-item .i-close {
+.ac-content-item .i-close {
 	position: absolute;
 	top: 3px;
 	right: 8px;
 	color: #79787c;
 	display: none;
 }
-.ac-pinned-item:hover .i-close:hover {
+.ac-content-item .i-close:hover {
 	color: #222;
 }
-.ac-pinned-item:hover .i-close {
+.ac-content-item:hover .i-close {
 	display: block;
 }
-.ac-pinned-item .message-item {
-	padding: 0px;
-}
-.ac-pinned-item .message-item:hover {
-	background: inherit;
-}
-.ac-pinned-item .message-content {
+.ac-content-item .message-content {
 	padding-top: 5px;
 }
-.ac-pinned-item:hover {
+.ac-content-item:hover {
 	box-shadow: 0px 2px 8px -6px #000;
 }
 .ac-item-content {
 	padding-bottom: 10px;
+}
+.pre-items {
+	color: #7B7979;
+	padding: 0 11px;
+	font-size: 15px;
+}
+.ac-highlights-items .day-head {
+	margin-bottom: 15px;
+}
+.ac-members-item {
+	display: flex;
+	align-items: center;
+	border: none;
+	margin: 0 7px;
+	border-radius: 3px;
+	padding: 5px 7px;
+}
+.ac-members-item:hover {
+	box-shadow: 0 0 0 1px #cbe7f7;
+	background: #eaf5fc;
+}
+.ac-members-item .user-name {
+	font-weight: bold;
+	color: #2c2d30;
+	font-size: 16px;
+	position: relative;
+	top: -2px;	
+}
+.ac-members-item .user-image {
+	width: 20px;
+	height: 20px;
+	margin-right: 9px;
+}
+.ac-members-item .status {
+	margin-right: 9px;
+}
+.ac-members-items .invite {
+	margin-left: 14px;
+	font-size: 16px;
+}
+/* acitvity */
+.activity-items {
+	font-size: 15px;
+}
+.activity-items .day {
+	padding: 0 10px;
+}
+.activity-items-includes {
+	padding: 5px 10px;
+	font-size: 13px;
+	border-bottom: 1px solid #e8e8e8;
+	color: #59595B;
+	cursor: pointer;
+	display: flex;
+	align-items: flex-start;
+}
+.activity-items-includes:hover {
+	color: #353537;	
+}
+.activity-items-includes .i-more {
+	font-size: 8px;
+	margin-left: 4px;
+	margin-top: 4px;
+}
+.activity-items-includes span {
+	display: inline-block;
+	vertical-align: middle;
+}
+.activity-items .day-head {
+	margin-bottom: 15px;
+}
+.activity-items .channel {
+	font-size: 16px;
+	display: inline-block;
+	padding-bottom: 15px;
+}
+.activity-items .message-item {
+	margin-bottom: 20px;
 }
