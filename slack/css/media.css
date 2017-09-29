@@ -8,6 +8,13 @@
 	.channel-work input:focus {
 		width: 270px;
 	}
+	.aside-chat-wrapper {
+		flex-basis: 355px;
+		width: 355px;
+	}
+	.aside-chat-scroller {
+		width: 368px;
+	}
 }
 @media only screen and (max-width : 1340px) {
 	.channel-work input {
@@ -15,6 +22,13 @@
 	}
 	.channel-work input:focus {
 		width: 220px;
+	}
+	.aside-chat-wrapper {
+		flex-basis: 307px;
+		width: 307px;
+	}
+	.aside-chat-scroller {
+		width: 320px;
 	}
 }
 @media only screen and (max-width : 1260px) {
@@ -24,6 +38,13 @@
 	.channel-work input:focus {
 		width: 200px;
 	}
+	.aside-chat-wrapper {
+		flex-basis: 286px;
+		width: 286px;
+	}
+	.aside-chat-scroller {
+		width: 299px;
+	}
 }
 @media only screen and (max-width : 1055px) {
 	.channel-work input {
@@ -32,10 +53,24 @@
 	.channel-work input:focus {
 		width: 180px;
 	}
+	.aside-chat-wrapper {
+		flex-basis: 276px;
+		width: 276px;
+	}
+	.aside-chat-scroller {
+		width: 289px;
+	}
 }
 @media only screen and (max-width : 860px) {
 	.channel-work input {
 		width: 70px;
+	}
+	.aside-chat-wrapper {
+		flex-basis: 237px;
+		width: 237px;
+	}
+	.aside-chat-scroller {
+		width: 250px;
 	}
 }
 @media only screen and (max-width : 1200px) {
