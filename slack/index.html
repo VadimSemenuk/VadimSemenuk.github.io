@@ -200,7 +200,7 @@
 					</div>
 				</div>
 				<div class="channel-work">
-					<div class="phone-i icon btn">
+					<div class="phone-i icon btn disabled">
 						<i class="fa fa-phone" aria-hidden="true"></i>
 					</div>	
 					<div class="details-i icon btn" data-cnt="about">
@@ -591,7 +591,7 @@
 											</div>	
 										</div>
 									</div>
-									<div class="message-item">
+									<div class="message-item pinned">
 										<div class="user-image-side">
 											<div class="user-image" style="background-image: url(img/users/happy-cat.jpg)"></div>
 										</div>
@@ -609,6 +609,96 @@
 											</div>
 											<div class="message-content">
 												<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit accusantium eum sapiente repellat vero optio excepturi iusto repudiandae fugiat dolor. Itaque, non praesentium. Sequi ex totam iusto iure omnis officiis!</p>
+											</div>
+										</div>
+										<div class="actions">
+											<div class="reaction-i icon btn">
+												<i class="fa fa-smile-o" aria-hidden="true"></i>
+											</div>
+											<div class="commenting-i icon btn">	
+												<i class="fa fa-commenting-o" aria-hidden="true"></i>
+											</div>		
+											<div class="share-i icon btn">													
+												<i class="fa fa-share" aria-hidden="true"></i>
+											</div>	
+											<div class="to-actions-nav-i icon btn">													
+												<i class="fa fa-ellipsis-h" aria-hidden="true"></i>		
+											</div>	
+										</div>
+										<div class="pin">
+											<div class="i-pin icon">
+												<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+											</div>
+											<span>Pinned by <span><span>Notgrumpy</span><span>&nbsp;</span><span>Cat</span></span></span>
+										</div>
+									</div>
+									<div class="message-item">
+										<div class="user-image-side">
+											<div class="user-image" style="background-image: url(img/users/grumpy-cat.bmp)"></div>
+										</div>
+										<div class="message-content-side">											
+											<div class="message-head">
+												<div class="user-name">
+													<span>Grumpy</span><span>&nbsp;</span><span>Cat</span>																				
+												</div>
+												<div class="message-time">
+													<span>1:42 PM</span>
+												</div>
+												<div class="star-i icon btn">
+													<i class="fa fa-star-o" aria-hidden="true"></i>
+												</div>
+											</div>
+											<div class="message-content">
+												<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit accusantium eum sapiente repellat vero optio excepturi iusto repudiandae fugiat dolor. Itaque, non praesentium. Sequi ex totam iusto iure omnis officiis!</p>
+											</div>
+										</div>
+										<div class="actions">
+											<div class="reaction-i icon btn">
+												<i class="fa fa-smile-o" aria-hidden="true"></i>
+											</div>
+											<div class="commenting-i icon btn">	
+												<i class="fa fa-commenting-o" aria-hidden="true"></i>
+											</div>		
+											<div class="share-i icon btn">													
+												<i class="fa fa-share" aria-hidden="true"></i>
+											</div>	
+											<div class="to-actions-nav-i icon btn">													
+												<i class="fa fa-ellipsis-h" aria-hidden="true"></i>		
+											</div>	
+										</div>
+									</div>
+									<div class="message-item">
+										<div class="user-image-side">
+											<div class="user-image" style="background-image: url(img/users/happy-cat.jpg)"></div>
+										</div>
+										<div class="message-content-side">											
+											<div class="message-head">
+												<div class="user-name">
+													<span>Notgrumpy</span><span>&nbsp;</span><span>Cat</span>																				
+												</div>
+												<div class="message-time">
+													<span>1:43 PM</span>
+												</div>
+												<div class="star-i icon btn">
+													<i class="fa fa-star-o" aria-hidden="true"></i>
+												</div>
+											</div>
+											<div class="message-content">
+												<div class="uploaded image">
+													<span>uploaded this image: <a href="#">Pasted iamge at 2017-09-27, 10:54 AM</a></span>
+													<div class="i-go-ahead icon">
+														<i class="fa fa-caret-right" aria-hidden="true"></i>
+													</div>
+													<div class="image" style="background-image: url(img/screeenshots/scr.png)"></div>
+												</div>
+											</div>
+											<div class="reactions">
+												<div class="reaction-item">
+													<span class="icon">
+														<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+													</span>
+													<span class="count">2</span>
+												</div>
 											</div>
 										</div>
 										<div class="actions">
@@ -1429,60 +1519,7 @@
 	<script src="libs/respond/respond.min.js"></script>
 	<![endif]-->
 	
-	<script>
-		let inp = document.querySelector(".msg-input");
-		inp.addEventListener("keydown", function (ev) {
-			if (ev.key == "Enter" && !ev.shiftKey) {
-				setTimeout(function () {
-					inp.innerHTML = ""
-				}, 4);
-			};
-		});
-
-		let aside = document.querySelector(".aside-chat-wrapper");
-		let asideChatContainer = document.querySelector(".aside-chat-container");
-		let channelWork = document.querySelector(".channel-work");
-		addEvents(document.querySelectorAll(".channel-work .icon"), "click", function (e) {
-			if (!this.dataset.cnt) {
-				return;
-			}
-			if (this.classList.contains("active-showed")) {
-				aside.style.display = "none";
-				this.classList.remove("active-showed");				
-			} else {
-				aside.style.display = "block";
-				channelWork.querySelectorAll(".active-showed").forEach(function (el) {
-					el.classList.remove("active-showed");
-				});
-				this.classList.add("active-showed");
-			}
-			asideChatContainer.querySelectorAll(".active-showed").forEach(function (el) {
-				el.style.display = "none";
-				el.classList.remove("active-showed");
-			});
-			asideChatContainer.querySelectorAll("div[data-name=" + this.dataset.cnt + "]").forEach(function (el) {
-				el.style.display = "block";
-				el.classList.add("active-showed");
-			});
-		});
-
-		function addEvents (el, ev, handler) {
-			el.forEach(function(el) {
-				el.addEventListener(ev, handler);	
-			});
-		};
-
-		document.querySelector(".aside-chat-head").addEventListener("click", function () {
-			aside.style.display = "none";
-			asideChatContainer.querySelectorAll(".active-showed").forEach(function (el) {
-				el.style.display = "none";
-				el.classList.remove("active-showed");
-			});
-			channelWork.querySelectorAll(".active-showed").forEach(function (el) {
-				el.classList.remove("active-showed");
-			});
-		});
-	</script>
+	<script src="js/common.js"></script>
 
 </body>
 </html>
