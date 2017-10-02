@@ -783,7 +783,9 @@
 						<div class="add-i icon">									
 							<i class="fa fa-plus" aria-hidden="true"></i>
 						</div>
-						<div class="msg-input" contenteditable="true" placeholder="Message #study"></div>
+						<div class="msg-input-wrapper">
+							<div class="msg-input" contenteditable="true" placeholder="Message #study"></div>
+						</div>
 						<div class="at-i icon btn">									
 							<i class="fa fa-at" aria-hidden="true"></i>
 						</div>
@@ -1472,6 +1474,13 @@
 
 		document.querySelector(".aside-chat-head").addEventListener("click", function () {
 			aside.style.display = "none";
+			asideChatContainer.querySelectorAll(".active-showed").forEach(function (el) {
+				el.style.display = "none";
+				el.classList.remove("active-showed");
+			});
+			channelWork.querySelectorAll(".active-showed").forEach(function (el) {
+				el.classList.remove("active-showed");
+			});
 		});
 	</script>
 

@@ -514,12 +514,13 @@ aside .sig-name i {
 	right: 0px;
 	position: absolute;
 	bottom: 0px;
-	padding: 0 17px;
-	padding-bottom: 17px;
+	margin: 0 17px;
+	margin-bottom: 17px;
 	box-sizing: border-box;
 	display: flex;	
 	background: #fff;
 	z-index: 3;
+	overflow: hidden;
 }
 .msg-input-container .add-i {
 	flex-basis: 40px;
@@ -543,7 +544,7 @@ aside .sig-name i {
 	position: absolute;
 	font-size: 20px;
 	color: #808082;
-	right: 28px;
+	right: 10px;
 	height: 41px;
 	padding: 0 5px;
 	padding-top: 5px;
@@ -553,7 +554,7 @@ aside .sig-name i {
 	position: absolute;
 	font-size: 20px;
 	color: #808082;
-	right: 59px;
+	right: 40px;
 	padding-top: 5px;
 }
 .msg-input-container .smile-i:hover,
@@ -564,24 +565,33 @@ aside .sig-name i {
 	color: #f4b848;
 }
 .msg-input {
+	max-height: 140px;
+	padding: 10px 0;
+	font-size: 14px;
+	width: 100%;
+	outline: none;	
+	overflow: hidden;
+	overflow-y: scroll;
+	position: relative;
+	left: 15px;	
+}
+.msg-input-wrapper {
 	border: 2px solid #bcbcbd;
 	display: flex;
 	flex-grow: 1;
-	align-items: center;
-	padding: 10px;
 	border-top-right-radius: 5px;
 	border-bottom-right-radius: 5px;	
-	font-size: 14px;
 	box-sizing: border-box;
 	border-left: none;
-	outline: none;
+	overflow: hidden;	
 }
 [placeholder]:empty:before {
     content: attr(placeholder);
 	color: #645C5C; 
 	position: absolute;
 	font-size: 16px;
-	top: 10px;
+	top: 8px;
+	z-index: -1;
 }
 [placeholder]:not(:empty):before {
     content: "";
@@ -812,6 +822,9 @@ aside .sig-name i {
 	background: #fff5cc;	
 }
 /* aside-chat */
+details[open] .i-go-ahead {
+	transform: rotate(90deg);
+}
 .aside-chat-wrapper {
 	flex-basis: 406px;
 	flex-shrink: 0;
