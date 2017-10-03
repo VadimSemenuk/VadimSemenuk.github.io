@@ -40,7 +40,7 @@ function addEvents (el, ev, handler) {
     });
 };
 
-document.querySelector(".aside-chat-head").addEventListener("click", function () {
+document.querySelector(".aside-chat-head .i-close").addEventListener("click", function () {
     aside.style.display = "none";
     asideChatContainer.querySelectorAll(".active-showed").forEach(function (el) {
         el.style.display = "none";

@@ -74,6 +74,9 @@ button:hover {
 summary {
 	outline: none;
 	display: block;
+	position: relative;
+	z-index: 2;
+	background: #fff;
 }
 summary::-webkit-details-marker { 
 	display:none; 
@@ -86,6 +89,20 @@ summary::-ms-details-marker {
 }
 summary::-o-details-marker { 
 	display:none; 
+}
+@keyframes slideOut {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0%);        
+    }
+}
+details > .ac-item-content {
+    animation: slideOut 100ms ease-out;
+}
+details {
+	overflow: hidden;		
 }
 
 .btn,
@@ -189,7 +206,38 @@ body {
 
 /* aside */
 
-.aside-wrapper {
+aside {
+	flex-basis: 200px;
+	display: flex;
+	flex-shrink: 0;	
+	flex-direction: column;	
+	border-right: 1px solid #e8e8e8;
+	background: #4d5250;
+	color: #c8c9c9;
+	font-size: 15px;	
+}
+aside .top {
+	padding: 10px 15px;
+	flex-basis: 42px;
+	flex-shrink: 0;
+	padding-bottom: 9px;
+}
+aside .bot {
+	flex-basis: 60px;
+	flex-shrink: 0;	
+	text-align: center;
+	vertical-align: middle;
+	line-height: 60px;
+	background: #4d5250;
+	z-index: 2;	
+	transition: 150ms ease all;
+}
+aside .side-items {
+	overflow: hidden;
+    overflow-y: scroll;
+} 
+
+/* .aside-wrapper {
 	flex-basis: 200px;
 	flex-shrink: 0;
 	overflow-x: hidden;
@@ -198,7 +246,7 @@ body {
 }
 .aside-scroller {
 	overflow-y: scroll;
-	width: 215px;
+	width: 220px;
 	height: 100%;
 }
 aside {
@@ -207,8 +255,6 @@ aside {
 	background: #4d5250;
 	color: #c8c9c9;
 	font-size: 15px;
-
-
 	padding-top: 60px;
 	padding-bottom: 100px;
 }
@@ -223,7 +269,7 @@ aside .bot {
 	background: #4d5250;
 	z-index: 2;	
 	transition: 150ms ease all;
-}
+}*/
 aside .bot:hover {
 	color: #fff;
 }
@@ -242,12 +288,12 @@ aside .sig-name i:hover {
 	color: #fff;
 	cursor: pointer;
 }
-aside .top,
 .side-item,
 .sig-name {
-	padding: 0 15px;
+	padding-left: 15px;
+	padding-right: 5px;
 }
-aside .top {
+/* aside .top {
 	padding-top: 10px;
 	padding-bottom: 12px;
 	position: fixed;
@@ -255,10 +301,11 @@ aside .top {
 	top: 0px;
 	background: #4d5250;
 	z-index: 2;	
-}
+} */
 .user-name {
 	font-size: 14px;
 	line-height: 1;
+	margin-top: -3px;
 }
 .status {
 	width: 9px;
@@ -498,7 +545,7 @@ aside .sig-name i {
 	box-sizing: border-box;
 	overflow-x: hidden;
 	height: 100%;
-	padding-top: 64px;
+	padding-top: 60px;
 	padding-bottom: 60px;
 	position: relative;
 	flex-grow: 1;
@@ -506,15 +553,11 @@ aside .sig-name i {
 .chat-scroller {
 	overflow-y: scroll;
 	position: absolute;
-	top: 64px;
+	top: 55px;
 	left: 0px;
-	right: -15px;
+	/* right: -20px; */
+	right: 0px;
 	bottom: 60px;
-}
-@-moz-document url-prefix() {
-	.chat-scroller {
-		right: -10px;	
-	}
 }
 .chat-container {
 	padding-bottom: 18px;
@@ -627,6 +670,15 @@ aside .sig-name i {
 	color: #c74f4f;
     margin-top: -11px;
     margin-bottom: -10px;
+}
+.day-head {
+	position: -webkit-sticky;
+	position: -moz-sticky;
+	position: -ms-sticky;
+	position: -o-sticky;
+	position: sticky;
+	top: -5px;
+	z-index: 3;
 }
 .day-head:before,
 .new-messages-head:before {
@@ -756,10 +808,15 @@ aside .sig-name i {
 	transition: 100ms ease all;
 	position: absolute;
 	top: -16px;
-	right: 5px;
+	right: 10px;
 	background: #fff;
 	display: none;
 	z-index: 3;
+}
+@-moz-document url-prefix() {
+	.message-item .actions {
+		right: 15px;	
+	}
 }
 .message-item .actions:hover {
 	border-color: #8E8E8E;
@@ -885,6 +942,7 @@ aside .sig-name i {
 	margin-top: 8px;
 	border: 1px solid #e6e6e6;
 	border-radius: 5px;
+	cursor: pointer;
 }
 /* aside-chat */
 details[open] .i-go-ahead {
@@ -902,13 +960,8 @@ details[open] .i-go-ahead {
 }
 .aside-chat-scroller {
 	overflow-y: scroll;
-	width: 419px;
+	/* width: 423px; */
 	height: 100%;
-}
-@-moz-document url-prefix() {
-	.aside-chat-scroller {
-		width: 414px;
-	}
 }
 .aside-chat-container .message-item {
 	padding: 0px;
@@ -934,6 +987,7 @@ details[open] .i-go-ahead {
 }
 .aside-chat-head .i-close {
 	color: #727375;
+	font-size: 20px;
 }
 .aside-chat-head .name > h1,
 .aside-chat-head .name > span {

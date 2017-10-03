@@ -9,14 +9,9 @@
 		flex-basis: 355px;
 		width: 355px;
 	}
-	.aside-chat-scroller {
+	/* .aside-chat-scroller {
 		width: 368px;
-	}
-	@-moz-document url-prefix() {
-		.aside-chat-scroller {
-			width: 362px;
-		}
-	}		
+	}		 */
 }
 @media only screen and (max-width : 1340px) {
 	.channel-work input {
@@ -29,14 +24,9 @@
 		flex-basis: 307px;
 		width: 307px;
 	}
-	.aside-chat-scroller {
+	/* .aside-chat-scroller {
 		width: 320px;
-	}
-	@-moz-document url-prefix() {
-		.aside-chat-scroller {
-			width: 357px;
-		}
-	}	
+	} */
 }
 @media only screen and (max-width : 1260px) {
 	.channel-work input {
@@ -49,14 +39,9 @@
 		flex-basis: 286px;
 		width: 286px;
 	}
-	.aside-chat-scroller {
+	/* .aside-chat-scroller {
 		width: 299px;
-	}
-	@-moz-document url-prefix() {
-		.aside-chat-scroller {
-			width: 294px;
-		}
-	}	
+	}	 */
 }
 @media only screen and (max-width : 1055px) {
 	.channel-work input {
@@ -69,14 +54,9 @@
 		flex-basis: 276px;
 		width: 276px;
 	}
-	.aside-chat-scroller {
+	/* .aside-chat-scroller {
 		width: 289px;
-	}
-	@-moz-document url-prefix() {
-		.aside-chat-scroller {
-			width: 284px;
-		}
-	}	
+	}	 */
 }
 @media only screen and (max-width : 860px) {
 	.channel-work input {
@@ -86,12 +66,7 @@
 		flex-basis: 237px;
 		width: 237px;
 	}
-	.aside-chat-scroller {
+	/* .aside-chat-scroller {
 		width: 250px;
-	}
-	@-moz-document url-prefix() {
-		.aside-chat-scroller {
-			width: 245px;
-		}
-	}	
+	}	 */
 }
