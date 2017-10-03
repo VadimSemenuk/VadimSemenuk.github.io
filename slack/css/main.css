@@ -231,6 +231,7 @@ aside .bot {
 	background: #4d5250;
 	z-index: 2;	
 	transition: 150ms ease all;
+	margin-top: auto;
 }
 aside .side-items {
 	overflow: hidden;
@@ -942,7 +943,7 @@ aside .sig-name i {
 	margin-top: 8px;
 	border: 1px solid #e6e6e6;
 	border-radius: 5px;
-	cursor: pointer;
+	cursor: zoom-in;
 }
 /* aside-chat */
 details[open] .i-go-ahead {
