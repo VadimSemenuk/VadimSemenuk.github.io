@@ -70,3 +70,14 @@
 		width: 250px;
 	}	 */
 }
+@media only screen and (max-width : 802px) {
+	.chat-scroller {
+		top: 95px;
+	}
+	.chat-wrapper {
+		padding-top: 101px;
+	}
+	.aside-chat-wrapper {
+		padding-top: 101px;
+	}
+}

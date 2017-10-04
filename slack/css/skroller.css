@@ -7,6 +7,7 @@
 	background: rgba(255, 255, 255, .0);
 	overflow: hidden;
     transition: 80ms ease all;
+    z-index: 1;
 }
 .scroll-scroller {
 	width: 100%;
@@ -15,14 +16,29 @@
 	cursor: pointer;
 	border-radius: 3px;
 }
-.scrolls .scroll-wrapper {
+.scrolls:not(.full) .scroll-wrapper {
     opacity: 0;    
 }
-.scrolls:hover .scroll-wrapper:not(.hidden) {
+/* .scrolls:hover .scroll-wrapper:not(.hidden) {
+    opacity: 1;
+} */
+.scrolls:not(.hidden):hover .scroll-wrapper {
     opacity: 1;
 }
-.scroller {
+.scrolls.full.hidden .scroll-wrapper {
+    opacity: 0;
+}
+.scrolls.full.hidden .scrolled-container {
+    padding-right: 0px;
+}
+.scroller:not(.scrollerFF) {
     overflow-y: scroll!important;
+}
+.scrollerFF {
+    overflow-y: hidden!important;
+}
+.scroller.full .scrolled-container {
+    padding-right: 10px;    
 }
 
 .scroller::-webkit-scrollbar { 
@@ -33,4 +49,12 @@
 }
 .scroller { 
 	overflow: -moz-scrollbars-none; 
+}
+
+.scroller.full .scroll-wrapper {
+    background: #f3f3f3;
+    border-radius: 3px;
+}
+.scroller.full .scroll-scroller {    
+    background: #c7c7c7;
 }

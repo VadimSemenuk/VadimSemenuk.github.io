@@ -1,7 +1,18 @@
-function skroller (scrollEl) {
+"use strict"
+function skroller (scrollEl, pars) {
     let wrp,
         scrl,
         scrolledCnt = scrollEl.querySelector(".scrolled-container");
+    
+    let def = {
+        full: false,
+        setOverflow: true
+    };
+    if (!pars) {
+        pars = {};
+    }
+    let params = Object.assign(def, pars);
+
     function createScrollMarcup () {
         wrp = document.createElement("div");
         scrl = document.createElement("div");
@@ -11,7 +22,9 @@ function skroller (scrollEl) {
     };
     function appendScroll () {
         scrolledCnt.style.position = "relative";
-        scrolledCnt.style.overflow = "auto";        
+        if (params.setOverflow) {
+            scrolledCnt.style.overflow = "auto";
+        }        
         scrolledCnt.appendChild(wrp);
     };
     function getScrollerHeight (diff, cntHeight) {
@@ -20,9 +33,13 @@ function skroller (scrollEl) {
     createScrollMarcup();
     appendScroll();
     scrollEl.classList.add("scrolls");
+    scrollEl.classList.add("scroller");
     scrl.style.height = getScrollerHeight(scrollEl.offsetHeight / scrolledCnt.offsetHeight, scrollEl.offsetHeight) + "px";  
     if (scrolledCnt.offsetHeight - scrollEl.offsetHeight <= 0) {
-        wrp.classList.add("hidden");    
+        scrollEl.classList.add("hidden");    
+    };
+    if (params.full) {
+        scrollEl.classList.add("full");
     };
 
     let moz = scrollEl.style["-moz-animation"] != undefined;
@@ -34,13 +51,13 @@ function skroller (scrollEl) {
         scrlPeaceH = scrl.offsetHeight,
         trnst = 0,
         scrlKoef = 0;
-    if (moz) {
+    if (moz) {         
+        scrollEl.classList.add("scrollerFF");                    
         scrollEl.addEventListener("MozMousePixelScroll", function (e) {
             this.scrollTop += e.detail;
             scrlHandler(this);             
         });  
-    } else {
-        scrollEl.classList.add("scroller");    
+    } else {    
         scrollEl.addEventListener("scroll", function (e) {
             scrlHandler(this);             
         });
@@ -115,12 +132,14 @@ function skroller (scrollEl) {
         scrlH = scrl.offsetHeight;    
         scrlPeaceH = scrl.offsetHeight;
         if (sCntH - sElH <= 0) {
-            wrp.classList.add("hidden");    
+            scrollEl.classList.add("hidden");    
         } else {
-            wrp.classList.remove("hidden");                
+            scrollEl.classList.remove("hidden");                
         }
     };
-    skroller.setDimentions = setDimentions;
+    return {
+        setDimentions: setDimentions
+    };
 }
 function debounce (fn, delay) {
     let access = true,
@@ -143,10 +162,6 @@ function debounce (fn, delay) {
         }
     };
 };
-window.addEventListener("resize", function () {
-    skroller.setDimentions();
-});
-skroller(document.querySelector(".side-items"));
 
 
 

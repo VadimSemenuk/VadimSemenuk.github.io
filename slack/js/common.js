@@ -1,3 +1,4 @@
+"use strict"
 let inp = document.querySelector(".msg-input");
 inp.addEventListener("keydown", function (ev) {
     if (ev.key == "Enter" && !ev.shiftKey) {
@@ -11,6 +12,7 @@ let aside = document.querySelector(".aside-chat-wrapper");
 let asideChatContainer = document.querySelector(".aside-chat-container");
 let channelWork = document.querySelector(".channel-work");
 addEvents(document.querySelectorAll(".channel-work .icon"), "click", function (e) {
+    setTimeout(cScr.setDimentions, 4);   
     if (!this.dataset.cnt) {
         return;
     }
@@ -23,6 +25,7 @@ addEvents(document.querySelectorAll(".channel-work .icon"), "click", function (e
             el.classList.remove("active-showed");
         });
         this.classList.add("active-showed");
+        setTimeout(csScr.setDimentions, 4);
     }
     asideChatContainer.querySelectorAll(".active-showed").forEach(function (el) {
         el.style.display = "none";
@@ -41,6 +44,7 @@ function addEvents (el, ev, handler) {
 };
 
 document.querySelector(".aside-chat-head .i-close").addEventListener("click", function () {
+    setTimeout(cScr.setDimentions, 4);       
     aside.style.display = "none";
     asideChatContainer.querySelectorAll(".active-showed").forEach(function (el) {
         el.style.display = "none";
@@ -50,3 +54,27 @@ document.querySelector(".aside-chat-head .i-close").addEventListener("click", fu
         el.classList.remove("active-showed");
     });
 });
+
+addEvents(document.querySelectorAll(".ac-item summary"), "click", function (e) {
+    setTimeout(csScr.setDimentions, 4); 
+});
+
+let scrolls = [];
+let siScr = skroller(document.querySelector(".side-items"));
+let cScr = skroller(document.querySelector(".chat-scroller"), {
+    full: true,
+    setOverflow: false
+});
+let csScr = skroller(document.querySelector(".aside-chat-items-scroller"), {
+    full: true,
+    setOverflow: false
+});
+scrolls.push(siScr);
+scrolls.push(cScr);
+scrolls.push(csScr);
+window.addEventListener("resize", function () {
+    ScrollsResizeHandler();
+});
+function ScrollsResizeHandler () {
+    scrolls.forEach(fn => fn.setDimentions());  
+}

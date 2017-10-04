@@ -967,9 +967,19 @@ details[open] .i-go-ahead {
 	width: 406px;
 }
 .aside-chat-scroller {
-	overflow-y: scroll;
+	/* overflow-y: scroll; */
 	/* width: 423px; */
 	height: 100%;
+}
+.aside-chat-container {
+	height: 100%;
+	position: relative;
+}
+.aside-chat-items-scroller {
+	position: absolute;
+	top: 65px;
+	bottom: 0px;
+	width: 100%;
 }
 .aside-chat-container .message-item {
 	padding: 0px;
@@ -1278,6 +1288,7 @@ details[open] .i-go-ahead {
 }
 .activity-items .day-head {
 	margin-bottom: 15px;
+	background: #fff;
 }
 .activity-items .channel {
 	font-size: 16px;
