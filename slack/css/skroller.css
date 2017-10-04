@@ -21,3 +21,16 @@
 .scrolls:hover .scroll-wrapper:not(.hidden) {
     opacity: 1;
 }
+.scroller {
+    overflow-y: scroll!important;
+}
+
+.scroller::-webkit-scrollbar { 
+	width: 0; 
+}
+.scroller { 
+	-ms-overflow-style: none; 
+}
+.scroller { 
+	overflow: -moz-scrollbars-none; 
+}

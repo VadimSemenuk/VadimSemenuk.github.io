@@ -20,6 +20,7 @@ function skroller (scrollEl) {
     createScrollMarcup();
     appendScroll();
     scrl.style.height = getScrollerHeight(scrollEl.offsetHeight / scrolledCnt.offsetHeight, scrollEl.offsetHeight) + "px";  
+    scrollEl.classList.add("scroller");
 
     let sCntH = scrolledCnt.offsetHeight,
         sElH = scrollEl.offsetHeight,

@@ -22,9 +22,10 @@ function skroller (scrollEl) {
     scrollEl.classList.add("scrolls");
     scrl.style.height = getScrollerHeight(scrollEl.offsetHeight / scrolledCnt.offsetHeight, scrollEl.offsetHeight) + "px";  
     if (scrolledCnt.offsetHeight - scrollEl.offsetHeight <= 0) {
-        console.log(scrolledCnt.offsetHeight);
         wrp.classList.add("hidden");    
     };
+
+    let moz = scrollEl.style["-moz-animation"] != undefined;
 
     let sCntH = scrolledCnt.offsetHeight,
         sElH = scrollEl.offsetHeight,
@@ -32,18 +33,18 @@ function skroller (scrollEl) {
         diff = sCntH - sElH,
         scrlPeaceH = scrl.offsetHeight,
         trnst = 0,
-        scrlKoef = 0,
-        shitBrowsKoef = 17.6;
-    scrollEl.addEventListener("wheel", function (e) {
-        if (e.deltaY < 30 && e.deltaY > 0) {
-            this.scrollTop += e.deltaY * shitBrowsKoef;
-        } if (e.deltaY > -30 && e.deltaY < 0) {
-            this.scrollTop += e.deltaY * shitBrowsKoef;            
-        } else {
-            this.scrollTop += e.deltaY;
-        };
-        scrlHandler(this);             
-    });
+        scrlKoef = 0;
+    if (moz) {
+        scrollEl.addEventListener("MozMousePixelScroll", function (e) {
+            this.scrollTop += e.detail;
+            scrlHandler(this);             
+        });  
+    } else {
+        scrollEl.classList.add("scroller");    
+        scrollEl.addEventListener("scroll", function (e) {
+            scrlHandler(this);             
+        });
+    }
     function scrollHandler (self) {
         scrlKoef = self.scrollTop / diff;
         scrlPeaceH = scrlKoef * scrlH;
@@ -83,19 +84,25 @@ function skroller (scrollEl) {
         if (moveD >= diff && moveDiff > 0) {
             moveD = diff; 
             dAcc = sElH - scrlH;
-            scrollEl.scrollTop = moveD;   
-            scrlHandler(scrollEl);        
+            scrollEl.scrollTop = moveD; 
+            if (moz) {        
+                scrlHandler(scrollEl);   
+            };     
             return
         };
         if (moveD <= 0 && moveDiff < 0) {
             moveD = 0; 
             dAcc = 0; 
-            scrollEl.scrollTop = moveD;  
-            scrlHandler(scrollEl);        
+            scrollEl.scrollTop = moveD;
+            if (moz) {        
+                scrlHandler(scrollEl);
+            };        
             return
         };       
         scrollEl.scrollTop = moveD;
-        scrlHandler(scrollEl);
+        if (moz) {        
+            scrlHandler(scrollEl);
+        };
         prev = e.pageY;
     }
     let drgHandler = debounce(dragHandler, 20);
@@ -140,3 +147,7 @@ window.addEventListener("resize", function () {
     skroller.setDimentions();
 });
 skroller(document.querySelector(".side-items"));
+
+
+
+
