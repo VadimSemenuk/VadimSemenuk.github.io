@@ -17,6 +17,9 @@
 * {
 	padding: 0px;
 	margin: 0px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
 }
 
 body input:focus:required:invalid,
@@ -239,10 +242,7 @@ aside .bot {
 }
 aside .side-items {
 	overflow: hidden;
-	overflow-y: scroll;
-	
-
-	width: 215px;
+	/* overflow-y: scroll; */
 } 
 
 /* .aside-wrapper {
@@ -1326,27 +1326,4 @@ details[open] .i-go-ahead {
 }
 .starred-item .i-unstar {
 	color: #f4b848;
-}
-/* scroler */
-.scroll-wrapper {
-	position: absolute;
-	top: 0px;
-	right: 2px;
-	height: 100%;
-	width: 8px;
-
-	background: rgba(255, 255, 255, .0);
-	overflow: hidden;
-}
-.scroll-scroller {
-	width: 100%;
-	height: 70px;
-	background: rgba(255, 255, 255, .45);	
-	cursor: pointer;
-	border-radius: 3px;
-}
-* {
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
 }

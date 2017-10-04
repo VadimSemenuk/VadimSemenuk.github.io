@@ -19,12 +19,7 @@ function skroller (scrollEl) {
     };
     createScrollMarcup();
     appendScroll();
-    scrollEl.classList.add("scrolls");
     scrl.style.height = getScrollerHeight(scrollEl.offsetHeight / scrolledCnt.offsetHeight, scrollEl.offsetHeight) + "px";  
-    if (scrolledCnt.offsetHeight - scrollEl.offsetHeight <= 0) {
-        console.log(scrolledCnt.offsetHeight);
-        wrp.classList.add("hidden");    
-    };
 
     let sCntH = scrolledCnt.offsetHeight,
         sElH = scrollEl.offsetHeight,
@@ -32,16 +27,8 @@ function skroller (scrollEl) {
         diff = sCntH - sElH,
         scrlPeaceH = scrl.offsetHeight,
         trnst = 0,
-        scrlKoef = 0,
-        shitBrowsKoef = 17.6;
-    scrollEl.addEventListener("wheel", function (e) {
-        if (e.deltaY < 30 && e.deltaY > 0) {
-            this.scrollTop += e.deltaY * shitBrowsKoef;
-        } if (e.deltaY > -30 && e.deltaY < 0) {
-            this.scrollTop += e.deltaY * shitBrowsKoef;            
-        } else {
-            this.scrollTop += e.deltaY;
-        };
+        scrlKoef = 0;
+    scrollEl.addEventListener("scroll", function (e) {
         scrlHandler(this);             
     });
     function scrollHandler (self) {
@@ -60,16 +47,15 @@ function skroller (scrollEl) {
     let mouseOn = false,
         prev = 0,
         moveDiff = 0,
+        p = 0,
         moveD = 0,
         dAcc = 0;
     scrl.addEventListener("mousedown", function (e) {            
         prev = e.pageY;
         mouseOn = true;
-        scrollEl.classList.remove("scrolls");    
     });
     document.addEventListener("mouseup", function (e) {
         mouseOn = false;
-        scrollEl.classList.add("scrolls");            
     });
     document.addEventListener("mousemove", function(e) {
         if (mouseOn) {
@@ -83,19 +69,16 @@ function skroller (scrollEl) {
         if (moveD >= diff && moveDiff > 0) {
             moveD = diff; 
             dAcc = sElH - scrlH;
-            scrollEl.scrollTop = moveD;   
-            scrlHandler(scrollEl);        
+            scrollEl.scrollTop = moveD;                                  
             return
         };
         if (moveD <= 0 && moveDiff < 0) {
             moveD = 0; 
             dAcc = 0; 
-            scrollEl.scrollTop = moveD;  
-            scrlHandler(scrollEl);        
+            scrollEl.scrollTop = moveD;              
             return
         };       
         scrollEl.scrollTop = moveD;
-        scrlHandler(scrollEl);
         prev = e.pageY;
     }
     let drgHandler = debounce(dragHandler, 20);
@@ -107,11 +90,6 @@ function skroller (scrollEl) {
         diff = sCntH - sElH;
         scrlH = scrl.offsetHeight;    
         scrlPeaceH = scrl.offsetHeight;
-        if (sCntH - sElH <= 0) {
-            wrp.classList.add("hidden");    
-        } else {
-            wrp.classList.remove("hidden");                
-        }
     };
     skroller.setDimentions = setDimentions;
 }
