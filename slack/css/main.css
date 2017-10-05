@@ -108,6 +108,58 @@ details {
 	overflow: hidden;		
 }
 
+.alt:hover:before {
+	display: block;
+}
+.alt:hover:after {
+	display: block;
+}
+.alt {
+	position: relative;
+}
+
+.alt:before {
+	content: "";
+	position: absolute;
+	display: none;
+	width: 8px;
+	height: 8px;
+	background: #000;
+	bottom: -14px;
+	left: 50%;
+	transform: rotate(45deg);
+	margin-left: -4px;	
+	z-index: 5;
+}
+.alt:after {
+	content: attr(data-alt);
+	position: absolute;
+	display: none;
+	color: #fff;
+	background: #000;
+	font-size: 13px;
+	padding: 0 10px;
+	height: 30px;
+	line-height: 30px;
+	vertical-align: middle;
+	border-radius: 5px;
+	bottom: -40px;
+	left: 50%;
+	transform: translate(-50%, 0);
+	z-index: 5;
+	white-space: nowrap;
+	font-weight: 800;
+}
+.alt-right:after {
+	right: 0px;
+	left: auto;
+	transform: translate(0, 0);	
+}
+.alt-left:after {
+	left: 0px;
+	transform: translate(0, 0);	
+}
+
 .btn,
 .btn-white {
 	cursor: pointer;
@@ -116,8 +168,10 @@ details {
 	color: #1b82bf;
 }
 .btn.disabled {
-	opacity: .3;
 	cursor: default;
+}
+.btn.disabled i {
+	opacity: .3;	
 }
 .btn.disabled:hover {
 	color: inherit;
@@ -218,10 +272,8 @@ aside {
 	background: #4d5250;
 	color: #c8c9c9;
 	font-size: 15px;	
-
-
-	max-width: 200px;
-	overflow: hidden;
+	/* max-width: 200px;
+	overflow: hidden; */
 }
 aside .top {
 	padding: 10px 15px;
@@ -424,7 +476,7 @@ aside .sig-name i {
 	align-items: center;
 	flex-wrap: wrap;
 	background: #fff;
-	z-index: 2;
+	z-index: 4;
 }
 .channel-info {
 	flex-grow: 1;
@@ -548,7 +600,7 @@ aside .sig-name i {
 	content: "";
 	width: 100%;
 	border-bottom: 1px solid #e8e8e8;
-	height: 9px;
+	height: 5px;
 	position: absolute;
 	top: 0px;
 	background: #fff;
@@ -686,7 +738,7 @@ aside .sig-name i {
 	position: -ms-sticky;
 	position: -o-sticky;
 	position: sticky;
-	top: -1px;
+	top: -5px;
 	z-index: 3;
 }
 .day-head:before,
