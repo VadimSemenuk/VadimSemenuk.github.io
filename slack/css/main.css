@@ -412,27 +412,22 @@ aside .sig-name i {
 .content-wrapper {
 	flex-grow: 1;
 	position: relative;
+	display: flex;
+	flex-direction: column;
 }
 /* head */
 .head {
 	padding: 0 20px;
-	padding-top: 8px;
+	padding-top: 11px;	
 	padding-right: 0px;
-	border-bottom: 1px solid #e8e8e8;
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;
-
-
-	position: absolute;
-	left: 0px;
-	right: 0px;
 	background: #fff;
 	z-index: 2;
 }
 .channel-info {
 	flex-grow: 1;
-	padding-bottom: 8px;
 }
 .channel-name {
 	font-size: 18px;
@@ -498,7 +493,6 @@ aside .sig-name i {
 	display: flex;
 	align-self: center;
 	color: #757678;
-	padding-bottom: 8px;
 }
 .channel-work .active-showed {
 	background: #e8e8e8;
@@ -545,27 +539,38 @@ aside .sig-name i {
 }
 /* content */
 .content {
-	height: 100%;
 	display: flex;
+	position: absolute;
+	top: 55px;
+	bottom: 0px;
+}
+.content:before {
+	content: "";
+	width: 100%;
+	border-bottom: 1px solid #e8e8e8;
+	height: 9px;
+	position: absolute;
+	top: 0px;
+	background: #fff;
+	z-index: 3;
 }
 /* chat */
 .chat-wrapper {
 	box-sizing: border-box;
 	overflow-x: hidden;
-	height: 100%;
-	padding-top: 60px;
-	padding-bottom: 60px;
 	position: relative;
 	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+}
+.add-wrapper {
+	display: flex;
+	flex-direction: column;
 }
 .chat-scroller {
+	flex-grow: 1;
 	overflow-y: scroll;
-	position: absolute;
-	top: 55px;
-	left: 0px;
-	/* right: -20px; */
-	right: 0px;
-	bottom: 60px;
+	height: 100%;
 }
 .chat-container {
 	padding-bottom: 18px;
@@ -578,17 +583,13 @@ aside .sig-name i {
 }
 /* message input */
 .msg-input-container {
-	left: 0px;
-	right: 0px;
-	position: absolute;
-	bottom: 0px;
-	margin: 0 17px;
-	margin-bottom: 17px;
-	box-sizing: border-box;
-	display: flex;	
-	background: #fff;
-	z-index: 3;
+    display: flex;
+    background: #fff;
+    flex-shrink: 0;
+    z-index: 3;
 	overflow: hidden;
+	margin: 17px;
+	margin-top: 0px;
 }
 .msg-input-container .add-i {
 	flex-basis: 40px;
@@ -612,7 +613,7 @@ aside .sig-name i {
 	position: absolute;
 	font-size: 20px;
 	color: #808082;
-	right: 10px;
+	right: 25px;
 	height: 41px;
 	padding: 0 5px;
 	padding-top: 5px;
@@ -622,7 +623,7 @@ aside .sig-name i {
 	position: absolute;
 	font-size: 20px;
 	color: #808082;
-	right: 40px;
+	right: 55px;
 	padding-top: 5px;
 }
 .msg-input-container .smile-i:hover,
@@ -685,7 +686,7 @@ aside .sig-name i {
 	position: -ms-sticky;
 	position: -o-sticky;
 	position: sticky;
-	top: -5px;
+	top: -1px;
 	z-index: 3;
 }
 .day-head:before,
@@ -819,7 +820,7 @@ aside .sig-name i {
 	right: 10px;
 	background: #fff;
 	display: none;
-	z-index: 3;
+	z-index: 2;
 }
 @-moz-document url-prefix() {
 	.message-item .actions {
@@ -960,7 +961,6 @@ details[open] .i-go-ahead {
 	flex-basis: 406px;
 	flex-shrink: 0;
 	border-left: 1px solid #e8e8e8;
-	padding-top: 61px;
 	height: 100%;
 	box-sizing: border-box;
 	overflow: hidden;

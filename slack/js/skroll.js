@@ -124,7 +124,11 @@ function skroller (scrollEl, pars) {
     }
     let drgHandler = debounce(dragHandler, 20);
 
+    let toBot = false;
     function setDimentions () {
+        if (scrollEl.scrollTop == diff && diff != 0) {
+            toBot = true;
+        }
         scrl.style.height = getScrollerHeight(scrollEl.offsetHeight / scrolledCnt.offsetHeight, scrollEl.offsetHeight) + "px";          
         sCntH = scrolledCnt.offsetHeight;  
         sElH = scrollEl.offsetHeight;    
@@ -135,7 +139,10 @@ function skroller (scrollEl, pars) {
             scrollEl.classList.add("hidden");    
         } else {
             scrollEl.classList.remove("hidden");                
-        }
+        };   
+        if (toBot) {
+            scrollEl.scrollTop = diff;
+        };
     };
     return {
         setDimentions: setDimentions

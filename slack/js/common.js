@@ -1,9 +1,16 @@
 "use strict"
 let inp = document.querySelector(".msg-input");
+let inpH = inp.clientHeight;
+inp.addEventListener("input", function (ev) {
+    if (this.clientHeight > inpH || this.clientHeight < inpH) {
+        inpH = this.clientHeight;
+        setTimeout(cScr.setDimentions, 4);           
+    };
+});    
 inp.addEventListener("keydown", function (ev) {
     if (ev.key == "Enter" && !ev.shiftKey) {
         setTimeout(function () {
-            inp.innerHTML = ""
+            inp.innerHTML = "";
         }, 4);
     };
 });
@@ -78,3 +85,7 @@ window.addEventListener("resize", function () {
 function ScrollsResizeHandler () {
     scrolls.forEach(fn => fn.setDimentions());  
 }
+// let cScr = {};
+// cScr.setDimentions = function () {
+//     return;
+// }
