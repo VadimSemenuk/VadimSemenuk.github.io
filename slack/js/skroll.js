@@ -158,7 +158,8 @@ function debounce (fn, delay) {
             setTimeout(function () {
                 access = true;
                 if (args) {
-                    f(...args);
+                    // f(...args);
+                    f.apply(this, args);
                     args = false;
                 }
             }, delay);

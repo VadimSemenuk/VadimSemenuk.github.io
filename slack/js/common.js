@@ -83,9 +83,7 @@ window.addEventListener("resize", function () {
     ScrollsResizeHandler();
 });
 function ScrollsResizeHandler () {
-    scrolls.forEach(fn => fn.setDimentions());  
+    scrolls.forEach(function (fn) {
+        fn.setDimentions()
+    });  
 }
-// let cScr = {};
-// cScr.setDimentions = function () {
-//     return;
-// }
