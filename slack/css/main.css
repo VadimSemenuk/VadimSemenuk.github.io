@@ -595,6 +595,7 @@ aside .sig-name i {
 	position: absolute;
 	top: 55px;
 	bottom: 0px;
+	width: 100%;
 }
 .content:before {
 	content: "";

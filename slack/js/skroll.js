@@ -11,6 +11,33 @@ function skroller (scrollEl, pars) {
     if (!pars) {
         pars = {};
     }
+
+
+    if (typeof Object.assign != 'function') {
+        Object.defineProperty(Object, "assign", {
+            value: function assign(target, varArgs) { 
+                'use strict';
+                if (target == null) { 
+                    throw new TypeError('Cannot convert undefined or null to object');
+                }
+                var to = Object(target);
+                for (var index = 1; index < arguments.length; index++) {
+                    var nextSource = arguments[index];
+                    if (nextSource != null) { 
+                        for (var nextKey in nextSource) {
+                            if (Object.prototype.hasOwnProperty.call(nextSource, nextKey)) {
+                            to[nextKey] = nextSource[nextKey];
+                        }
+                    }
+                }
+            }
+            return to;
+          },
+          writable: true,
+          configurable: true
+        });
+    }
+
     let params = Object.assign(def, pars);
 
     function createScrollMarcup () {
@@ -55,11 +82,11 @@ function skroller (scrollEl, pars) {
         scrollEl.classList.add("scrollerFF");                    
         scrollEl.addEventListener("MozMousePixelScroll", function (e) {
             this.scrollTop += e.detail;
-            scrlHandler(this);             
+            scrollHandler(this);             
         });  
     } else {    
         scrollEl.addEventListener("scroll", function (e) {
-            scrlHandler(this);             
+            scrollHandler(this);             
         });
     }
     function scrollHandler (self) {
@@ -73,7 +100,7 @@ function skroller (scrollEl, pars) {
         }       
         scrl.style.transform = "translateY(" + trnst + "px)";     
     };
-    let scrlHandler = debounce(scrollHandler, 10);
+    // let scrlHandler = debounce(scrollHandler, 10);
 
     let mouseOn = false,
         prev = 0,
@@ -91,7 +118,7 @@ function skroller (scrollEl, pars) {
     });
     document.addEventListener("mousemove", function(e) {
         if (mouseOn) {
-            drgHandler(e);
+            dragHandler(e);
         };
     });
     function dragHandler (e) {
@@ -103,7 +130,7 @@ function skroller (scrollEl, pars) {
             dAcc = sElH - scrlH;
             scrollEl.scrollTop = moveD; 
             if (moz) {        
-                scrlHandler(scrollEl);   
+                scrollHandler(scrollEl);   
             };     
             return
         };
@@ -112,17 +139,17 @@ function skroller (scrollEl, pars) {
             dAcc = 0; 
             scrollEl.scrollTop = moveD;
             if (moz) {        
-                scrlHandler(scrollEl);
+                scrollHandler(scrollEl);
             };        
             return
         };       
         scrollEl.scrollTop = moveD;
         if (moz) {        
-            scrlHandler(scrollEl);
+            scrollHandler(scrollEl);
         };
         prev = e.pageY;
     }
-    let drgHandler = debounce(dragHandler, 20);
+    // let drgHandler = debounce(dragHandler, 20);
 
     let toBot = false;
     function setDimentions () {
@@ -153,7 +180,8 @@ function debounce (fn, delay) {
         args = false;
     return function f () {
         if (access) {
-            fn(...arguments);
+            // fn(...arguments);
+            fn.apply(this, arguments);
             access = false;
             setTimeout(function () {
                 access = true;

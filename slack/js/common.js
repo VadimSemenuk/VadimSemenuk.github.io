@@ -28,38 +28,64 @@ addEvents(document.querySelectorAll(".channel-work .icon"), "click", function (e
         this.classList.remove("active-showed");				
     } else {
         aside.style.display = "block";
-        channelWork.querySelectorAll(".active-showed").forEach(function (el) {
-            el.classList.remove("active-showed");
-        });
+        // channelWork.querySelectorAll(".active-showed").forEach(function (el) {
+        //     el.classList.remove("active-showed");
+        // });
+        let cw = channelWork.querySelectorAll(".active-showed");
+        for (let i = 0, l = cw.length; i < l; i++) {
+            cw[i].classList.remove("active-showed");
+        };
         this.classList.add("active-showed");
         setTimeout(csScr.setDimentions, 4);
     }
-    asideChatContainer.querySelectorAll(".active-showed").forEach(function (el) {
-        el.style.display = "none";
-        el.classList.remove("active-showed");
-    });
-    asideChatContainer.querySelectorAll("div[data-name=" + this.dataset.cnt + "]").forEach(function (el) {
-        el.style.display = "block";
-        el.classList.add("active-showed");
-    });
+    // asideChatContainer.querySelectorAll(".active-showed").forEach(function (el) {
+    //     el.style.display = "none";
+    //     el.classList.remove("active-showed");
+    // });
+    let ac = asideChatContainer.querySelectorAll(".active-showed");
+    for (let i = 0, l = ac.length; i < l; i++) {
+        ac[i].style.display = "none";
+        ac[i].classList.remove("active-showed");
+    };
+    // asideChatContainer.querySelectorAll("div[data-name=" + this.dataset.cnt + "]").forEach(function (el) {
+    //     el.style.display = "block";
+    //     el.classList.add("active-showed");
+    // });
+    let acc = asideChatContainer.querySelectorAll("div[data-name=" + this.dataset.cnt + "]");
+    for (let i = 0, l = acc.length; i < l; i++) {
+        acc[i].style.display = "block";
+        acc[i].classList.add("active-showed");
+    };
 });
 
 function addEvents (el, ev, handler) {
-    el.forEach(function(el) {
-        el.addEventListener(ev, handler);	
-    });
+    // el.forEach(function(el) {
+    //     el.addEventListener(ev, handler);	
+    // });
+    for (let i = 0, l = el.length; i < l; i++) {
+        el[i].addEventListener(ev, handler);
+    };
 };
 
 document.querySelector(".aside-chat-head .i-close").addEventListener("click", function () {
     setTimeout(cScr.setDimentions, 4);       
     aside.style.display = "none";
-    asideChatContainer.querySelectorAll(".active-showed").forEach(function (el) {
-        el.style.display = "none";
-        el.classList.remove("active-showed");
-    });
-    channelWork.querySelectorAll(".active-showed").forEach(function (el) {
-        el.classList.remove("active-showed");
-    });
+    // asideChatContainer.querySelectorAll(".active-showed").forEach(function (el) {
+    //     el.style.display = "none";
+    //     el.classList.remove("active-showed");
+    // });
+    let acc = asideChatContainer.querySelectorAll(".active-showed");
+    for (let i = 0, l = acc.length; i < l; i++) {
+        acc[i].style.display = "none";
+        acc[i].classList.remove("active-showed");
+    };
+    // channelWork.querySelectorAll(".active-showed").forEach(function (el) {
+    //     el.classList.remove("active-showed");
+    // });
+    let cw = channelWork.querySelectorAll(".active-showed");
+    for (let i = 0, l = cw.length; i < l; i++) {
+        cw[i].classList.remove("active-showed");
+    };
 });
 
 addEvents(document.querySelectorAll(".ac-item summary"), "click", function (e) {
