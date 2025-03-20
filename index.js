@@ -6,9 +6,15 @@ async function run() {
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register("/serviceworker.js")
                 .then(registration => {
-                    registration.showNotification('Hello!', {
-                        body: 'This is a notification example.',
-                        icon: 'icon.png' // Replace with your notification icon
+                    // registration.showNotification('Hello!', {
+                    //     body: 'This is a notification example.',
+                    //     icon: 'icon.png' // Replace with your notification icon
+                    // });
+
+                    registration.showNotification("ttitle", {
+                        body: "messageee",
+                        silent: false,
+                        tag: 'ABRDirect',
                     });
                 });
         }
