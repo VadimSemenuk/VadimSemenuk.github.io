@@ -109,12 +109,14 @@
         } else {
             document.querySelector('.qr-code-container').classList.add('hidden');
         }
+        
+
 
         new QRCode(document.getElementById("qrcode"), {
             text: window.location.href,
             width: 300,
             height: 300,
-        });
+        })
     }
 
     const isAppleMobile = () => {
