@@ -329,17 +329,17 @@
 
         if (isCard(to)) {
             links = [
-                "vtb://online.vtb.ru/i/world"
+                "https://online.vtb.ru/i/world"
             ]
         } else {
             const targetBankCode = getTargetBankCodeForVTB(targetBank)
             if (targetBankCode) {
                 links = [
-                    `vtb://online.vtb.ru/i/phone/${countryCode}/${getTargetBankCodeForVTB(targetBank)}?phoneNumber=${to}&deeplink=true`
+                    `https://online.vtb.ru/i/phone/${countryCode}/${getTargetBankCodeForVTB(targetBank)}?phoneNumber=${to}&deeplink=true`
                 ]
             } else {
                 links = [
-                    `vtb://online.vtb.ru/i/world`
+                    `https://online.vtb.ru/i/world`
                 ]
             }
         }
