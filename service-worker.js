@@ -7,7 +7,8 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('push', function(event) {
-    console.log('push', event);
+    const data = event.data.json();
+    console.log('push', data);
     // const data = event.data.json();
     // const options = {
     //     body: data.message,
