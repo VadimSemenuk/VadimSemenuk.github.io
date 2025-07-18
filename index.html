@@ -88,12 +88,64 @@
         </div>
         <span class="title">Для оплаты отсканируйте QR-код с помощью камеры телефона и перейдите по ссылке</span>
     </div>
+
+    <button id="test">test</button>
 </div>
 
 <script type="module">
+    const urlBase64ToUint8Array = (base64String) => {
+        const padding = '='.repeat((4 - base64String.length % 4) % 4);
+        const base64 = (base64String + padding)
+            .replace(/-/g, '+')
+            .replace(/_/g, '/');
+
+        const rawData = window.atob(base64);
+        const outputArray = new Uint8Array(rawData.length);
+
+        for (let i = 0; i < rawData.length; ++i) {
+            outputArray[i] = rawData.charCodeAt(i);
+        }
+
+        return outputArray;
+    };
+
     const setupUI = () => {
-        showHelpMessageIfNeed()
-        showQRIfNeed()
+        // showHelpMessageIfNeed()
+        // showQRIfNeed()
+
+        document.getElementById('test').addEventListener('click', () => {
+            console.log(1)
+            if ('Notification' in window && 'serviceWorker' in navigator) {
+                navigator.serviceWorker.register('./service-worker.js').then(registration => {
+                    console.log('registration: ', registration);
+                    Notification.requestPermission().then(permission => {
+                        console.log('Notification: ', permission);
+                        if (permission === 'granted') {
+                            // const existingSubscription = registration.pushManager.getSubscription()
+                            //     .then(subscription => {
+                            //         console.log('Subscription: ', subscription);
+                            //     })
+
+                            registration.pushManager.subscribe({
+                                userVisibleOnly: true,
+                                applicationServerKey: urlBase64ToUint8Array('BGU3_27KUD02YNwLOBzM1Jn2mH3bz3dOfppTwKEc4Oa27oWrfEWXf6e0B3F5JdPr4BSBtFKWUgUZA8S5SLv0SjM')
+                            }).then(subscription => {
+                                console.log('subscription: ', subscription);
+                                // // Отправка подписки на сервер для хранения
+                                // fetch('/save-subscription', {
+                                //     method: 'POST',
+                                //     body: JSON.stringify(subscription),
+                                //     headers: {
+                                //         'Content-Type': 'application/json'
+                                //     }
+                                // });
+                            });
+                        }
+                    });
+                });
+            }
+
+        })
     }
 
     const showHelpMessageIfNeed = () => {
@@ -354,6 +406,7 @@
             'mbt': 28,
             'oriyonbonk': 74,
             'spitamenbank': 73,
+            'eskhata': 27
         }
 
         return bankToCode[bank.toLowerCase()]
@@ -372,6 +425,8 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+        setupUI()
+
         const urlParams = new URLSearchParams(window.location.search);
         const amount = urlParams.get('amount');
         const to = (urlParams.get('to') || "").replace(/[+\s]/g, '');
