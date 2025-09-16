@@ -363,7 +363,12 @@
     const runRedirects = (links) => {
         links.forEach((item, index) => {
             setTimeout(() => {
-                location.href = item;
+                console.log(i, item)
+                try {
+                    location.href = item;
+                } catch(err) {
+                    console.log("err", err)
+                }
             }, index * 500)
         })
 
