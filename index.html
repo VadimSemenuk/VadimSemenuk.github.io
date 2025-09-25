@@ -354,21 +354,44 @@
             'mbt': 28,
             'oriyonbonk': 74,
             'spitamenbank': 73,
-            'eskhata': 27
+            'eskhata': 27,
+            'vtb armenia': 2
         }
 
-        return bankToCode[bank.toLowerCase()]
+        return bankToCode[bank.toLowerCase()] || bank
+    }
+
+    const runAlfabank = async (amount, to) => {
+        let links = []
+
+        if (isCard(to)) {
+            links = [
+                `smartfinancementor://card_to_card?amount=${amount}&recipientCardNumber=${to}`,
+                `alfabank://card_to_card?amount=${amount}&recipientCardNumber=${to}`
+            ]
+        } else {
+            links = [
+                `smartfinancementor://phone_bank_transfers?recipientPhoneNumber=${to}`,
+                `alfabank://phone_bank_transfers?recipientPhoneNumber=${to}`
+            ]
+        }
+
+        runRedirects(links)
+    }
+
+    const runAlfabankInternational = async () => {
+        let links = [
+            "smartfinancementor://multistep-route?alias=global-transfer&fromModule=STANDARD",
+            "alfabank://multistep-route?alias=global-transfer&fromModule=STANDARD"
+        ]
+
+        runRedirects(links)
     }
 
     const runRedirects = (links) => {
         links.forEach((item, index) => {
             setTimeout(() => {
-                console.log(index, item)
-                try {
-                    location.href = item;
-                } catch(err) {
-                    console.log("err", err)
-                }
+                location.href = item;
             }, index * 500)
         })
 
@@ -412,15 +435,18 @@
                 runVtbInternational(amount, to, countryCode, targetBank)
                 break
             }
+            case 'alfabank': {
+                runAlfabank(amount, to)
+                break
+            }
+            case 'alfabank_international': {
+                runAlfabankInternational(amount, to, countryCode, targetBank)
+                break
+            }
         }
 
         setupUI()
     })
-
-    document.addEventListener('visibilitychange', () => {
-        console.log("document.hidden", document.hidden)
-        console.log("document.visibilityState", document.visibilityState)
-    });
 </script>
 
 </body>
