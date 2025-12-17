@@ -367,12 +367,12 @@
         if (isCard(to)) {
             links = [
                 `smartfinancementor://card_to_card?amount=${amount}&recipientCardNumber=${to}`,
-                `alfabank://card_to_card?amount=${amount}&recipientCardNumber=${to}`
+                // `alfabank://card_to_card?amount=${amount}&recipientCardNumber=${to}`
             ]
         } else {
             links = [
                 `smartfinancementor://phone_bank_transfers?recipientPhoneNumber=${to}`,
-                `alfabank://phone_bank_transfers?recipientPhoneNumber=${to}`
+                // `alfabank://phone_bank_transfers?recipientPhoneNumber=${to}`
             ]
         }
 
