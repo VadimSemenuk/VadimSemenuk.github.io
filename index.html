@@ -409,11 +409,13 @@
 
     function setupAutoClose() {
         document.addEventListener("visibilitychange", () => {
+            console.log(1)
             setTimeout(() => {
+                console.log(2)
                 if (document.visibilityState === "hidden") {
                     close();
                 }
-            }, 2000)
+            }, 100)
         });
     }
 
