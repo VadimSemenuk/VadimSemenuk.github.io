@@ -403,13 +403,19 @@
     function onUserLeft() {
     }
 
-    document.addEventListener("visibilitychange", () => {
-        console.log("visibilitychange")
+    // document.addEventListener("visibilitychange", () => {
+    //     console.log("visibilitychange")
+    //     console.log(document.visibilityState);
+    //     console.log(document.hidden)
+    //     // if (document.hidden) {
+    //     //     onUserLeft()
+    //     // }
+    // });
+
+    window.addEventListener("pagehide", () => {
+        console.log("pagehide")
+        console.log(document.hidden);
         console.log(document.visibilityState);
-        console.log(document.hidden)
-        // if (document.hidden) {
-        //     onUserLeft()
-        // }
     });
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -476,7 +482,7 @@
         //     console.log("blur")
         //     onUserLeft()
         // });
-        //
+
         // window.addEventListener("pagehide", () => {
         //     console.log("pagehide")
         //     onUserLeft()
