@@ -408,8 +408,12 @@
     }
 
     function setupAutoClose() {
+        console.log(1)
         document.addEventListener("visibilitychange", () => {
+            console.log(2)
+            console.log(document.visibilityState)
             if (document.visibilityState === "hidden") {
+                console.log(3)
                 close();
             }
         });
