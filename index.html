@@ -393,12 +393,12 @@
             setTimeout(() => {
 
                 // document.body.removeChild(iframe);
-                const iframe = document.createElement('iframe');
-                iframe.style.display = 'none';
-                iframe.src = item;
-                document.body.appendChild(iframe);
-
-                // location.href = item;
+                // const iframe = document.createElement('iframe');
+                // iframe.style.display = 'none';
+                // iframe.src = item;
+                // document.body.appendChild(iframe);
+                //
+                location.href = item;
             }, index * 500)
         })
 
