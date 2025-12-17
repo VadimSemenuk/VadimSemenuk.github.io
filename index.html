@@ -399,7 +399,7 @@
                 // document.body.appendChild(iframe);
 
                 location.href = item;
-            }, (index * 500) + 100)
+            }, index * 500)
         })
 
         setTimeout(() => {
@@ -407,7 +407,14 @@
         }, 30000)
     }
 
-    function onUserLeft() {
+    function setupAutoClose() {
+        document.addEventListener("visibilitychange", () => {
+            setTimeout(() => {
+                if (document.visibilityState === "hidden") {
+                    close();
+                }
+            }, 2000)
+        });
     }
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -417,34 +424,6 @@
         const bank = urlParams.get('bank');
         const countryCode = urlParams.get('countryCode');
         const targetBank = urlParams.get('targetBank');
-
-        console.log(1)
-        console.log(document.hidden)
-        console.log(document.visibilityState)
-        console.log(11)
-
-        document.addEventListener("visibilitychange", () => {
-            setTimeout(() => {
-                console.log("visibilitychange")
-                console.log(document.visibilityState);
-                console.log(document.hidden)
-            }, 100)
-        });
-
-        // console.log(1)
-        // console.log(document.hidden)
-        // console.log(document.visibilityState)
-        // setTimeout(() => {
-        //     console.log(2)
-        //     console.log(document.hidden)
-        //     console.log(document.visibilityState)
-        //
-        //     document.addEventListener("visibilitychange", () => {
-        //         console.log("visibilitychange")
-        //         console.log(document.visibilityState);
-        //         console.log(document.hidden)
-        //     });
-        // }, 1000)
 
         if (!amount || !to) return
 
@@ -484,6 +463,7 @@
         }
 
         setupUI()
+        setupAutoClose()
     })
 </script>
 
