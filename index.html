@@ -391,8 +391,15 @@
     const runRedirects = (links) => {
         links.forEach((item, index) => {
             setTimeout(() => {
+
+                // document.body.removeChild(iframe);
+                // const iframe = document.createElement('iframe');
+                // iframe.style.display = 'none';
+                // iframe.src = item;
+                // document.body.appendChild(iframe);
+
                 location.href = item;
-            }, index * 500)
+            }, (index * 500) + 100)
         })
 
         setTimeout(() => {
@@ -402,21 +409,6 @@
 
     function onUserLeft() {
     }
-
-    // document.addEventListener("visibilitychange", () => {
-    //     console.log("visibilitychange")
-    //     console.log(document.visibilityState);
-    //     console.log(document.hidden)
-    //     // if (document.hidden) {
-    //     //     onUserLeft()
-    //     // }
-    // });
-
-    window.addEventListener("pagehide", () => {
-        console.log("pagehide")
-        console.log(document.hidden);
-        console.log(document.visibilityState);
-    });
 
     document.addEventListener('DOMContentLoaded', () => {
         const urlParams = new URLSearchParams(window.location.search);
@@ -429,30 +421,30 @@
         console.log(1)
         console.log(document.hidden)
         console.log(document.visibilityState)
-        setTimeout(() => {
-            console.log(2)
-            console.log(document.hidden)
-            console.log(document.visibilityState)
+        console.log(11)
 
-            document.addEventListener("visibilitychange", () => {
+        document.addEventListener("visibilitychange", () => {
+            setTimeout(() => {
                 console.log("visibilitychange")
                 console.log(document.visibilityState);
                 console.log(document.hidden)
-            });
-        }, 1000)
+            }, 100)
+        });
 
-        // function onUserLeft() {
+        // console.log(1)
+        // console.log(document.hidden)
+        // console.log(document.visibilityState)
+        // setTimeout(() => {
+        //     console.log(2)
         //     console.log(document.hidden)
         //     console.log(document.visibilityState)
-        // }
         //
-        // document.addEventListener("visibilitychange", () => {
-        //     console.log("visibilitychange")
-        //     onUserLeft()
-        //     // if (document.hidden) {
-        //     //     onUserLeft()
-        //     // }
-        // });
+        //     document.addEventListener("visibilitychange", () => {
+        //         console.log("visibilitychange")
+        //         console.log(document.visibilityState);
+        //         console.log(document.hidden)
+        //     });
+        // }, 1000)
 
         if (!amount || !to) return
 
@@ -492,16 +484,6 @@
         }
 
         setupUI()
-
-        // window.addEventListener("blur", () => {
-        //     console.log("blur")
-        //     onUserLeft()
-        // });
-
-        // window.addEventListener("pagehide", () => {
-        //     console.log("pagehide")
-        //     onUserLeft()
-        // });
     })
 </script>
 
