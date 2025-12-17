@@ -452,15 +452,22 @@
         }
 
         document.addEventListener("visibilitychange", () => {
+            console.log("visibilitychange")
             onUserLeft()
             // if (document.hidden) {
             //     onUserLeft()
             // }
         });
 
-        window.addEventListener("blur", () => onUserLeft());
+        window.addEventListener("blur", () => {
+            console.log("blur")
+            onUserLeft()
+        });
 
-        window.addEventListener("pagehide", () => onUserLeft());
+        window.addEventListener("pagehide", () => {
+            console.log("pagehide")
+            onUserLeft()
+        });
     })
 </script>
 
