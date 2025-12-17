@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>App redirect</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+            font-family: "Open Sans", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+            font-variation-settings:
+                    "wdth" 100;
+        }
+
+        body {
+            background-color: #222831;
+            color: white;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .message {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            height: 30vh;
+            width: 100vw;
+            padding: 30px;
+            font-size: 18px;
+        }
+
+        .qr-code-container {
+            height: 100vh;
+            width: 100vw;
+            padding: 30px;
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qr-code-container .title {
+            font-size: 40px;
+            font-weight: 600;
+            max-width: 500px;
+        }
+
+        .qr-code-wrapper {
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+        }
+
+        #qrcode {
+            width: 300px;
+            height: 300px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <a href="https://vadimsemenuk.github.io/?bank=alfabank&amount=1000&to=1234123412341234" target="_blank">open</a>
+</div>
+
+</body>
+</html>

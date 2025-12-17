@@ -409,15 +409,23 @@
 
     function setupAutoClose() {
         document.addEventListener("visibilitychange", () => {
-            console.log(1)
-            setTimeout(() => {
-                console.log(2)
-                if (document.visibilityState === "hidden") {
-                    close();
-                }
-            }, 100)
+            if (document.visibilityState === "hidden") {
+                close();
+            }
         });
     }
+
+    // function setupAutoClose() {
+    //     document.addEventListener("visibilitychange", () => {
+    //         console.log(1)
+    //         setTimeout(() => {
+    //             console.log(2)
+    //             if (document.visibilityState === "hidden") {
+    //                 close();
+    //             }
+    //         }, 100)
+    //     });
+    // }
 
     document.addEventListener('DOMContentLoaded', () => {
         const urlParams = new URLSearchParams(window.location.search);
@@ -465,7 +473,10 @@
         }
 
         setupUI()
-        setupAutoClose()
+
+        setTimeout(() => {
+            setupAutoClose()
+        }, 500)
     })
 </script>
 
