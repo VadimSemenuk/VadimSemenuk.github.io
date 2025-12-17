@@ -408,6 +408,18 @@
         const countryCode = urlParams.get('countryCode');
         const targetBank = urlParams.get('targetBank');
 
+        function onUserLeft() {
+            console.log(document.hidden)
+        }
+
+        document.addEventListener("visibilitychange", () => {
+            console.log("visibilitychange")
+            onUserLeft()
+            // if (document.hidden) {
+            //     onUserLeft()
+            // }
+        });
+
         if (!amount || !to) return
 
         switch (bank) {
@@ -446,18 +458,6 @@
         }
 
         setupUI()
-
-        function onUserLeft() {
-            console.log(document.hidden)
-        }
-
-        document.addEventListener("visibilitychange", () => {
-            console.log("visibilitychange")
-            onUserLeft()
-            // if (document.hidden) {
-            //     onUserLeft()
-            // }
-        });
 
         // window.addEventListener("blur", () => {
         //     console.log("blur")
