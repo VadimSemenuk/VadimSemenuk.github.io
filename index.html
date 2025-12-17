@@ -400,6 +400,18 @@
         }, 30000)
     }
 
+    function onUserLeft() {
+    }
+
+    document.addEventListener("visibilitychange", () => {
+        console.log("visibilitychange")
+        console.log(document.visibilityState);
+        console.log(document.hidden)
+        // if (document.hidden) {
+        //     onUserLeft()
+        // }
+    });
+
     document.addEventListener('DOMContentLoaded', () => {
         const urlParams = new URLSearchParams(window.location.search);
         const amount = urlParams.get('amount');
@@ -408,18 +420,18 @@
         const countryCode = urlParams.get('countryCode');
         const targetBank = urlParams.get('targetBank');
 
-        function onUserLeft() {
-            console.log(document.hidden)
-            console.log(document.visibilityState)
-        }
-
-        document.addEventListener("visibilitychange", () => {
-            console.log("visibilitychange")
-            onUserLeft()
-            // if (document.hidden) {
-            //     onUserLeft()
-            // }
-        });
+        // function onUserLeft() {
+        //     console.log(document.hidden)
+        //     console.log(document.visibilityState)
+        // }
+        //
+        // document.addEventListener("visibilitychange", () => {
+        //     console.log("visibilitychange")
+        //     onUserLeft()
+        //     // if (document.hidden) {
+        //     //     onUserLeft()
+        //     // }
+        // });
 
         if (!amount || !to) return
 
