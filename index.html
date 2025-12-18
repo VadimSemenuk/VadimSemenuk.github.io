@@ -367,12 +367,12 @@
         if (isCard(to)) {
             links = [
                 `smartfinancementor://card_to_card?amount=${amount}&recipientCardNumber=${to}`,
-                // `alfabank://card_to_card?amount=${amount}&recipientCardNumber=${to}`
+                `alfabank://card_to_card?amount=${amount}&recipientCardNumber=${to}`
             ]
         } else {
             links = [
                 `smartfinancementor://phone_bank_transfers?recipientPhoneNumber=${to}`,
-                // `alfabank://phone_bank_transfers?recipientPhoneNumber=${to}`
+                `alfabank://phone_bank_transfers?recipientPhoneNumber=${to}`
             ]
         }
 
@@ -391,46 +391,16 @@
     const runRedirects = (links) => {
         links.forEach((item, index) => {
             setTimeout(() => {
-
-                // document.body.removeChild(iframe);
-                // const iframe = document.createElement('iframe');
-                // iframe.style.display = 'none';
-                // iframe.src = item;
-                // document.body.appendChild(iframe);
-
-                window.open(item)
-                // location.href = item;
+                location.href = item;
             }, index * 500)
         })
 
         setTimeout(() => {
-            close()
-        }, 30000)
+            setInterval(() => {
+                close()
+            }, 1000)
+        }, 5000)
     }
-
-    function setupAutoClose() {
-        console.log(1)
-        document.addEventListener("visibilitychange", () => {
-            console.log(2)
-            console.log(document.visibilityState)
-            if (document.visibilityState === "hidden") {
-                console.log(3)
-                close();
-            }
-        });
-    }
-
-    // function setupAutoClose() {
-    //     document.addEventListener("visibilitychange", () => {
-    //         console.log(1)
-    //         setTimeout(() => {
-    //             console.log(2)
-    //             if (document.visibilityState === "hidden") {
-    //                 close();
-    //             }
-    //         }, 100)
-    //     });
-    // }
 
     document.addEventListener('DOMContentLoaded', () => {
         const urlParams = new URLSearchParams(window.location.search);
@@ -478,10 +448,6 @@
         }
 
         setupUI()
-
-        setTimeout(() => {
-            setupAutoClose()
-        }, 500)
     })
 </script>
 
