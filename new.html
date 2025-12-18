@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>App redirect</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+            font-family: "Open Sans", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+            font-variation-settings:
+                    "wdth" 100;
+        }
+
+        body {
+            background-color: #222831;
+            color: white;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .message {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            height: 30vh;
+            width: 100vw;
+            padding: 30px;
+            font-size: 18px;
+        }
+
+        .qr-code-container {
+            height: 100vh;
+            width: 100vw;
+            padding: 30px;
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qr-code-container .title {
+            font-size: 40px;
+            font-weight: 600;
+            max-width: 500px;
+        }
+
+        .qr-code-wrapper {
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+        }
+
+        #qrcode {
+            width: 300px;
+            height: 300px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="hidden ios-message message">
+        Для продолжения нажимайте <br/> «ОК» или «Открыть» во всплывающем окне
+    </div>
+
+    <div class="hidden qr-code-container">
+        <div class="qr-code-wrapper">
+            <div id="qrcode"></div>
+        </div>
+        <span class="title">Для оплаты отсканируйте QR-код с помощью камеры телефона и перейдите по ссылке</span>
+    </div>
+</div>
+
+<script type="module">
+    const DeviceDetector = {
+        isAppleMobile() {
+            return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+        },
+
+        isAndroidMobile() {
+            return /Android/i.test(navigator.userAgent);
+        }
+    }
+
+    class LinksHelper {
+        getLinks(bank, amount, to, countryCode, targetBank) {
+            switch (bank) {
+                case 'sber': {
+                    return this.getSberLinks(amount, to)
+                }
+                case 'sber_international': {
+                    return this.getSberInternationalLinks(amount, to)
+                }
+                case 'tbank': {
+                    return this.getTBankLinks(amount, to)
+                }
+                case 'tbank_international': {
+                    return this.getTBankLinks(amount, to)
+                }
+                case 'vtb': {
+                    return this.getVtbLinks(amount, to)
+                }
+                case 'vtb_international': {
+                    return this.getVtbInternationalLinks(amount, to, countryCode, targetBank)
+                }
+                case 'alfabank': {
+                    return this.getAlfabankLinks(amount, to)
+                }
+                case 'alfabank_international': {
+                    return this.getAlfabankInternationalLinks(amount, to, countryCode, targetBank)
+                }
+            }
+        }
+
+        isCard(value) {
+            return (value?.length || 0) >= 16
+        }
+
+        getSberLinks(amount, to) {
+            let links = []
+            if (isAppleMobile()) {
+                if (this.isCard(to)) {
+                    links = [
+                        `budgetonline-ios://sbolonline/p2ptransfer?amount=${amount}&isNeedToOpenNextScreen=true&skipContactsScreen=true&to=${to}&type=cardNumber`,
+                        `sbolonline://payments/p2ptransfer?amount=${amount}&isNeedToOpenNextScreen=true&skipContactsScreen=true&to=${to}&type=cardNumber%7D`,
+                        `ios-app-smartonline://sbolonline/p2ptransfer?amount=${amount}&isNeedToOpenNextScreen=true&skipContactsScreen=true&to=${to}&type=cardNumber`,
+                        `app-online-ios://payments/p2ptransfer?amount=${amount}&isNeedToOpenNextScreen=true&skipContactsScreen=true&to=${to}&type=cardNumber%7D`,
+                        `btripsexpenses://sbolonline/p2ptransfer?amount=${amount}&isNeedToOpenNextScreen=true&skipContactsScreen=true&to=${to}&type=cardNumber`,
+                    ]
+                } else {
+                    links = [
+                        `budgetonline-ios://sbolonline/payments/p2p-by-phone-number?phoneNumber=${to}`,
+                        `sbolonline://payments/p2p-by-phone-number?phoneNumber=${to}`,
+                        `ios-app-smartonline://sbolonline/payments/p2p-by-phone-number?phoneNumber=${to}`,
+                        `app-online-ios://payments/p2p-by-phone-number?phoneNumber=${to}`,
+                        `btripsexpenses://sbolonline/payments/p2p-by-phone-number?phoneNumber=${to}`,
+                    ]
+                }
+
+            } else if (isAndroidMobile()) {
+                if (this.isCard(to)) {
+                    links = [
+                        `intent://ru.sberbankmobile/payments/p2p?type=card_number&requisiteNumber=${to}&amount=${amount}`,
+                        `android-app://ru.sberbankmobile/payments/p2p?type=card_number&requisiteNumber=${to}&amount=${amount}`,
+                        `intent://ru.sberbankmobile/android-app/payments/p2p?type=card_number&requisiteNumber=${to}&amount=${amount}`,
+                        `sberbankonline://payments/p2p?type=card_number&requisiteNumber=${to}&amount=${amount}`,
+                    ]
+                } else {
+                    links = [
+                        `intent://ru.sberbankmobile/payments/p2p?type=phone_number&requisiteNumber=${to}&amount=${amount}`,
+                        `intent://ru.sberbankmobile/android-app/payments/p2p?type=phone_number&requisiteNumber=${to}&amount=${amount}`,
+                        `android-app://ru.sberbankmobile/payments/p2p?type=phone_number&requisiteNumber=${to}&amount=${amount}`,
+                        `sberbankonline://payments/p2p?type=phone_number&requisiteNumber=${to}&amount=${amount}`,
+                    ]
+                }
+            }
+            return links
+        }
+
+        getSberInternationalLinks(amount, to) {
+            let links = []
+            if (isAppleMobile()) {
+                if (this.isCard(to)) {
+                    links = [
+                        `budgetonline-ios://sbolonline/p2ptransfer?type=cardNumber&to=${to}`,
+                        `sbolonline://payments/p2ptransfer?type=cardNumber&to=${to}`,
+                        `ios-app-smartonline://sbolonline/p2ptransfer?type=cardNumber&to=${to}`,
+                        `app-online-ios://payments/p2ptransfer?type=cardNumber&to=${to}`,
+                        `btripsexpenses://sbolonline/p2ptransfer?type=cardNumber&to=${to}`,
+                    ]
+                } else {
+                    links = [
+                        `budgetonline-ios://sbolonline/abroadtransfers/foreignbank?to=${to}&type=phone`,
+                        `sbolonline://abroadtransfers/foreignbank?to=${to}&type=phone`,
+                        `ios-app-smartonline://sbolonline/abroadtransfers/foreignbank?to=${to}&type=phone`,
+                        `app-online-ios://abroadtransfers/foreignbank?to=${to}&type=phone`,
+                        `btripsexpenses://sbolonline/abroadtransfers/foreignbank?to=${to}&type=phone`,
+                    ]
+                }
+            } else if (isAndroidMobile()) {
+                if (this.isCard(to)) {
+                    links = [
+                        `intent://ru.sberbankmobile/payments/p2p?type=card_number&requisiteNumber=${to}&amount=${amount}`,
+                        `android-app://ru.sberbankmobile/payments/p2p?type=card_number&requisiteNumber=${to}&amount=${amount}`,
+                        `intent://ru.sberbankmobile/android-app/payments/p2p?type=card_number&requisiteNumber=${to}&amount=${amount}`,
+                        `sberbankonline://payments/p2p?type=card_number&requisiteNumber=${to}&amount=${amount}`,
+                    ]
+                } else {
+                    links = [
+                        `intent://ru.sberbankmobile/transfers/overseas?type=phone_number&requisiteNumber=${to}&amount=${amount}`,
+                        `android-app://ru.sberbankmobile/transfers/overseas?type=phone_number&requisiteNumber=${to}&amount=${amount}`,
+                        `intent://ru.sberbankmobile/android-app/transfers/overseas?type=phone_number&requisiteNumber=${to}&amount=${amount}`,
+                        `sberbankonline://transfers/overseas?type=phone_number&requisiteNumber=${to}&amount=${amount}`,
+                    ]
+                }
+            }
+
+            return links
+        }
+
+        getTBankLinks(amount, to) {
+            let links = []
+            if (isAppleMobile()) {
+                if (this.isCard(to)) {
+                    links = [
+                        `freelancecase://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                        `yourmoney://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                        `tbank://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                        `feedaways://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                        `toffice://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                        `tguard://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                        `mobtrs://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                        `goaloriented://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                        `tmydocs://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                        `tfinstudy://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                        `tsplit://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                        `tfinskills://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                        `catch://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                        `tinkoffbank://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`
+                    ]
+                } else {
+                    links = [
+                        `freelancecase://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
+                        `yourmoney://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
+                        `tbank://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
+                        `feedaways://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
+                        `toffice://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
+                        `tguard://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
+                        `mobtrs://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
+                        `goaloriented://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
+                        `tmydocs://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
+                        `tfinstudy://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
+                        `tsplit://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
+                        `tfinskills://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
+                        `catch://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
+                        `tinkoffbank://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
+                    ]
+                }
+
+            } else if (isAndroidMobile()) {
+                if (this.isCard(to)) {
+                    links = [
+                        `freelancecase://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                        `yourmoney://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                        `tbank://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                        `feedaways://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                        `toffice://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                        `tguard://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                        `mobtrs://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                        `goaloriented://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                        `tmydocs://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                        `tfinstudy://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                        `tsplit://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                        `tfinskills://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                        `catch://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                        `tinkoffbank://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                    ]
+                } else {
+                    links = [
+                        `freelancecase://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
+                        `yourmoney://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
+                        `tbank://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
+                        `feedaways://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
+                        `toffice://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
+                        `tguard://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
+                        `mobtrs://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
+                        `goaloriented://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
+                        `tmydocs://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
+                        `tfinstudy://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
+                        `tsplit://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
+                        `tfinskills://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
+                        `catch://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
+                        `tinkoffbank://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
+                    ]
+                }
+            }
+
+            return links;
+        }
+
+        getVtbLinks(amount, to) {
+            let links = []
+
+            if (this.isCard(to)) {
+                links = [
+                    "https://online.vtb.ru/i/c2c"
+                ]
+            } else {
+                links = [
+                    `https://online.vtb.ru/i/ppl/${to}`
+                ]
+            }
+
+            return links;
+        }
+
+        getVtbInternationalLinks(amount, to, countryCode, targetBank) {
+            let links = []
+
+            if (this.isCard(to)) {
+                links = [
+                    "https://online.vtb.ru/i/world"
+                ]
+            } else {
+                const targetBankCode = this.getTargetBankCodeForVTB(targetBank)
+                if (targetBankCode) {
+                    links = [
+                        `https://online.vtb.ru/i/phone/${countryCode}/${getTargetBankCodeForVTB(targetBank)}?phoneNumber=${to}&deeplink=true`
+                    ]
+                } else {
+                    links = [
+                        `https://online.vtb.ru/i/world`
+                    ]
+                }
+            }
+
+            return links;
+        }
+
+        getTargetBankCodeForVTB(bank) {
+            const bankToCode = {
+                'amonatbonk': 29,
+                'matin': 83,
+                'mbt': 28,
+                'oriyonbonk': 74,
+                'spitamenbank': 73,
+                'eskhata': 27,
+                'vtb armenia': 2
+            }
+
+            return bankToCode[bank.toLowerCase()] || bank
+        }
+
+        getAlfabankLinks(amount, to) {
+            let links = []
+
+            if (this.isCard(to)) {
+                links = [
+                    `smartfinancementor://card_to_card?amount=${amount}&recipientCardNumber=${to}`,
+                    `alfabank://card_to_card?amount=${amount}&recipientCardNumber=${to}`
+                ]
+            } else {
+                links = [
+                    `smartfinancementor://phone_bank_transfers?recipientPhoneNumber=${to}`,
+                    `alfabank://phone_bank_transfers?recipientPhoneNumber=${to}`
+                ]
+            }
+
+            return links;
+        }
+
+        getAlfabankInternationalLinks() {
+            let links = [
+                "smartfinancementor://multistep-route?alias=global-transfer&fromModule=STANDARD",
+                "alfabank://multistep-route?alias=global-transfer&fromModule=STANDARD"
+            ]
+
+            return links;
+        }
+    }
+
+    const setupUI = () => {
+        showQRIfNeed()
+    }
+
+    const showQRIfNeed = () => {
+        if (!DeviceDetector.isAppleMobile() && !DeviceDetector.isAndroidMobile()) {
+            document.querySelector('.qr-code-container').classList.remove('hidden');
+        } else {
+            document.querySelector('.qr-code-container').classList.add('hidden');
+        }
+
+        new QRCode(document.getElementById("qrcode"), {
+            text: window.location.href,
+            width: 300,
+            height: 300,
+        });
+    }
+
+    const runRedirect = () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const amount = urlParams.get('amount');
+        const to = (urlParams.get('to') || "").replace(/[+\s]/g, '');
+        const bank = urlParams.get('bank');
+        const countryCode = urlParams.get('countryCode');
+        const targetBank = urlParams.get('targetBank');
+        const linkIndex = parseInt(urlParams.get("_i") || "0", 10);
+
+        if (!amount || !to) return
+
+        const links = new LinksHelper().getLinks(bank, amount, to, countryCode, targetBank)
+        console.log(links);
+        if (linkIndex <= links.length) {
+            window.open(links[linkIndex])
+            setTimeout(() => {
+                refresh(linkIndex + 1)
+            }, 50)
+        }
+    }
+
+    function refresh(nextLinkIndex) {
+        let url = new URL(window.location.href)
+        let params = new URLSearchParams(url.search)
+        params.set("_i", nextLinkIndex)
+        url.search = params.toString()
+
+        window.location.replace(url.toString())
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        setupUI()
+        runRedirect()
+    })
+</script>
+
+</body>
+</html>
