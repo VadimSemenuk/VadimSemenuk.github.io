@@ -410,7 +410,8 @@
         const links = new LinksHelper().getLinks(bank, amount, to, countryCode, targetBank)
         console.log(links);
         if (linkIndex <= links.length) {
-            window.open(links[linkIndex])
+            window.location.href = links[linkIndex];
+            // window.open(links[linkIndex])
             setTimeout(() => {
                 refresh(linkIndex + 1)
             }, 50)
