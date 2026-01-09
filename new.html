@@ -83,6 +83,10 @@
 
         isAndroidMobile() {
             return /Android/i.test(navigator.userAgent);
+        },
+
+        isMobile() {
+            return DeviceDetector.isAppleMobile() || DeviceDetector.isAndroidMobile()
         }
     }
 
@@ -126,19 +130,23 @@
             if (DeviceDetector.isAppleMobile()) {
                 if (this.isCard(to)) {
                     links = [
+                        `onlineios-app://sbolonline/p2ptransfer?amount=${amount}&isNeedToOpenNextScreen=true&skipContactsScreen=true&to=${to}&type=cardNumber`,
+                        `onlineappmobile://sbolonline/p2ptransfer?amount=${amount}&isNeedToOpenNextScreen=true&skipContactsScreen=true&to=${to}&type=cardNumber`,
                         `budgetonline-ios://sbolonline/p2ptransfer?amount=${amount}&isNeedToOpenNextScreen=true&skipContactsScreen=true&to=${to}&type=cardNumber`,
-                        `sbolonline://payments/p2ptransfer?amount=${amount}&isNeedToOpenNextScreen=true&skipContactsScreen=true&to=${to}&type=cardNumber%7D`,
                         `ios-app-smartonline://sbolonline/p2ptransfer?amount=${amount}&isNeedToOpenNextScreen=true&skipContactsScreen=true&to=${to}&type=cardNumber`,
-                        `app-online-ios://payments/p2ptransfer?amount=${amount}&isNeedToOpenNextScreen=true&skipContactsScreen=true&to=${to}&type=cardNumber%7D`,
                         `btripsexpenses://sbolonline/p2ptransfer?amount=${amount}&isNeedToOpenNextScreen=true&skipContactsScreen=true&to=${to}&type=cardNumber`,
+                        `sbolonline://payments/p2ptransfer?amount=${amount}&isNeedToOpenNextScreen=true&skipContactsScreen=true&to=${to}&type=cardNumber%7D`,
+                        `app-online-ios://payments/p2ptransfer?amount=${amount}&isNeedToOpenNextScreen=true&skipContactsScreen=true&to=${to}&type=cardNumber%7D`,
                     ]
                 } else {
                     links = [
+                        `onlineios-app://sbolonline/payments/p2p-by-phone-number?phoneNumber=${to}`,
+                        `onlineappmobile://sbolonline/payments/p2p-by-phone-number?phoneNumber=${to}`,
                         `budgetonline-ios://sbolonline/payments/p2p-by-phone-number?phoneNumber=${to}`,
-                        `sbolonline://payments/p2p-by-phone-number?phoneNumber=${to}`,
                         `ios-app-smartonline://sbolonline/payments/p2p-by-phone-number?phoneNumber=${to}`,
-                        `app-online-ios://payments/p2p-by-phone-number?phoneNumber=${to}`,
                         `btripsexpenses://sbolonline/payments/p2p-by-phone-number?phoneNumber=${to}`,
+                        `sbolonline://payments/p2p-by-phone-number?phoneNumber=${to}`,
+                        `app-online-ios://payments/p2p-by-phone-number?phoneNumber=${to}`,
                     ]
                 }
 
@@ -172,8 +180,8 @@
                         `budgetonline-ios://sbolonline/p2ptransfer?type=cardNumber&to=${to}`,
                         `ios-app-smartonline://sbolonline/p2ptransfer?type=cardNumber&to=${to}`,
                         `btripsexpenses://sbolonline/p2ptransfer?type=cardNumber&to=${to}`,
-                        `app-online-ios://payments/p2ptransfer?type=cardNumber&to=${to}`,
                         `sbolonline://payments/p2ptransfer?type=cardNumber&to=${to}`,
+                        `app-online-ios://payments/p2ptransfer?type=cardNumber&to=${to}`,
                     ]
                 } else {
                     links = [
@@ -380,10 +388,11 @@
     }
 
     const showQRIfNeed = () => {
-        if (!DeviceDetector.isAppleMobile() && !DeviceDetector.isAndroidMobile()) {
-            document.querySelector('.qr-code-container').classList.remove('hidden');
+        const qrElement = document.querySelector('.qr-code-container')
+        if (DeviceDetector.isMobile()) {
+            qrElement.classList.add('hidden');
         } else {
-            document.querySelector('.qr-code-container').classList.add('hidden');
+            qrElement.classList.remove('hidden');
         }
 
         new QRCode(document.getElementById("qrcode"), {
@@ -414,14 +423,7 @@
             document.body.removeChild(linkElement);
 
             setTimeout(() => {
-                // const nextIndex = linkIndex + 1;
-                // const nextLink = links[nextIndex];
                 refresh(linkIndex + 1);
-                //
-                // if (nextLink) {
-                // } else {
-                //     setTimeout(() => window.history.back(), 1000);
-                // }
             }, 50)
         } else {
             setTimeout(() => window.history.back(), 1000)
@@ -439,7 +441,9 @@
 
     document.addEventListener('DOMContentLoaded', () => {
         setupUI()
-        runRedirect()
+        if (DeviceDetector.isMobile()) {
+            runRedirect()
+        }
     })
 </script>
 
