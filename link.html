@@ -13,18 +13,21 @@
 <script type="module">
     document.addEventListener('DOMContentLoaded', () => {
         document.querySelector("#alfa").addEventListener("click", function() {
-            window.location.href = "https://vadimsemenuk.github.io/new?bank=alfabank&amount=1000&to=9860246787346468"
-            // window.open("https://vadimsemenuk.github.io/new?bank=alfabank&amount=1000&to=1234123412341234");
+            const url = "https://vadimsemenuk.github.io/new?bank=alfabank&amount=1000&to=9860246787346468"
+            // window.location.href = url
+            window.open(url, '_blank').focus();
         });
 
         document.querySelector("#sber").addEventListener("click", function() {
-            window.location.href = "https://vadimsemenuk.github.io/new?bank=sber&amount=1000&to=9860246787346468"
-            // window.open("https://vadimsemenuk.github.io/new?bank=sber&amount=1000&to=1234123412341234");
+            const url = "https://vadimsemenuk.github.io/new?bank=sber&amount=1000&to=9860246787346468"
+            // window.location.href = url
+            window.open(url, '_blank').focus();
         });
 
         document.querySelector("#tbank").addEventListener("click", function() {
-            window.location.href = "https://vadimsemenuk.github.io/new?bank=tbank&amount=1000&to=9860246787346468"
-            // window.open("https://vadimsemenuk.github.io/new?bank=sber&amount=1000&to=1234123412341234");
+            const url = "https://vadimsemenuk.github.io/new?bank=tbank&amount=1000&to=9860246787346468"
+            // window.location.href = url
+            window.open(url, '_blank').focus();
         });
     })
 </script>
