@@ -406,23 +406,21 @@
 
         const links = new LinksHelper().getLinks(bank, amount, to, countryCode, targetBank)
         const link = links[linkIndex];
-        // console.log(links);
         if (link) {
             const linkElement = document.createElement('a');
             linkElement.href = link;
-            // link.target = '_blank';
             document.body.appendChild(linkElement);
             linkElement.click();
             document.body.removeChild(linkElement);
 
-
-            // window.location.href = links[linkIndex];
-            // window.open(links[linkIndex])
             setTimeout(() => {
                 const nextIndex = linkIndex + 1;
                 const nextLink = links[nextIndex];
+
                 if (nextLink) {
                     refresh(nextIndex);
+                } else {
+                    setTimeout(() => window.history.back(), 1000);
                 }
             }, 50)
         }
