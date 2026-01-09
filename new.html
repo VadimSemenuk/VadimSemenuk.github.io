@@ -35,17 +35,6 @@
             display: none !important;
         }
 
-        .message {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            height: 30vh;
-            width: 100vw;
-            padding: 30px;
-            font-size: 18px;
-        }
-
         .qr-code-container {
             height: 100vh;
             width: 100vw;
@@ -78,10 +67,6 @@
 <body>
 
 <div class="container">
-    <div class="hidden ios-message message">
-        Для продолжения нажимайте <br/> «ОК» или «Открыть» во всплывающем окне
-    </div>
-
     <div class="hidden qr-code-container">
         <div class="qr-code-wrapper">
             <div id="qrcode"></div>
@@ -135,6 +120,7 @@
             return (value?.length || 0) >= 16
         }
 
+        // region sber
         getSberLinks(amount, to) {
             let links = []
             if (DeviceDetector.isAppleMobile()) {
@@ -181,19 +167,23 @@
             if (DeviceDetector.isAppleMobile()) {
                 if (this.isCard(to)) {
                     links = [
+                        `onlineios-app://sbolonline/p2ptransfer?type=cardNumber&to=${to}`,
+                        `onlineappmobile://sbolonline/p2ptransfer?type=cardNumber&to=${to}`,
                         `budgetonline-ios://sbolonline/p2ptransfer?type=cardNumber&to=${to}`,
-                        `sbolonline://payments/p2ptransfer?type=cardNumber&to=${to}`,
                         `ios-app-smartonline://sbolonline/p2ptransfer?type=cardNumber&to=${to}`,
-                        `app-online-ios://payments/p2ptransfer?type=cardNumber&to=${to}`,
                         `btripsexpenses://sbolonline/p2ptransfer?type=cardNumber&to=${to}`,
+                        `app-online-ios://payments/p2ptransfer?type=cardNumber&to=${to}`,
+                        `sbolonline://payments/p2ptransfer?type=cardNumber&to=${to}`,
                     ]
                 } else {
                     links = [
-                        `budgetonline-ios://sbolonline/abroadtransfers/foreignbank?to=${to}&type=phone`,
+                        `onlineios-app://sbolonline/abroadtransfers/foreignbank?to=${to}&type=phone`, //12.12.25
+                        `onlineappmobile://sbolonline/abroadtransfers/foreignbank?to=${to}&type=phone`, //25.08.25
+                        `budgetonline-ios://sbolonline/abroadtransfers/foreignbank?to=${to}&type=phone`, //22.10.24
+                        `ios-app-smartonline://sbolonline/abroadtransfers/foreignbank?to=${to}&type=phone`, //19.07.24
+                        `btripsexpenses://sbolonline/abroadtransfers/foreignbank?to=${to}&type=phone`, //31.01.24
                         `sbolonline://abroadtransfers/foreignbank?to=${to}&type=phone`,
-                        `ios-app-smartonline://sbolonline/abroadtransfers/foreignbank?to=${to}&type=phone`,
                         `app-online-ios://abroadtransfers/foreignbank?to=${to}&type=phone`,
-                        `btripsexpenses://sbolonline/abroadtransfers/foreignbank?to=${to}&type=phone`,
                     ]
                 }
             } else if (DeviceDetector.isAndroidMobile()) {
@@ -216,13 +206,16 @@
 
             return links
         }
+        // endregion
 
+        // region tbank
         getTBankLinks(amount, to) {
             let links = []
             if (DeviceDetector.isAppleMobile()) {
                 if (this.isCard(to)) {
                     links = [
-                        `freelancecase://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                        `catch://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                        `freelancecase://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`, //18.05.2025
                         `yourmoney://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
                         `tbank://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
                         `feedaways://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
@@ -234,11 +227,11 @@
                         `tfinstudy://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
                         `tsplit://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
                         `tfinskills://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `catch://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
                         `tinkoffbank://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`
                     ]
                 } else {
                     links = [
+                        `catch://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
                         `freelancecase://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
                         `yourmoney://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
                         `tbank://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
@@ -251,7 +244,6 @@
                         `tfinstudy://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
                         `tsplit://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
                         `tfinskills://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `catch://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
                         `tinkoffbank://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
                     ]
                 }
@@ -259,6 +251,7 @@
             } else if (DeviceDetector.isAndroidMobile()) {
                 if (this.isCard(to)) {
                     links = [
+                        `catch://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
                         `freelancecase://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
                         `yourmoney://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
                         `tbank://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
@@ -271,11 +264,11 @@
                         `tfinstudy://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
                         `tsplit://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
                         `tfinskills://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `catch://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
                         `tinkoffbank://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
                     ]
                 } else {
                     links = [
+                        `catch://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
                         `freelancecase://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
                         `yourmoney://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
                         `tbank://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
@@ -288,7 +281,6 @@
                         `tfinstudy://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
                         `tsplit://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
                         `tfinskills://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `catch://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
                         `tinkoffbank://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
                     ]
                 }
@@ -296,7 +288,9 @@
 
             return links;
         }
+        // endregion
 
+        // region vtb
         getVtbLinks(amount, to) {
             let links = []
 
@@ -349,7 +343,9 @@
 
             return bankToCode[bank.toLowerCase()] || bank
         }
+        // endregion
 
+        // region alfabank
         getAlfabankLinks(amount, to) {
             let links = []
 
@@ -376,6 +372,7 @@
 
             return links;
         }
+        // endregion
     }
 
     const setupUI = () => {
