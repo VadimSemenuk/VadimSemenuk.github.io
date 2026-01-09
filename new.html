@@ -422,7 +422,11 @@
             // window.location.href = links[linkIndex];
             // window.open(links[linkIndex])
             setTimeout(() => {
-                refresh(linkIndex + 1)
+                const nextIndex = linkIndex + 1;
+                const nextLink = links[nextIndex];
+                if (nextLink) {
+                    refresh(nextIndex);
+                }
             }, 50)
         }
     }
