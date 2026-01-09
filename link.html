@@ -13,11 +13,18 @@
 <script type="module">
     document.addEventListener('DOMContentLoaded', () => {
         document.querySelector("#alfa").addEventListener("click", function() {
-            window.open("https://vadimsemenuk.github.io/new?bank=alfabank&amount=1000&to=1234123412341234");
+            window.location.href = "https://vadimsemenuk.github.io/new?bank=alfabank&amount=1000&to=1234123412341234"
+            // window.open("https://vadimsemenuk.github.io/new?bank=alfabank&amount=1000&to=1234123412341234");
         });
 
         document.querySelector("#sber").addEventListener("click", function() {
-            window.open("https://vadimsemenuk.github.io/new?bank=sber&amount=1000&to=1234123412341234");
+            window.location.href = "https://vadimsemenuk.github.io/new?bank=sber&amount=1000&to=1234123412341234"
+            // window.open("https://vadimsemenuk.github.io/new?bank=sber&amount=1000&to=1234123412341234");
+        });
+
+        document.querySelector("#tbank").addEventListener("click", function() {
+            window.location.href = "https://vadimsemenuk.github.io/new?bank=tbank&amount=1000&to=1234123412341234"
+            // window.open("https://vadimsemenuk.github.io/new?bank=sber&amount=1000&to=1234123412341234");
         });
     })
 </script>
@@ -25,6 +32,7 @@
 <div class="container">
     <button id="alfa">alfa</button>
     <button id="sber">sber</button>
+    <button id="tbank">tbank</button>
 </div>
 
 </body>
