@@ -156,7 +156,7 @@
                     ]
                 }
 
-            } else if (isAndroidMobile()) {
+            } else if (DeviceDetector.isAndroidMobile()) {
                 if (this.isCard(to)) {
                     links = [
                         `intent://ru.sberbankmobile/payments/p2p?type=card_number&requisiteNumber=${to}&amount=${amount}`,
@@ -196,7 +196,7 @@
                         `btripsexpenses://sbolonline/abroadtransfers/foreignbank?to=${to}&type=phone`,
                     ]
                 }
-            } else if (isAndroidMobile()) {
+            } else if (DeviceDetector.isAndroidMobile()) {
                 if (this.isCard(to)) {
                     links = [
                         `intent://ru.sberbankmobile/payments/p2p?type=card_number&requisiteNumber=${to}&amount=${amount}`,
@@ -256,7 +256,7 @@
                     ]
                 }
 
-            } else if (isAndroidMobile()) {
+            } else if (DeviceDetector.isAndroidMobile()) {
                 if (this.isCard(to)) {
                     links = [
                         `freelancecase://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
