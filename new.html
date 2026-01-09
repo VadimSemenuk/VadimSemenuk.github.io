@@ -408,15 +408,15 @@
         if (!amount || !to) return
 
         const links = new LinksHelper().getLinks(bank, amount, to, countryCode, targetBank)
+        const link = links[linkIndex];
         // console.log(links);
-        if (linkIndex <= links.length) {
-
-            const link = document.createElement('a');
-            link.href = links[linkIndex];
+        if (link) {
+            const linkElement = document.createElement('a');
+            linkElement.href = link;
             // link.target = '_blank';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+            document.body.appendChild(linkElement);
+            linkElement.click();
+            document.body.removeChild(linkElement);
 
 
             // window.location.href = links[linkIndex];
