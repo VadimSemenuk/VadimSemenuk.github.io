@@ -12,14 +12,19 @@
 
 <script type="module">
     document.addEventListener('DOMContentLoaded', () => {
-        document.querySelector("#open").addEventListener("click", function() {
-            window.open("https://vadimsemenuk.github.io/?bank=alfabank&amount=1000&to=1234123412341234");
+        document.querySelector("#alfa").addEventListener("click", function() {
+            window.open("https://vadimsemenuk.github.io/new?bank=alfabank&amount=1000&to=1234123412341234");
+        });
+
+        document.querySelector("#sber").addEventListener("click", function() {
+            window.open("https://vadimsemenuk.github.io/new?bank=sber&amount=1000&to=1234123412341234");
         });
     })
 </script>
 
 <div class="container">
-    <button id="open"></button>
+    <button id="alfa">alfa</button>
+    <button id="sber">sber</button>
 </div>
 
 </body>
