@@ -137,7 +137,7 @@
 
         getSberLinks(amount, to) {
             let links = []
-            if (isAppleMobile()) {
+            if (DeviceDetector.isAppleMobile()) {
                 if (this.isCard(to)) {
                     links = [
                         `budgetonline-ios://sbolonline/p2ptransfer?amount=${amount}&isNeedToOpenNextScreen=true&skipContactsScreen=true&to=${to}&type=cardNumber`,
@@ -178,7 +178,7 @@
 
         getSberInternationalLinks(amount, to) {
             let links = []
-            if (isAppleMobile()) {
+            if (DeviceDetector.isAppleMobile()) {
                 if (this.isCard(to)) {
                     links = [
                         `budgetonline-ios://sbolonline/p2ptransfer?type=cardNumber&to=${to}`,
@@ -219,7 +219,7 @@
 
         getTBankLinks(amount, to) {
             let links = []
-            if (isAppleMobile()) {
+            if (DeviceDetector.isAppleMobile()) {
                 if (this.isCard(to)) {
                     links = [
                         `freelancecase://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
@@ -408,9 +408,18 @@
         if (!amount || !to) return
 
         const links = new LinksHelper().getLinks(bank, amount, to, countryCode, targetBank)
-        console.log(links);
+        // console.log(links);
         if (linkIndex <= links.length) {
-            window.location.href = links[linkIndex];
+
+            const link = document.createElement('a');
+            link.href = links[linkIndex];
+            // link.target = '_blank';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+
+            // window.location.href = links[linkIndex];
             // window.open(links[linkIndex])
             setTimeout(() => {
                 refresh(linkIndex + 1)
