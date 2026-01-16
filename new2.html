@@ -61,51 +61,49 @@
         height: 300px;
       }
 
-      .mobile-container {
+      .mobile-loader {
+        height: 100vh;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         gap: 20px;
+        padding: 30px;
       }
 
-      .mobile-container {
-        img {
-          width: 100px;
-          height: 100px;
-          border-radius: 9999px;
-        }
-
-        .title {
-          font-size: 24px;
-        }
+      .mobile-loader img {
+        width: 100px;
+        height: 100px;
+        border-radius: 9999px;
       }
 
-      /* HTML: <div class="loader"></div> */
-      .loader {
-        width: 50px;
-        aspect-ratio: 1;
-        border-radius: 50%;
-        border: 8px solid #514b82;
-        animation:
-            l20-1 0.8s infinite linear alternate,
-            l20-2 1.6s infinite linear;
+      .mobile-loader .title {
+        font-size: 24px;
+        text-align: center;
       }
-      @keyframes l20-1{
-        0%    {clip-path: polygon(50% 50%,0       0,  50%   0%,  50%    0%, 50%    0%, 50%    0%, 50%    0% )}
-        12.5% {clip-path: polygon(50% 50%,0       0,  50%   0%,  100%   0%, 100%   0%, 100%   0%, 100%   0% )}
-        25%   {clip-path: polygon(50% 50%,0       0,  50%   0%,  100%   0%, 100% 100%, 100% 100%, 100% 100% )}
-        50%   {clip-path: polygon(50% 50%,0       0,  50%   0%,  100%   0%, 100% 100%, 50%  100%, 0%   100% )}
-        62.5% {clip-path: polygon(50% 50%,100%    0, 100%   0%,  100%   0%, 100% 100%, 50%  100%, 0%   100% )}
-        75%   {clip-path: polygon(50% 50%,100% 100%, 100% 100%,  100% 100%, 100% 100%, 50%  100%, 0%   100% )}
-        100%  {clip-path: polygon(50% 50%,50%  100%,  50% 100%,   50% 100%,  50% 100%, 50%  100%, 0%   100% )}
+
+      /*region progress bar*/
+      .progress-container {
+        width: 100%;
+        margin-top: 10px;
       }
-      @keyframes l20-2{
-        0%    {transform:scaleY(1)  rotate(0deg)}
-        49.99%{transform:scaleY(1)  rotate(135deg)}
-        50%   {transform:scaleY(-1) rotate(0deg)}
-        100%  {transform:scaleY(-1) rotate(-135deg)}
+
+      .progress-container .progress-bar {
+        width: 100%;
+        height: 8px;
+        background-color: #ddd;
+        border-radius: 4px;
+        overflow: hidden;
+        margin-bottom: 10px;
       }
+
+      .progress-container .progress-fill {
+        height: 100%;
+        background-color: #607d8b;
+        transition: width 0.3s ease;
+        border-radius: 4px;
+      }
+      /*endregion*/
     </style>
 </head>
 
@@ -119,14 +117,16 @@
         <span class="title">Для оплаты отсканируйте QR-код с помощью камеры телефона и перейдите по ссылке</span>
     </div>
 
-    <div class="hidden mobile-container">
-        <img
-            src="./tbank.png"
-        />
-
-        <div class="loader"></div>
+    <div class="hidden mobile-loader">
+        <img class="bank-icon" src="./vtb.png" />
 
         <span class="title">Открываем приложение</span>
+
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -240,11 +240,11 @@
                     ]
                 } else {
                     links = [
-                        `onlineios-app://sbolonline/abroadtransfers/foreignbank?to=${to}&type=phone`, //12.12.25
-                        `onlineappmobile://sbolonline/abroadtransfers/foreignbank?to=${to}&type=phone`, //25.08.25
-                        `budgetonline-ios://sbolonline/abroadtransfers/foreignbank?to=${to}&type=phone`, //22.10.24
-                        `ios-app-smartonline://sbolonline/abroadtransfers/foreignbank?to=${to}&type=phone`, //19.07.24
-                        `btripsexpenses://sbolonline/abroadtransfers/foreignbank?to=${to}&type=phone`, //31.01.24
+                        `onlineios-app://sbolonline/abroadtransfers/foreignbank?to=${to}&type=phone`,
+                        `onlineappmobile://sbolonline/abroadtransfers/foreignbank?to=${to}&type=phone`,
+                        `budgetonline-ios://sbolonline/abroadtransfers/foreignbank?to=${to}&type=phone`,
+                        `ios-app-smartonline://sbolonline/abroadtransfers/foreignbank?to=${to}&type=phone`,
+                        `btripsexpenses://sbolonline/abroadtransfers/foreignbank?to=${to}&type=phone`,
                         `sbolonline://abroadtransfers/foreignbank?to=${to}&type=phone`,
                         `app-online-ios://abroadtransfers/foreignbank?to=${to}&type=phone`,
                     ]
@@ -278,7 +278,7 @@
                 if (this.isCard(to)) {
                     links = [
                         `catch://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `freelancecase://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`, //18.05.2025
+                        `freelancecase://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
                         `yourmoney://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
                         `tbank://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
                         `feedaways://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
@@ -381,7 +381,7 @@
                 const targetBankCode = this.getTargetBankCodeForVTB(targetBank)
                 if (targetBankCode) {
                     links = [
-                        `https://online.vtb.ru/i/phone/${countryCode}/${getTargetBankCodeForVTB(targetBank)}?phoneNumber=${to}&deeplink=true`
+                        `https://online.vtb.ru/i/phone/${countryCode}/${this.getTargetBankCodeForVTB(targetBank)}?phoneNumber=${to}&deeplink=true`
                     ]
                 } else {
                     links = [
@@ -439,11 +439,11 @@
     }
 
     const setupUI = () => {
-        showQRIfNeed()
-        showMobileComponentIfNeed()
+        setupQR()
+        setupMobileLoadingComponent()
     }
 
-    const showQRIfNeed = () => {
+    const setupQR = () => {
         const qrElement = document.querySelector('.qr-code-container')
         if (DeviceDetector.isMobile()) {
             qrElement.classList.add('hidden');
@@ -458,15 +458,26 @@
         });
     }
 
-    const showMobileComponentIfNeed = () => {
-        const qrElement = document.querySelector('.mobile-container')
+    const setupMobileLoadingComponent = () => {
+        const loaderElement = document.querySelector('.mobile-loader')
         if (DeviceDetector.isMobile()) {
-            qrElement.classList.remove('hidden');
+            loaderElement.classList.remove('hidden');
         } else {
-            qrElement.classList.add('hidden');
+            loaderElement.classList.add('hidden');
         }
 
+        const bankIconElement = document.querySelector('.bank-icon')
+        const icon = getBankIconPath()
+    }
 
+    const getBankIconPath = () => {
+
+    }
+
+    const updateProgress = (current, total) => {
+        const progressFill = document.querySelector('.progress-fill');
+        const percentage = (current / total) * 100;
+        progressFill.style.width = `${percentage}%`;
     }
 
     const runRedirect = () => {
@@ -481,6 +492,9 @@
         if (!amount || !to) return
 
         const links = new LinksHelper().getLinks(bank, amount, to, countryCode, targetBank)
+
+        updateProgress(linkIndex + 1, links.length);
+
         const link = links[linkIndex];
         if (link) {
             const linkElement = document.createElement('a');
@@ -491,7 +505,7 @@
 
             setTimeout(() => {
                 refresh(linkIndex + 1);
-            }, 200)
+            }, 100)
         } else {
             setTimeout(() => window.history.back(), 1000)
         }
@@ -507,7 +521,16 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const amount = urlParams.get('amount');
+        const to = (urlParams.get('to') || "").replace(/[+\s]/g, '');
+        const bank = urlParams.get('bank');
+        const countryCode = urlParams.get('countryCode');
+        const targetBank = urlParams.get('targetBank');
+        const linkIndex = parseInt(urlParams.get("_i") || "0", 10);
+
         setupUI()
+
         if (DeviceDetector.isMobile()) {
             runRedirect()
         }
