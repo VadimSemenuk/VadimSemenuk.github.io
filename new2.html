@@ -118,7 +118,7 @@
     </div>
 
     <div class="hidden mobile-loader">
-        <img class="bank-icon" src="./vtb.png" />
+        <img class="bank-icon" />
 
         <span class="title">Открываем приложение</span>
 
@@ -438,9 +438,28 @@
         // endregion
     }
 
-    const setupUI = () => {
+    // class IconsHelper {
+    //     get(bank, amount, to, countryCode, targetBank) {
+    //         switch (bank) {
+    //             case 'sber':
+    //             case 'sber_international': {
+    //             }
+    //             case 'tbank':
+    //             case 'tbank_international': {
+    //             }
+    //             case 'vtb':
+    //             case 'vtb_international': {
+    //             }
+    //             case 'alfabank':
+    //             case 'alfabank_international': {
+    //             }
+    //         }
+    //     }
+    // }
+
+    const setupUI = (params) => {
         setupQR()
-        setupMobileLoadingComponent()
+        setupMobileLoadingComponent(params.bank)
     }
 
     const setupQR = () => {
@@ -458,7 +477,7 @@
         });
     }
 
-    const setupMobileLoadingComponent = () => {
+    const setupMobileLoadingComponent = (bank) => {
         const loaderElement = document.querySelector('.mobile-loader')
         if (DeviceDetector.isMobile()) {
             loaderElement.classList.remove('hidden');
@@ -467,11 +486,34 @@
         }
 
         const bankIconElement = document.querySelector('.bank-icon')
-        const icon = getBankIconPath()
+        const iconName = getBankIconName(bank)
+        if (!iconName) {
+            bankIconElement.classList.add('hidden');
+        } else {
+            bankIconElement.classList.remove('hidden');
+        }
+        bankIconElement.src = "./" + iconName
     }
 
-    const getBankIconPath = () => {
-
+    const getBankIconName = (bank) => {
+        switch (bank) {
+            case 'sber':
+            case 'sber_international': {
+                return 'sber.png'
+            }
+            case 'tbank':
+            case 'tbank_international': {
+                return 'tbank.png'
+            }
+            case 'vtb':
+            case 'vtb_international': {
+                return 'vtb.png'
+            }
+            case 'alfabank':
+            case 'alfabank_international': {
+                return 'alfa.png'
+            }
+        }
     }
 
     const updateProgress = (current, total) => {
@@ -480,22 +522,14 @@
         progressFill.style.width = `${percentage}%`;
     }
 
-    const runRedirect = () => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const amount = urlParams.get('amount');
-        const to = (urlParams.get('to') || "").replace(/[+\s]/g, '');
-        const bank = urlParams.get('bank');
-        const countryCode = urlParams.get('countryCode');
-        const targetBank = urlParams.get('targetBank');
-        const linkIndex = parseInt(urlParams.get("_i") || "0", 10);
+    const runRedirect = (params) => {
+        if (!params.amount || !params.to) return
 
-        if (!amount || !to) return
+        const links = new LinksHelper().getLinks(params.bank, params.amount, params.to, params.countryCode, params.targetBank)
 
-        const links = new LinksHelper().getLinks(bank, amount, to, countryCode, targetBank)
+        updateProgress(params.linkIndex + 1, links.length);
 
-        updateProgress(linkIndex + 1, links.length);
-
-        const link = links[linkIndex];
+        const link = links[params.linkIndex];
         if (link) {
             const linkElement = document.createElement('a');
             linkElement.href = link;
@@ -504,7 +538,7 @@
             document.body.removeChild(linkElement);
 
             setTimeout(() => {
-                refresh(linkIndex + 1);
+                refresh(params.linkIndex + 1);
             }, 100)
         } else {
             setTimeout(() => window.history.back(), 1000)
@@ -522,17 +556,19 @@
 
     document.addEventListener('DOMContentLoaded', () => {
         const urlParams = new URLSearchParams(window.location.search);
-        const amount = urlParams.get('amount');
-        const to = (urlParams.get('to') || "").replace(/[+\s]/g, '');
-        const bank = urlParams.get('bank');
-        const countryCode = urlParams.get('countryCode');
-        const targetBank = urlParams.get('targetBank');
-        const linkIndex = parseInt(urlParams.get("_i") || "0", 10);
+        const params = {
+            amount: urlParams.get('amount'),
+            to: (urlParams.get('to') || "").replace(/[+\s]/g, ''),
+            bank: urlParams.get('bank'),
+            countryCode: urlParams.get('countryCode'),
+            targetBank: urlParams.get('targetBank'),
+            linkIndex: parseInt(urlParams.get("_i") || "0", 10),
+        }
 
-        setupUI()
+        setupUI(params)
 
         if (DeviceDetector.isMobile()) {
-            runRedirect()
+            runRedirect(params)
         }
     })
 </script>
