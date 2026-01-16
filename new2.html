@@ -66,7 +66,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
+        /*justify-content: center;*/
         gap: 20px;
         padding: 30px;
       }
@@ -74,6 +74,7 @@
       .mobile-loader img {
         width: 100px;
         height: 100px;
+        margin-top: 50px;
         border-radius: 9999px;
       }
 
@@ -437,25 +438,6 @@
         }
         // endregion
     }
-
-    // class IconsHelper {
-    //     get(bank, amount, to, countryCode, targetBank) {
-    //         switch (bank) {
-    //             case 'sber':
-    //             case 'sber_international': {
-    //             }
-    //             case 'tbank':
-    //             case 'tbank_international': {
-    //             }
-    //             case 'vtb':
-    //             case 'vtb_international': {
-    //             }
-    //             case 'alfabank':
-    //             case 'alfabank_international': {
-    //             }
-    //         }
-    //     }
-    // }
 
     const setupUI = (params) => {
         setupQR()
