@@ -602,31 +602,30 @@
         } else {
             bankIconElement.classList.remove('hidden');
         }
-        // bankIconElement.src = "./" + iconName
-        bankIconElement.src = iconName
+        bankIconElement.src = "./" + iconName
     }
 
     const getBankIconName = (bank) => {
         switch (bank) {
             case 'sber':
             case 'sber_international': {
-                // return 'sber.png'
-                return 'https://drive.google.com/uc?export=view&id=1c31tAYC-Sri4VNF0OnrDRdkdNvpIWPPy'
+                return 'sber.png'
+                // return 'https://drive.google.com/uc?export=view&id=1c31tAYC-Sri4VNF0OnrDRdkdNvpIWPPy'
             }
             case 'tbank':
             case 'tbank_international': {
-                // return 'tbank.png'
-                return 'https://drive.google.com/uc?export=view&id=1seoPZ0V0xazTBYHoj4LZ32gnpr0YzoAE&export=view'
+                return 'tbank.png'
+                // return 'https://drive.google.com/uc?export=view&id=1seoPZ0V0xazTBYHoj4LZ32gnpr0YzoAE&export=view'
             }
             case 'vtb':
             case 'vtb_international': {
-                // return 'vtb.png'
-                return 'https://drive.google.com/uc?export=view&id=1uzkNbczl9EngbXv_UOygUkld0BJdQsO9&export=view'
+                return 'vtb.png'
+                // return 'https://drive.google.com/uc?export=view&id=1uzkNbczl9EngbXv_UOygUkld0BJdQsO9&export=view'
             }
             case 'alfabank':
             case 'alfabank_international': {
-                // return 'alfa.png'
-                return 'https://drive.google.com/uc?export=view&id=1b8Alb4X3C_olABdmO8pGGZPLLUHOfLOM'
+                return 'alfa.png'
+                // return 'https://drive.google.com/uc?export=view&id=1b8Alb4X3C_olABdmO8pGGZPLLUHOfLOM'
             }
         }
     }
