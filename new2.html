@@ -642,16 +642,7 @@
         const links = new LinksHelper().getLinks(params.bank, params.amount, params.to, params.countryCode, params.targetBank)
 
         if (links.length > 0 && links[0].startsWith("https://")) {
-            // window.open(links[0], '_blank');
-
-            const aElem = document.createElement("a");
-            aElem.href = links[0];
-            aElem.target = "_blank"; // Ensures it opens in a new tab
-            document.body.appendChild(aElem);
-            aElem.click(); // Programmatically trigger the click
-            document.body.removeChild(aElem);
-
-            // setTimeout(() => window.history.back(), 1000)
+            runRedirectDefault(links)
         } else if (DeviceDetector.isAppleMobile()) {
             runRedirectIOS(links, params.linkIndex)
         } else {
