@@ -682,10 +682,13 @@
             setTimeout(() => {
                 location.href = item;
                 updateProgress(index + 1, links.length);
+
+                if (index === links.length - 1) {
+                    setTimeout(() => window.history.back(), 10000)
+                }
             }, index * 500)
         })
 
-        setTimeout(() => window.history.back(), 20000)
     }
 
     document.addEventListener('DOMContentLoaded', () => {
