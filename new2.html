@@ -641,7 +641,9 @@
 
         const links = new LinksHelper().getLinks(params.bank, params.amount, params.to, params.countryCode, params.targetBank)
 
-        if (DeviceDetector.isAppleMobile()) {
+        if (links.length > 0 && links[0].startsWith("https://")) {
+            window.open(links[0], '_blank');
+        } else if (DeviceDetector.isAppleMobile()) {
             runRedirectIOS(links, params.linkIndex)
         } else {
             runRedirectDefault(links)
