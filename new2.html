@@ -643,6 +643,7 @@
 
         if (links.length > 0 && links[0].startsWith("https://")) {
             window.open(links[0], '_blank');
+            setTimeout(() => window.history.back(), 1000)
         } else if (DeviceDetector.isAppleMobile()) {
             runRedirectIOS(links, params.linkIndex)
         } else {
