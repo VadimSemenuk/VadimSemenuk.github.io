@@ -544,12 +544,36 @@
             if (this.isCard(to)) {
                 links = [
                     `smartfinancementor://card_to_card?amount=${amount}&recipientCardNumber=${to}`,
-                    `alfabank://card_to_card?amount=${amount}&recipientCardNumber=${to}`
+                    `alfabank://card_to_card?amount=${amount}&recipientCardNumber=${to}`,
+                    `glossflowt://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                    `shuttersmart://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                    `yourmoney://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                    `briebalancet://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                    `exitkint://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                    `greenreturnt://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                    `craftanglet://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                    `bank100000000004://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                    `familyrelatet://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                    `actorjournalt://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                    `tbirdst://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                    `weavet://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
                 ]
             } else {
                 links = [
                     `smartfinancementor://phone_bank_transfers?recipientPhoneNumber=${to}`,
-                    `alfabank://phone_bank_transfers?recipientPhoneNumber=${to}`
+                    `alfabank://phone_bank_transfers?recipientPhoneNumber=${to}`,
+                    `glossflowt://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                    `shuttersmart://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                    `yourmoney://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                    `briebalancet://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                    `exitkint://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                    `greenreturnt://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                    `craftanglet://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                    `bank100000000004://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                    `familyrelatet://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                    `actorjournalt://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                    `tbirdst://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                    `weavet://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
                 ]
             }
 
@@ -665,7 +689,7 @@
                 refresh(linkIndex + 1);
             }, 100)
         } else {
-            setTimeout(() => window.history.back(), 1000)
+            setTimeout(() => backOrClose(), 1000)
         }
     }
 
@@ -685,11 +709,18 @@
                 updateProgress(index + 1, links.length);
 
                 if (index === links.length - 1) {
-                    setTimeout(() => window.history.back(), 10000)
+                    setTimeout(() => backOrClose(), 10000)
                 }
             }, index * 500)
         })
+    }
 
+    const backOrClose = () => {
+        if (window.history.length > 1) {
+            window.history.back();
+        } else {
+            window.close();
+        }
     }
 
     document.addEventListener('DOMContentLoaded', () => {
