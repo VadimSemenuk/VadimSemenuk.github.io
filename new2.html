@@ -150,10 +150,10 @@
         getLinks(bank, amount, to, countryCode, targetBank) {
             switch (bank) {
                 case 'sber': {
-                    return this.getSberLinks(amount, to)
+                    return this.getSberLinks(amount, to, false)
                 }
                 case 'sber_international': {
-                    return this.getSberInternationalLinks(amount, to)
+                    return this.getSberInternationalLinks(amount, to, true)
                 }
                 case 'tbank': {
                     return this.getTBankLinks(amount, to)
@@ -273,212 +273,66 @@
         // endregion
 
         // region tbank
-        getTBankLinks(amount, to) {
-            let links = []
-            if (DeviceDetector.isAppleMobile()) {
-                if (this.isCard(to)) {
-                    links = [
-                        `catch://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `freelancecase://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `tinkoffbank://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `tbank://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `glossflowt://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `shuttersmart://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `yourmoney://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `briebalancet://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `exitkint://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `greenreturnt://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `craftanglet://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `bank100000000004://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `familyrelatet://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `actorjournalt://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `tbirdst://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `weavet://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `tdata://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `wheels://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `gymapp://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `clanstrix://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `feedaways://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `toffice://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `tguard://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `petraise://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `mobtrs://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `goaloriented://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `tmydocs://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `tfinstudy://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `tsplit://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `tfinskills://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `tassets://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `wwwtdata://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `smarthome://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `divevector://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `framedit://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `outpharmas://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `yellowt://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `invault://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `ressinside://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `youreporter://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `plantu://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `temperology://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `logapp://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `clifflogt://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `tidallogt://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `pocketpilott://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`
-                    ]
-                } else {
-                    links = [
-                        `catch://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `freelancecase://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `tinkoffbank://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `tbank://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `glossflowt://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `shuttersmart://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `yourmoney://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `briebalancet://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `exitkint://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `greenreturnt://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `craftanglet://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `bank100000000004://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `familyrelatet://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `actorjournalt://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `tbirdst://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `weavet://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `tdata://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `wheels://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `gymapp://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `clanstrix://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `feedaways://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `toffice://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `tguard://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `petraise://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `mobtrs://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `goaloriented://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `tmydocs://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `tfinstudy://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `tsplit://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `tfinskills://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `tassets://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `wwwtdata://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `smarthome://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `divevector://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `framedit://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `outpharmas://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `yellowt://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `invault://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `ressinside://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `youreporter://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `plantu://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `temperology://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `logapp://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `clifflogt://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `tidallogt://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `pocketpilott://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`
-                    ]
-                }
+        getTBankLinks(amount, to, isInternational) {
+            let schemas = [
+                "actorjournalt",
+                "glossflowt",
+                "craftanglet",
+                "familyrelatet",
+                "tidallogt",
+                "pocketpilott",
+                "greenreturnt",
+                "briebalancet",
+                "tbirdst",
+                "clifflogt",
+                "exitkint",
+                "gymapp",
+                "weavet",
+                "wheels",
+                "clanstrix",
+                "catch",
+                "logapp",
+                "temperology",
+                "plantu",
+                "youreporter",
+                "ressinside",
+                "invault",
+                "yellowt",
+                "outpharmas",
+                "freelancecase",
+                "petraise",
+                "framedit",
+                "divevector",
+                "shuttersmart",
+                "feedaways",
+                "toffice",
+                "smarthome",
+                "goaloriented",
+                "tfinskills",
+                "tdata",
+                "tassets",
+                "yourmoney",
+                "tfinstudy",
+                "mobtrs",
+                "tguard",
+                "tmydocs",
+                "tinkoffbank",
+                "tbank",
+                "bank100000000004",
+            ]
 
-            } else if (DeviceDetector.isAndroidMobile()) {
-                if (this.isCard(to)) {
-                    links = [
-                        `catch://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `freelancecase://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `tinkoffbank://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `tbank://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `glossflowt://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `shuttersmart://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `yourmoney://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `briebalancet://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `exitkint://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `greenreturnt://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `craftanglet://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `bank100000000004://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `familyrelatet://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `actorjournalt://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `tbirdst://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `weavet://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `tdata://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `wheels://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `gymapp://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `clanstrix://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `feedaways://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `toffice://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `tguard://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `petraise://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `mobtrs://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `goaloriented://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `tmydocs://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `tfinstudy://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `tsplit://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `tfinskills://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `tassets://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `wwwtdata://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `smarthome://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `divevector://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `framedit://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `outpharmas://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `yellowt://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `invault://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `ressinside://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `youreporter://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `plantu://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `temperology://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `logapp://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `clifflogt://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `tidallogt://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                        `pocketpilott://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`
-                    ]
-                } else {
-                    links = [
-                        `catch://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `freelancecase://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `tinkoffbank://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `tbank://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `glossflowt://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `shuttersmart://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `yourmoney://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `briebalancet://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `exitkint://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `greenreturnt://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `craftanglet://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `bank100000000004://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `familyrelatet://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `actorjournalt://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `tbirdst://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `weavet://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `tdata://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `wheels://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `gymapp://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `clanstrix://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `feedaways://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `toffice://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `tguard://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `petraise://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `mobtrs://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `goaloriented://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `tmydocs://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `tfinstudy://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `tsplit://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `tfinskills://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `tassets://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `wwwtdata://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `smarthome://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `divevector://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `framedit://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `outpharmas://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `yellowt://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `invault://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `ressinside://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `youreporter://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `plantu://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `temperology://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `logapp://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `clifflogt://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `tidallogt://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`,
-                        `pocketpilott://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`
-                    ]
-                }
+            if (isInternational) {
+                schemas = schemas.filter(it => it !== "tinkoffbank")
             }
 
-            return links;
+            let mapper
+            if (this.isCard(to)) {
+                mapper = (schema) => `${schema}://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`
+            } else {
+                mapper = (schema) => `${schema}://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`
+            }
+
+            return schemas.map(mapper);
         }
         // endregion
 
