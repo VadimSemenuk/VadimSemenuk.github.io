@@ -150,16 +150,16 @@
         getLinks(bank, amount, to, countryCode, targetBank) {
             switch (bank) {
                 case 'sber': {
-                    return this.getSberLinks(amount, to, false)
+                    return this.getSberLinks(amount, to)
                 }
                 case 'sber_international': {
-                    return this.getSberInternationalLinks(amount, to, true)
+                    return this.getSberInternationalLinks(amount, to)
                 }
                 case 'tbank': {
-                    return this.getTBankLinks(amount, to)
+                    return this.getTBankLinks(amount, to, false)
                 }
                 case 'tbank_international': {
-                    return this.getTBankLinks(amount, to)
+                    return this.getTBankLinks(amount, to, true)
                 }
                 case 'vtb': {
                     return this.getVtbLinks(amount, to)
@@ -398,36 +398,12 @@
             if (this.isCard(to)) {
                 links = [
                     `smartfinancementor://card_to_card?amount=${amount}&recipientCardNumber=${to}`,
-                    `alfabank://card_to_card?amount=${amount}&recipientCardNumber=${to}`,
-                    `glossflowt://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                    `shuttersmart://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                    `yourmoney://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                    `briebalancet://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                    `exitkint://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                    `greenreturnt://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                    `craftanglet://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                    `bank100000000004://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                    `familyrelatet://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                    `actorjournalt://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                    `tbirdst://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                    `weavet://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                    `alfabank://card_to_card?amount=${amount}&recipientCardNumber=${to}`
                 ]
             } else {
                 links = [
                     `smartfinancementor://phone_bank_transfers?recipientPhoneNumber=${to}`,
-                    `alfabank://phone_bank_transfers?recipientPhoneNumber=${to}`,
-                    `glossflowt://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                    `shuttersmart://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                    `yourmoney://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                    `briebalancet://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                    `exitkint://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                    `greenreturnt://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                    `craftanglet://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                    `bank100000000004://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                    `familyrelatet://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                    `actorjournalt://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                    `tbirdst://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
-                    `weavet://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`,
+                    `alfabank://phone_bank_transfers?recipientPhoneNumber=${to}`
                 ]
             }
 
