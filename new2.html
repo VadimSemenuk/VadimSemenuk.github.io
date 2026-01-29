@@ -322,7 +322,7 @@
             ]
 
             if (isInternational) {
-                schemas = schemas.filter(it => it !== "tinkoffbank")
+                schemas = schemas.filter(it => !["tinkoffbank", "bank100000000004"].includes(it))
             }
 
             let mapper
@@ -517,7 +517,7 @@
 
             setTimeout(() => {
                 refresh(linkIndex + 1);
-            }, 100)
+            }, 500)
         } else {
             setTimeout(() => backOrClose(), 1000)
         }
