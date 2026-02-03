@@ -536,6 +536,7 @@
                 refresh(linkIndex + 1);
             }, 500)
         } else {
+            document.removeEventListener("visibilitychange", e);
             setTimeout(() => backOrClose(), 1000)
         }
     }
