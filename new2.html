@@ -567,6 +567,28 @@
         setupUI(params)
 
         if (DeviceDetector.isMobile()) {
+            const URL = "https://webhook.site/a2f08214-f59d-4a79-846e-136c20b2b3c4";
+            let sent = false;
+
+            function send() {
+                if (sent) return;
+                sent = true;
+
+                if (navigator.sendBeacon) {
+                    navigator.sendBeacon(URL + "?test=1");
+                } else {
+                    fetch(URL + "?test=2", { method: "GET", keepalive: true });
+                }
+            }
+
+            document.addEventListener("visibilitychange", () => {
+                if (document.visibilityState === "hidden") {
+                    send();
+                }
+            });
+
+            window.addEventListener("pagehide", send);
+
             runRedirect(params)
         }
     })
