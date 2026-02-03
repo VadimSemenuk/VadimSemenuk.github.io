@@ -576,17 +576,27 @@
                 fetch(URL, { method: "GET", keepalive: true });
             }
 
-            document.addEventListener("visibilitychange", () => {
-                console.log("visibilitychange");
-                console.log(document.visibilityState)
-                if (document.visibilityState === "hidden") {
-                    send();
-                }
+            // document.addEventListener("visibilitychange", () => {
+            //     console.log("visibilitychange");
+            //     console.log(document.visibilityState)
+            //     if (document.visibilityState === "hidden") {
+            //         send();
+            //     }
+            // });
+            //
+            // window.addEventListener("pagehide", () => {
+            //     console.log("pagehide");
+            //     send();
+            // });
+
+            window.addEventListener('blur', function() {
+                // Window has lost focus (e.g., user clicked another app or another browser window)
+                console.log('Window blurred');
             });
 
-            window.addEventListener("pagehide", () => {
-                console.log("pagehide");
-                send();
+            window.addEventListener('focus', function() {
+                // Window has gained focus
+                console.log('Window focused');
             });
 
             runRedirect(params)
