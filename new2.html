@@ -513,17 +513,30 @@
     const eventHandler = () => {
         console.log("visibilitychange");
         console.log(document.visibilityState)
-        if (document.visibilityState === "hidden") {
-            if (sent) return;
-            sent = true;
-            console.log("send")
-            fetch(_URL + "?url=" + encodeURIComponent(_link), { method: "GET", keepalive: true });
-        }
+        console.log(document.hidden)
+        // if (document.visibilityState === "hidden") {
+        //     if (sent) return;
+        //     sent = true;
+        //     console.log("send")
+        //     fetch(_URL + "?url=" + encodeURIComponent(_link), { method: "GET", keepalive: true });
+        // }
     }
 
     const runRedirectIOS = (links, linkIndex) => {
 
         document.addEventListener("visibilitychange", eventHandler);
+
+        document.addEventListener("beforeunload", () => {
+            console.log("beforeunload");
+        });
+
+        document.addEventListener("blur", () => {
+            console.log("blur");
+        });
+
+        document.addEventListener("pagehide", () => {
+            console.log("pagehide");
+        });
 
         updateProgress(linkIndex + 1, links.length);
 
@@ -545,14 +558,14 @@
 
             setTimeout(() => {
                 console.log(3)
-                document.removeEventListener("visibilitychange", eventHandler);
+                // document.removeEventListener("visibilitychange", eventHandler);
                 console.log(4)
                 refresh(linkIndex + 1);
                 console.log(5)
-            }, 2000)
+            }, 4000)
         } else {
             setTimeout(() => {
-                document.removeEventListener("visibilitychange", eventHandler);
+                // document.removeEventListener("visibilitychange", eventHandler);
                 backOrClose()
             }, 1000)
         }
@@ -564,11 +577,7 @@
         params.set("_i", nextLinkIndex)
         url.search = params.toString()
 
-        console.log("4_1");
-
         window.location.replace(url.toString())
-
-        console.log("4_2");
     }
 
     const runRedirectDefault = (links) => {
