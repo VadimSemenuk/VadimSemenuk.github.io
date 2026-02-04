@@ -548,30 +548,18 @@
         const link = links[linkIndex];
         _link = link;
         if (link) {
+            redirectStart = performance.now()
+
             const linkElement = document.createElement('a');
             linkElement.href = link;
             document.body.appendChild(linkElement);
-            const start = performance.now()
-            // console.log(1)
             linkElement.click();
             document.body.removeChild(linkElement);
 
-            const end = performance.now()
-            // console.log(2)
-            // console.log("diff: " + (end - start))
-
             setTimeout(() => {
-                // console.log(3)
-                // document.removeEventListener("visibilitychange", eventHandler);
-                // console.log(4)
-
-
                 document.addEventListener("visibilitychange", eventHandler);
-                redirectStart = performance.now()
                 refresh(linkIndex + 1);
-
-                // console.log(5)
-            }, 4000)
+            }, 1000)
         } else {
             setTimeout(() => {
                 // document.removeEventListener("visibilitychange", eventHandler);
