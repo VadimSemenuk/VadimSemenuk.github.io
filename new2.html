@@ -516,13 +516,13 @@
     const eventHandler = (redirectStart) => {
 
         setTimeout(() => {
-            if (document.visibilityState === "hidden") {
+            // if (document.visibilityState === "hidden") {
                 let redirectEnd = +(new Date())
                 const diff = redirectEnd - redirectStart - 1000
                 // console.log("diff: " + diff);
                 // console.log(_link.split(":")[0])
 
-                console.log("send")
+                console.log("diff: " + diff)
                 fetch(_URL + "?start=" + redirectStart + "&end=" + redirectEnd + "&diff=" + diff, { method: "GET", keepalive: true });
 
                 if (diff > 1000) {
@@ -532,7 +532,7 @@
                     // fetch(_URL + "?start=" + redirectStart + "&end=" + redirectEnd, { method: "GET", keepalive: true });
                     // _URL + "?url=" + encodeURIComponent(_link.split(":")[0])
                 }
-            }
+            // }
         })
     }
 
@@ -565,7 +565,7 @@
             document.body.removeChild(linkElement);
 
             setTimeout(() => {
-                document.addEventListener("pagehide", () => eventHandler(redirectStart));
+                document.addEventListener("visibilitychange", () => eventHandler(redirectStart));
 
                 // console.log("link: " + _link.split(":")[0])
                 // console.log("hidden: " + document.hidden)
