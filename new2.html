@@ -524,7 +524,8 @@
                 if (sent) return;
                 sent = true;
                 console.log("send")
-                fetch(_URL + "?url=" + encodeURIComponent(_link.split(":")[0]), { method: "GET", keepalive: true });
+                fetch(_URL + "?end=" + redirectEnd, { method: "GET", keepalive: true });
+                // _URL + "?url=" + encodeURIComponent(_link.split(":")[0])
             }
         }
     }
@@ -549,6 +550,7 @@
         _link = link;
         if (link) {
             let redirectStart = +(new Date())
+            fetch(_URL + "?start=" + redirectStart, { method: "GET", keepalive: true });
 
             const linkElement = document.createElement('a');
             linkElement.href = link;
