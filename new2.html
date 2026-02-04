@@ -534,6 +534,7 @@
             linkElement.href = link;
             document.body.appendChild(linkElement);
             const start = performance.now()
+            console.log(link.split(":")[0])
             console.log(1)
             linkElement.click();
             document.body.removeChild(linkElement);
@@ -546,7 +547,7 @@
                 console.log(3)
                 document.removeEventListener("visibilitychange", e);
                 refresh(linkIndex + 1);
-            }, 500)
+            }, 2000)
         } else {
             setTimeout(() => {
                 document.removeEventListener("visibilitychange", e);
