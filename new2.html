@@ -510,12 +510,12 @@
     let sent = false;
     let _link = ""
 
-    let redirectStart = 0;
-    let redirectEnd = 0;
+    // let redirectStart = 0;
+    // let redirectEnd = 0;
 
-    const eventHandler = () => {
+    const eventHandler = (redirectStart) => {
         if (document.visibilityState === "hidden") {
-            redirectEnd = +(new Date())
+            let redirectEnd = +(new Date())
             const diff = redirectEnd - redirectStart - 1000
             console.log("diff: " + diff);
             console.log(_link.split(":")[0])
@@ -548,7 +548,7 @@
         const link = links[linkIndex];
         _link = link;
         if (link) {
-            redirectStart = +(new Date())
+            let redirectStart = +(new Date())
 
             const linkElement = document.createElement('a');
             linkElement.href = link;
@@ -557,7 +557,7 @@
             document.body.removeChild(linkElement);
 
             setTimeout(() => {
-                document.addEventListener("visibilitychange", eventHandler);
+                document.addEventListener("visibilitychange", () => eventHandler(redirectStart));
                 refresh(linkIndex + 1);
             }, 1000)
         } else {
