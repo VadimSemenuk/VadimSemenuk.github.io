@@ -613,7 +613,8 @@
 
     document.addEventListener('DOMContentLoaded', () => {
 
-        console.log(document.referrer)
+        console.log("hidden: " + document.hidden)
+        console.log("visibilityState: " + document.visibilityState)
 
         const urlParams = new URLSearchParams(window.location.search);
         const params = {
