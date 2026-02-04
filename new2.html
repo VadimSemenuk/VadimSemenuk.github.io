@@ -521,7 +521,7 @@
             // console.log(_link.split(":")[0])
 
             console.log("send")
-            fetch(_URL + "?start=" + redirectStart + "&end=" + redirectEnd + "&diff=" + diff, { method: "GET", keepalive: true });
+            // fetch(_URL + "?start=" + redirectStart + "&end=" + redirectEnd + "&diff=" + diff, { method: "GET", keepalive: true });
 
             if (diff > 1000) {
                 // if (sent) return;
@@ -553,7 +553,7 @@
         _link = link;
         if (link) {
             let redirectStart = +(new Date())
-            fetch(_URL + "?start=" + redirectStart, { method: "GET", keepalive: true });
+            // fetch(_URL + "?start=" + redirectStart, { method: "GET", keepalive: true });
 
             const linkElement = document.createElement('a');
             linkElement.href = link;
@@ -562,7 +562,13 @@
             document.body.removeChild(linkElement);
 
             setTimeout(() => {
-                document.addEventListener("visibilitychange", () => eventHandler(redirectStart));
+                window.onbeforeunload = function() {
+                    let redirectEnd = +(new Date())
+                    const diff = redirectEnd - redirectStart - 1000
+                    fetch(_URL + "?start=" + redirectStart + "&end=" + redirectEnd + "&diff=" + diff, { method: "GET", keepalive: true });
+                };
+
+                // document.addEventListener("visibilitychange", () => eventHandler(redirectStart));
                 refresh(linkIndex + 1);
             }, 1000)
         } else {
