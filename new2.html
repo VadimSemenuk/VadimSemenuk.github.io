@@ -510,10 +510,17 @@
     let sent = false;
     let _link = ""
 
+    let redirectStart = 0;
+    let redirectEnd = 0;
+
     const eventHandler = () => {
-        console.log("visibilitychange");
-        console.log(document.visibilityState)
-        console.log(document.hidden)
+        // console.log("visibilitychange");
+        // console.log(document.visibilityState)
+        // console.log(document.hidden)
+
+        redirectEnd = performance.now()
+        console.log(redirectEnd - redirectStart);
+
         // if (document.visibilityState === "hidden") {
         //     if (sent) return;
         //     sent = true;
@@ -523,20 +530,18 @@
     }
 
     const runRedirectIOS = (links, linkIndex) => {
-
-        document.addEventListener("visibilitychange", eventHandler);
-
-        document.addEventListener("beforeunload", () => {
-            console.log("beforeunload");
-        });
-
-        document.addEventListener("blur", () => {
-            console.log("blur");
-        });
-
-        document.addEventListener("pagehide", () => {
-            console.log("pagehide");
-        });
+        //
+        // document.addEventListener("beforeunload", () => {
+        //     console.log("beforeunload");
+        // });
+        //
+        // document.addEventListener("blur", () => {
+        //     console.log("blur");
+        // });
+        //
+        // document.addEventListener("pagehide", () => {
+        //     console.log("pagehide");
+        // });
 
         updateProgress(linkIndex + 1, links.length);
 
@@ -560,7 +565,12 @@
                 console.log(3)
                 // document.removeEventListener("visibilitychange", eventHandler);
                 console.log(4)
+
+
+                document.addEventListener("visibilitychange", eventHandler);
+                redirectStart = performance.now()
                 refresh(linkIndex + 1);
+
                 console.log(5)
             }, 4000)
         } else {
