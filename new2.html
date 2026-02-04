@@ -516,7 +516,7 @@
     const eventHandler = () => {
         if (document.visibilityState === "hidden") {
             redirectEnd = performance.now()
-            const diff = redirectEnd - redirectStart
+            const diff = redirectEnd - redirectStart - 1000
             console.log("diff: " + diff);
             console.log(_link.split(":")[0])
 
