@@ -567,12 +567,15 @@
 
             setTimeout(() => {
                 // document.addEventListener("visibilitychange", () => eventHandler(redirectStart));
-                refresh(linkIndex + 1);
 
                 console.log("link: " + _link.split(":")[0])
                 console.log("hidden: " + document.hidden)
                 console.log("visibilityState: " + document.visibilityState)
-            }, 500)
+                
+                setTimeout(() => {
+                    refresh(linkIndex + 1);
+                }, 400)
+            }, 100)
         } else {
             setTimeout(() => {
                 // document.removeEventListener("visibilitychange", eventHandler);
