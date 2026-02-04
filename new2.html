@@ -562,12 +562,13 @@
             document.body.removeChild(linkElement);
 
             setTimeout(() => {
-                window.onbeforeunload = function() {
-                    console.log("beforeunload");
+                window.addEventListener("beforeunload", function(event) {
+                    console.log("UNLOAD:1");
+
                     let redirectEnd = +(new Date())
                     const diff = redirectEnd - redirectStart - 1000
                     fetch(_URL + "?start=" + redirectStart + "&end=" + redirectEnd + "&diff=" + diff, { method: "GET", keepalive: true });
-                };
+                });
 
                 // document.addEventListener("visibilitychange", () => eventHandler(redirectStart));
                 refresh(linkIndex + 1);
