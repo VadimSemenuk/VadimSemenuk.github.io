@@ -547,8 +547,9 @@
         //     console.log("pagehide");
         // });
 
-        window.addEventListener("beforeunload", function(event) {
+        window.addEventListener("unload", function(event) {
             console.log("UNLOAD:1");
+            fetch(_URL, { method: "GET", keepalive: true });
         });
 
         updateProgress(linkIndex + 1, links.length);
@@ -571,7 +572,7 @@
                 console.log("link: " + _link.split(":")[0])
                 console.log("hidden: " + document.hidden)
                 console.log("visibilityState: " + document.visibilityState)
-                
+
                 setTimeout(() => {
                     refresh(linkIndex + 1);
                 }, 400)
