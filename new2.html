@@ -517,7 +517,7 @@
         // setTimeout(() => {
             // if (document.visibilityState === "hidden") {
                 let redirectEnd = +(new Date())
-                const diff = redirectEnd - redirectStart - 3000
+                const diff = redirectEnd - redirectStart - 100
                 // console.log("diff: " + diff);
                 // console.log(_link.split(":")[0])
 
@@ -528,7 +528,7 @@
                     // if (sent) return;
                     // sent = true;
                     // console.log("send")
-                    // fetch(_URL + "?start=" + redirectStart + "&end=" + redirectEnd, { method: "GET", keepalive: true });
+                    fetch(_URL + "?start=" + redirectStart + "&end=" + redirectEnd, { method: "GET", keepalive: true });
                     // _URL + "?url=" + encodeURIComponent(_link.split(":")[0])
                 }
             // }
@@ -575,7 +575,7 @@
 
                 // setTimeout(() => {
                 // }, 400)
-            }, 3000)
+            }, 100)
         } else {
             setTimeout(() => {
                 // document.removeEventListener("visibilitychange", eventHandler);
