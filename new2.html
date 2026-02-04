@@ -516,7 +516,7 @@
         if (document.visibilityState === "hidden") {
             if (sent) return;
             sent = true;
-            console.log(_URL + "?url=" + encodeURIComponent(_link));
+            console.log("send")
             fetch(_URL + "?url=" + encodeURIComponent(_link), { method: "GET", keepalive: true });
         }
     }
@@ -533,10 +533,17 @@
             const linkElement = document.createElement('a');
             linkElement.href = link;
             document.body.appendChild(linkElement);
+            const s = performance.now()
+            console.log(1)
             linkElement.click();
             document.body.removeChild(linkElement);
 
+            const e = performance.now()
+            console.log(2)
+            console.log(e - s)
+
             setTimeout(() => {
+                console.log(3)
                 document.removeEventListener("visibilitychange", e);
                 refresh(linkIndex + 1);
             }, 500)
