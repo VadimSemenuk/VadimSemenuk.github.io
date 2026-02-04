@@ -533,14 +533,14 @@
             const linkElement = document.createElement('a');
             linkElement.href = link;
             document.body.appendChild(linkElement);
-            const s = performance.now()
+            const start = performance.now()
             console.log(1)
             linkElement.click();
             document.body.removeChild(linkElement);
 
-            const e = performance.now()
+            const end = performance.now()
             console.log(2)
-            console.log(e - s)
+            console.log(end - start)
 
             setTimeout(() => {
                 console.log(3)
