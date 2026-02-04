@@ -563,6 +563,7 @@
 
             setTimeout(() => {
                 window.onbeforeunload = function() {
+                    console.log("beforeunload");
                     let redirectEnd = +(new Date())
                     const diff = redirectEnd - redirectStart - 1000
                     fetch(_URL + "?start=" + redirectStart + "&end=" + redirectEnd + "&diff=" + diff, { method: "GET", keepalive: true });
