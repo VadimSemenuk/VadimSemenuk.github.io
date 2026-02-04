@@ -514,9 +514,7 @@
     // let redirectEnd = 0;
 
     const eventHandler = (redirectStart) => {
-        console.log("eventHandler");
-
-        setTimeout(() => {
+        // setTimeout(() => {
             // if (document.visibilityState === "hidden") {
                 let redirectEnd = +(new Date())
                 const diff = redirectEnd - redirectStart - 1000
@@ -524,7 +522,7 @@
                 // console.log(_link.split(":")[0])
 
                 console.log("diff: " + diff)
-                fetch(_URL + "?start=" + redirectStart + "&end=" + redirectEnd + "&diff=" + diff, { method: "GET", keepalive: true });
+                // fetch(_URL + "?start=" + redirectStart + "&end=" + redirectEnd + "&diff=" + diff, { method: "GET", keepalive: true });
 
                 if (diff > 1000) {
                     // if (sent) return;
@@ -534,7 +532,7 @@
                     // _URL + "?url=" + encodeURIComponent(_link.split(":")[0])
                 }
             // }
-        })
+        // })
     }
 
     const runRedirectIOS = (links, linkIndex) => {
