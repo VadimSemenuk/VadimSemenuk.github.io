@@ -521,7 +521,7 @@
             // console.log(_link.split(":")[0])
 
             console.log("send")
-            fetch(_URL + "?start=" + redirectStart + "&end=" + redirectEnd, { method: "GET", keepalive: true });
+            fetch(_URL + "?start=" + redirectStart + "&end=" + redirectEnd + "&diff=" + diff, { method: "GET", keepalive: true });
 
             if (diff > 1000) {
                 // if (sent) return;
