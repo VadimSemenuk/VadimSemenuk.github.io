@@ -518,33 +518,26 @@
     }
 
     const _URL = "https://webhook.site/fc60b586-98b1-40d0-a47d-bfb743703edc";
-    let sent = false;
-    let _link = ""
 
-    // let redirectStart = 0;
-    // let redirectEnd = 0;
+    const eventHandler = (redirectStart, link) => {
+        if (document.visibilityState === "hidden") {
+            let redirectEnd = +(new Date())
+            const diff = redirectEnd - redirectStart - 100
+            // console.log("diff: " + diff);
+            // console.log(_link.split(":")[0])
 
-    const eventHandler = (redirectStart) => {
-        // setTimeout(() => {
-            // if (document.visibilityState === "hidden") {
-                let redirectEnd = +(new Date())
-                const diff = redirectEnd - redirectStart - 100
-                // console.log("diff: " + diff);
-                // console.log(_link.split(":")[0])
+            console.log("diff: " + diff)
+            // fetch(_URL + "?start=" + redirectStart + "&end=" + redirectEnd + "&diff=" + diff, { method: "GET", keepalive: true });
 
-                console.log("diff: " + diff)
-                // fetch(_URL + "?start=" + redirectStart + "&end=" + redirectEnd + "&diff=" + diff, { method: "GET", keepalive: true });
-
-                if (diff > 500) {
-                    // if (sent) return;
-                    // sent = true;
-                    // console.log("send")
-                    posthog.capture('app_open', { schema: _link.split(":")[0] })
-                    // fetch(_URL + "?start=" + redirectStart + "&end=" + redirectEnd, { method: "GET", keepalive: true });
-                    // _URL + "?url=" + encodeURIComponent(_link.split(":")[0])
-                }
-            // }
-        // })
+            if (diff > 1000) {
+                // if (sent) return;
+                // sent = true;
+                // console.log("send")
+                posthog.capture('app_open', { schema: _link.split(":")[0] })
+                // fetch(_URL + "?start=" + redirectStart + "&end=" + redirectEnd, { method: "GET", keepalive: true });
+                // _URL + "?url=" + encodeURIComponent(_link.split(":")[0])
+            }
+        }
     }
 
     const runRedirectIOS = (links, linkIndex) => {
@@ -564,7 +557,6 @@
         updateProgress(linkIndex + 1, links.length);
 
         const link = links[linkIndex];
-        _link = link;
         if (link) {
             let redirectStart = +(new Date())
             // fetch(_URL + "?start=" + redirectStart, { method: "GET", keepalive: true });
@@ -576,7 +568,7 @@
             document.body.removeChild(linkElement);
 
             setTimeout(() => {
-                document.addEventListener("visibilitychange", () => eventHandler(redirectStart));
+                document.addEventListener("visibilitychange", () => eventHandler(redirectStart, link));
 
                 // console.log("link: " + _link.split(":")[0])
                 // console.log("hidden: " + document.hidden)
