@@ -516,7 +516,8 @@
         if (document.visibilityState === "hidden") {
             if (sent) return;
             sent = true;
-            fetch(_URL + "?url=" + _link, { method: "GET", keepalive: true });
+            console.log(_URL + "?url=" + encodeURIComponent(_link));
+            fetch(_URL + "?url=" + encodeURIComponent(_link), { method: "GET", keepalive: true });
         }
     }
 
