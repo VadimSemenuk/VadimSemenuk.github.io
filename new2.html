@@ -564,6 +564,8 @@
             document.body.removeChild(linkElement);
 
             setTimeout(() => {
+                console.log("redirect")
+
                 document.addEventListener("visibilitychange", () => eventHandler(redirectStart));
 
                 // console.log("link: " + _link.split(":")[0])
