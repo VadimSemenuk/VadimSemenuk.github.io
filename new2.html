@@ -519,6 +519,7 @@
         // console.log(document.hidden)
 
         redirectEnd = performance.now()
+        console.log("diff");
         console.log(redirectEnd - redirectStart);
 
         // if (document.visibilityState === "hidden") {
@@ -552,26 +553,26 @@
             linkElement.href = link;
             document.body.appendChild(linkElement);
             const start = performance.now()
-            console.log(link.split(":")[0])
-            console.log(1)
+            // console.log(link.split(":")[0])
+            // console.log(1)
             linkElement.click();
             document.body.removeChild(linkElement);
 
             const end = performance.now()
-            console.log(2)
-            console.log("diff: " + (end - start))
+            // console.log(2)
+            // console.log("diff: " + (end - start))
 
             setTimeout(() => {
-                console.log(3)
+                // console.log(3)
                 // document.removeEventListener("visibilitychange", eventHandler);
-                console.log(4)
+                // console.log(4)
 
 
                 document.addEventListener("visibilitychange", eventHandler);
                 redirectStart = performance.now()
                 refresh(linkIndex + 1);
 
-                console.log(5)
+                // console.log(5)
             }, 4000)
         } else {
             setTimeout(() => {
