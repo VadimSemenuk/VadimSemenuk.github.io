@@ -510,7 +510,7 @@
     let sent = false;
     let _link = ""
 
-    const e = () => {
+    const eventHandler = () => {
         console.log("visibilitychange");
         console.log(document.visibilityState)
         if (document.visibilityState === "hidden") {
@@ -541,16 +541,18 @@
 
             const end = performance.now()
             console.log(2)
-            console.log(end - start)
+            console.log("diff: " + (end - start))
 
             setTimeout(() => {
                 console.log(3)
-                document.removeEventListener("visibilitychange", e);
+                document.removeEventListener("visibilitychange", eventHandler);
+                console.log(4)
                 refresh(linkIndex + 1);
+                console.log(5)
             }, 2000)
         } else {
             setTimeout(() => {
-                document.removeEventListener("visibilitychange", e);
+                document.removeEventListener("visibilitychange", eventHandler);
                 backOrClose()
             }, 1000)
         }
@@ -562,7 +564,11 @@
         params.set("_i", nextLinkIndex)
         url.search = params.toString()
 
+        console.log("4_1");
+
         window.location.replace(url.toString())
+
+        console.log("4_2");
     }
 
     const runRedirectDefault = (links) => {
