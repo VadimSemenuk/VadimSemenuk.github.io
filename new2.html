@@ -514,20 +514,19 @@
     let redirectEnd = 0;
 
     const eventHandler = () => {
-        // console.log("visibilitychange");
-        // console.log(document.visibilityState)
-        // console.log(document.hidden)
+        if (document.visibilityState === "hidden") {
+            redirectEnd = performance.now()
+            const diff = redirectEnd - redirectStart
+            console.log("diff: " + diff);
+            console.log(_link.split(":")[0])
 
-        redirectEnd = performance.now()
-        console.log("diff");
-        console.log(redirectEnd - redirectStart);
-
-        // if (document.visibilityState === "hidden") {
-        //     if (sent) return;
-        //     sent = true;
-        //     console.log("send")
-        //     fetch(_URL + "?url=" + encodeURIComponent(_link), { method: "GET", keepalive: true });
-        // }
+            if (diff > 1000) {
+                if (sent) return;
+                sent = true;
+                console.log("send")
+                fetch(_URL + "?url=" + encodeURIComponent(_link.split(":")[0]), { method: "GET", keepalive: true });
+            }
+        }
     }
 
     const runRedirectIOS = (links, linkIndex) => {
@@ -553,7 +552,6 @@
             linkElement.href = link;
             document.body.appendChild(linkElement);
             const start = performance.now()
-            // console.log(link.split(":")[0])
             // console.log(1)
             linkElement.click();
             document.body.removeChild(linkElement);
