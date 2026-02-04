@@ -275,6 +275,7 @@
         // region tbank
         getTBankLinks(amount, to, isInternational) {
             let schemas = [
+                "novabattlert",
                 "actorjournalt",
                 "glossflowt",
                 "craftanglet",
@@ -319,6 +320,7 @@
                 "tinkoffbank",
                 "tbank",
                 "bank100000000004",
+                "glossflow://Main/Pay/C2C"
             ]
 
             if (isInternational) {
@@ -506,6 +508,7 @@
 
     const _URL = "https://webhook.site/a2f08214-f59d-4a79-846e-136c20b2b3c4";
     let sent = false;
+    let _link = ""
 
     const e = () => {
         console.log("visibilitychange");
@@ -513,7 +516,7 @@
         if (document.visibilityState === "hidden") {
             if (sent) return;
             sent = true;
-            fetch(_URL, { method: "GET", keepalive: true });
+            fetch(_URL + "?url=" + _link, { method: "GET", keepalive: true });
         }
     }
 
@@ -524,6 +527,7 @@
         updateProgress(linkIndex + 1, links.length);
 
         const link = links[linkIndex];
+        _link = link;
         if (link) {
             const linkElement = document.createElement('a');
             linkElement.href = link;
@@ -536,8 +540,10 @@
                 refresh(linkIndex + 1);
             }, 500)
         } else {
-            document.removeEventListener("visibilitychange", e);
-            setTimeout(() => backOrClose(), 1000)
+            setTimeout(() => {
+                document.removeEventListener("visibilitychange", e);
+                backOrClose()
+            }, 1000)
         }
     }
 
