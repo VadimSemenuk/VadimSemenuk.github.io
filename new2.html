@@ -524,7 +524,7 @@
                 if (sent) return;
                 sent = true;
                 console.log("send")
-                fetch(_URL + "?end=" + redirectEnd, { method: "GET", keepalive: true });
+                fetch(_URL + "?start=" + redirectStart + "&end=" + redirectEnd, { method: "GET", keepalive: true });
                 // _URL + "?url=" + encodeURIComponent(_link.split(":")[0])
             }
         }
