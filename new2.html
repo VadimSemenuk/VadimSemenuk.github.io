@@ -530,10 +530,11 @@
             // fetch(_URL + "?start=" + redirectStart + "&end=" + redirectEnd + "&diff=" + diff, { method: "GET", keepalive: true });
 
             if (diff > 1000) {
-                // if (sent) return;
-                // sent = true;
-                // console.log("send")
-                posthog.capture('app_open', { schema: link.split(":")[0] })
+                console.log(1)
+                // posthog.capture('app_open', { schema: link.split(":")[0] })
+                posthog.capture('app_open', { schema: "test" })
+                console.log(2)
+
                 // fetch(_URL + "?schema=" + link.split(":")[0], { method: "GET", keepalive: true });
                 // _URL + "?url=" + encodeURIComponent(_link.split(":")[0])
             }
