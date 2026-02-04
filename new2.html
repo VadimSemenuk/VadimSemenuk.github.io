@@ -514,31 +514,29 @@
     // let redirectEnd = 0;
 
     const eventHandler = (redirectStart) => {
-        if (document.visibilityState === "hidden") {
-            let redirectEnd = +(new Date())
-            const diff = redirectEnd - redirectStart - 1000
-            // console.log("diff: " + diff);
-            // console.log(_link.split(":")[0])
 
-            console.log("send")
-            // fetch(_URL + "?start=" + redirectStart + "&end=" + redirectEnd + "&diff=" + diff, { method: "GET", keepalive: true });
+        setTimeout(() => {
+            if (document.visibilityState === "hidden") {
+                let redirectEnd = +(new Date())
+                const diff = redirectEnd - redirectStart - 1000
+                // console.log("diff: " + diff);
+                // console.log(_link.split(":")[0])
 
-            if (diff > 1000) {
-                // if (sent) return;
-                // sent = true;
-                // console.log("send")
-                // fetch(_URL + "?start=" + redirectStart + "&end=" + redirectEnd, { method: "GET", keepalive: true });
-                // _URL + "?url=" + encodeURIComponent(_link.split(":")[0])
+                console.log("send")
+                fetch(_URL + "?start=" + redirectStart + "&end=" + redirectEnd + "&diff=" + diff, { method: "GET", keepalive: true });
+
+                if (diff > 1000) {
+                    // if (sent) return;
+                    // sent = true;
+                    // console.log("send")
+                    // fetch(_URL + "?start=" + redirectStart + "&end=" + redirectEnd, { method: "GET", keepalive: true });
+                    // _URL + "?url=" + encodeURIComponent(_link.split(":")[0])
+                }
             }
-        }
+        })
     }
 
     const runRedirectIOS = (links, linkIndex) => {
-        //
-        // document.addEventListener("beforeunload", () => {
-        //     console.log("beforeunload");
-        // });
-        //
         // document.addEventListener("blur", () => {
         //     console.log("blur");
         // });
@@ -547,10 +545,10 @@
         //     console.log("pagehide");
         // });
 
-        window.addEventListener("unload", function(event) {
-            console.log("UNLOAD:1");
-            fetch(_URL, { method: "GET", keepalive: true });
-        });
+        // window.addEventListener("pagehide", function(event) {
+        //     console.log("UNLOAD:1");
+        //     fetch(_URL, { method: "GET", keepalive: true });
+        // });
 
         updateProgress(linkIndex + 1, links.length);
 
@@ -567,16 +565,16 @@
             document.body.removeChild(linkElement);
 
             setTimeout(() => {
-                // document.addEventListener("visibilitychange", () => eventHandler(redirectStart));
+                document.addEventListener("pagehide", () => eventHandler(redirectStart));
 
-                console.log("link: " + _link.split(":")[0])
-                console.log("hidden: " + document.hidden)
-                console.log("visibilityState: " + document.visibilityState)
+                // console.log("link: " + _link.split(":")[0])
+                // console.log("hidden: " + document.hidden)
+                // console.log("visibilityState: " + document.visibilityState)
+                refresh(linkIndex + 1);
 
-                setTimeout(() => {
-                    refresh(linkIndex + 1);
-                }, 400)
-            }, 100)
+                // setTimeout(() => {
+                // }, 400)
+            }, 3000)
         } else {
             setTimeout(() => {
                 // document.removeEventListener("visibilitychange", eventHandler);
