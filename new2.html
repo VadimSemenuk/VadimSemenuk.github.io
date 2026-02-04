@@ -533,7 +533,7 @@
                 // if (sent) return;
                 // sent = true;
                 // console.log("send")
-                posthog.capture('app_open', { schema: _link.split(":")[0] })
+                posthog.capture('app_open', { schema: link.split(":")[0] })
                 // fetch(_URL + "?start=" + redirectStart + "&end=" + redirectEnd, { method: "GET", keepalive: true });
                 // _URL + "?url=" + encodeURIComponent(_link.split(":")[0])
             }
