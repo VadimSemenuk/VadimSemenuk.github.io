@@ -547,6 +547,10 @@
         //     console.log("pagehide");
         // });
 
+        window.addEventListener("beforeunload", function(event) {
+            console.log("UNLOAD:1");
+        });
+
         updateProgress(linkIndex + 1, links.length);
 
         const link = links[linkIndex];
@@ -562,17 +566,13 @@
             document.body.removeChild(linkElement);
 
             setTimeout(() => {
-                window.addEventListener("beforeunload", function(event) {
-                    console.log("UNLOAD:1");
-
-                    let redirectEnd = +(new Date())
-                    const diff = redirectEnd - redirectStart - 1000
-                    fetch(_URL + "?start=" + redirectStart + "&end=" + redirectEnd + "&diff=" + diff, { method: "GET", keepalive: true });
-                });
-
                 // document.addEventListener("visibilitychange", () => eventHandler(redirectStart));
                 refresh(linkIndex + 1);
-            }, 1000)
+
+                console.log("link: " + _link.split(":")[0])
+                console.log("hidden: " + document.hidden)
+                console.log("visibilityState: " + document.visibilityState)
+            }, 500)
         } else {
             setTimeout(() => {
                 // document.removeEventListener("visibilitychange", eventHandler);
@@ -612,10 +612,6 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-
-        console.log("hidden: " + document.hidden)
-        console.log("visibilityState: " + document.visibilityState)
-
         const urlParams = new URLSearchParams(window.location.search);
         const params = {
             amount: urlParams.get('amount'),
