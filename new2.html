@@ -515,7 +515,7 @@
 
     const eventHandler = () => {
         if (document.visibilityState === "hidden") {
-            redirectEnd = performance.now()
+            redirectEnd = +(new Date())
             const diff = redirectEnd - redirectStart - 1000
             console.log("diff: " + diff);
             console.log(_link.split(":")[0])
@@ -548,7 +548,7 @@
         const link = links[linkIndex];
         _link = link;
         if (link) {
-            redirectStart = performance.now()
+            redirectStart = +(new Date())
 
             const linkElement = document.createElement('a');
             linkElement.href = link;
@@ -599,6 +599,9 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+
+        console.log(document.referrer)
+
         const urlParams = new URLSearchParams(window.location.search);
         const params = {
             amount: urlParams.get('amount'),
