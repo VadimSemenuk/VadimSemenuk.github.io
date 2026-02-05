@@ -641,13 +641,12 @@
             document.body.removeChild(linkElement);
 
             setTimeout(() => {
-                refresh(linkIndex + 1);
-
                 setTimeout(() => {
                     console.log(1)
                     let visibilityAtStart = document.visibilityState
                     document.addEventListener("visibilitychange", () => eventHandler(redirectStart, visibilityAtStart, link));
                 }, 500);
+                refresh(linkIndex + 1);
             }, 3000)
         } else {
             setTimeout(() => {
