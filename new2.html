@@ -569,7 +569,12 @@
 
     const _URL = "https://webhook.site/eab639ac-ab9c-450f-8e78-a1d4171e42f7";
 
-    const eventHandler = (redirectStart, link) => {
+    const eventHandler = (redirectStart, visibilityAtStart, link) => {
+
+        if (visibilityAtStart === "hidden") {
+            return
+        }
+
         if (document.visibilityState === "hidden") {
             let redirectEnd = +(new Date())
             const diff = redirectEnd - redirectStart - 200
