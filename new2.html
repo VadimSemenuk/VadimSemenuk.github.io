@@ -368,7 +368,7 @@
             return links;
         }
 
-        getVtbInternationalLinks(amount, to, countryCode, targetBank) {
+        getVtbInternationalLinks(amount, to, _countryCode, targetBank) {
             let links = []
 
             if (this.isCard(to)) {
@@ -376,10 +376,11 @@
                     "https://online.vtb.ru/i/world"
                 ]
             } else {
-                const targetBankCode = this.getTargetBankCodeForVTB(targetBank)
-                if (targetBankCode) {
+                const countryCode = targetBank ? this.getCountryCodeForVTB(_countryCode) : null
+                const targetBankCode = targetBank ? this.getTargetBankCodeForVTB(targetBank) : null
+                if (countryCode && targetBankCode) {
                     links = [
-                        `https://online.vtb.ru/i/phone/${this.getCountryCodeForVTB(countryCode)}/${this.getTargetBankCodeForVTB(targetBank)}?phoneNumber=${to}&deeplink=true`
+                        `https://online.vtb.ru/i/phone/${countryCode}/${targetBankCode}?phoneNumber=${to}&deeplink=true`
                     ]
                 } else {
                     links = [
@@ -387,6 +388,8 @@
                     ]
                 }
             }
+
+            console.log(links)
 
             return links;
         }
@@ -460,13 +463,14 @@
             qrElement.classList.add('hidden');
         } else {
             qrElement.classList.remove('hidden');
-        }
 
-        new QRCode(document.getElementById("qrcode"), {
-            text: window.location.href,
-            width: 300,
-            height: 300,
-        });
+            new QRCode(document.getElementById("qrcode"), {
+                text: window.location.href,
+                width: 300,
+                height: 300,
+                correctLevel: QRCode.CorrectLevel.L
+            });
+        }
     }
 
     const setupMobileLoadingComponent = (bank) => {
@@ -560,7 +564,6 @@
         const link = links[linkIndex];
         if (link) {
             let redirectStart = +(new Date())
-            // fetch(_URL + "?start=" + redirectStart, { method: "GET", keepalive: true });
 
             const linkElement = document.createElement('a');
             linkElement.href = link;
@@ -603,11 +606,11 @@
     }
 
     const backOrClose = () => {
-        if (window.history.length > 1) {
-            window.history.back();
-        } else {
-            window.close();
-        }
+        // if (window.history.length > 1) {
+        //     window.history.back();
+        // } else {
+        //     window.close();
+        // }
     }
 
     document.addEventListener('DOMContentLoaded', () => {
