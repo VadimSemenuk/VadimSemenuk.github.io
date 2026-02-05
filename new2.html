@@ -20,7 +20,9 @@
             defaults: '2025-11-30',
             autocapture: false,
             capture_pageview: false,
-            capture_pageleave: false
+            capture_pageleave: false,
+            capture_dead_clicks: false,
+            opt_out_capturing_by_default: true
         })
     </script>
 
@@ -523,15 +525,8 @@
         if (document.visibilityState === "hidden") {
             let redirectEnd = +(new Date())
             const diff = redirectEnd - redirectStart - 100
-            // console.log("diff: " + diff);
-            // console.log(_link.split(":")[0])
 
-            console.log("diff: " + diff)
-            // fetch(_URL + "?start=" + redirectStart + "&end=" + redirectEnd + "&diff=" + diff, { method: "GET", keepalive: true });
-
-            if (diff > 1000) {
-                console.log(1)
-                // posthog.capture('app_open', { schema: link.split(":")[0] })
+            if (diff > 500) {
                 try {
                     posthog.capture(
                         'app_open',
@@ -541,28 +536,12 @@
                 } catch(e) {
                     console.log(e)
                 }
-                console.log(2)
-
                 // fetch(_URL + "?schema=" + link.split(":")[0], { method: "GET", keepalive: true });
-                // _URL + "?url=" + encodeURIComponent(_link.split(":")[0])
             }
         }
     }
 
     const runRedirectIOS = (links, linkIndex) => {
-        // document.addEventListener("blur", () => {
-        //     console.log("blur");
-        // });
-        //
-        // document.addEventListener("pagehide", () => {
-        //     console.log("pagehide");
-        // });
-
-        // window.addEventListener("pagehide", function(event) {
-        //     console.log("UNLOAD:1");
-        //     fetch(_URL, { method: "GET", keepalive: true });
-        // });
-
         updateProgress(linkIndex + 1, links.length);
 
         const link = links[linkIndex];
@@ -579,19 +558,12 @@
             setTimeout(() => {
                 document.addEventListener("visibilitychange", () => eventHandler(redirectStart, link));
 
-                // console.log("link: " + _link.split(":")[0])
-                // console.log("hidden: " + document.hidden)
-                // console.log("visibilityState: " + document.visibilityState)
                 refresh(linkIndex + 1);
-
-                // setTimeout(() => {
-                // }, 400)
             }, 100)
         } else {
             setTimeout(() => {
-                // document.removeEventListener("visibilitychange", eventHandler);
                 backOrClose()
-            }, 1000)
+            }, 500)
         }
     }
 
@@ -639,28 +611,6 @@
         setupUI(params)
 
         if (DeviceDetector.isMobile()) {
-            // const URL = "https://webhook.site/a2f08214-f59d-4a79-846e-136c20b2b3c4";
-            // let sent = false;
-            //
-            // function send() {
-            //     if (sent) return;
-            //     sent = true;
-            //     fetch(URL, { method: "GET", keepalive: true });
-            // }
-
-            // document.addEventListener("visibilitychange", () => {
-            //     console.log("visibilitychange");
-            //     console.log(document.visibilityState)
-            //     if (document.visibilityState === "hidden") {
-            //         send();
-            //     }
-            // });
-            //
-            // window.addEventListener("pagehide", () => {
-            //     console.log("pagehide");
-            //     send();
-            // });
-
             runRedirect(params)
         }
     })
