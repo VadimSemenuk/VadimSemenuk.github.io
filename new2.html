@@ -535,7 +535,7 @@
                 try {
                     posthog.capture(
                         'app_open',
-                        { schema: "test" },
+                        { schema: link.split(":")[0] },
                         { send_instantly: true }
                     )
                 } catch(e) {
