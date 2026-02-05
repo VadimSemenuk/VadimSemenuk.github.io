@@ -595,7 +595,7 @@
     const runRedirectDefault = (links, finishBehaviour) => {
         links.forEach((item, index) => {
             setTimeout(() => {
-                // location.href = item;
+                location.href = item;
                 updateProgress(index + 1, links.length);
 
                 if (index === links.length - 1) {
@@ -622,6 +622,9 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+
+        console.log(document.referrer)
+
         const urlParams = new URLSearchParams(window.location.search);
         const params = {
             amount: urlParams.get('amount'),
