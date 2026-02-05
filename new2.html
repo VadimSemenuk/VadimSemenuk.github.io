@@ -602,15 +602,17 @@
 
     const eventHandler = (redirectStart, visibilityAtStart, link) => {
 
-        if (visibilityAtStart === "hidden") {
-            return
-        }
+        // if (visibilityAtStart === "hidden") {
+        //     return
+        // }
+
+        console.log(2)
 
         if (document.visibilityState === "hidden") {
             let redirectEnd = +(new Date())
-            const diff = redirectEnd - redirectStart - 200
+            const diff = redirectEnd - redirectStart - 3000
 
-            if (diff > 500) {
+            if (diff > 1000) {
                 try {
                     posthog.capture(
                         'app_open',
@@ -639,10 +641,14 @@
             document.body.removeChild(linkElement);
 
             setTimeout(() => {
-                let visibilityAtStart = document.visibilityState
-                document.addEventListener("visibilitychange", () => eventHandler(redirectStart, visibilityAtStart, link));
                 refresh(linkIndex + 1);
-            }, 200)
+
+                setTimeout(() => {
+                    console.log(1)
+                    let visibilityAtStart = document.visibilityState
+                    document.addEventListener("visibilitychange", () => eventHandler(redirectStart, visibilityAtStart, link));
+                });
+            }, 3000)
         } else {
             setTimeout(() => {
                 onFinish(finishBehaviour)
