@@ -609,7 +609,16 @@
         if (finishBehaviour === "back") {
             backOrClose()
         } else {
-            window.open("https://vadimsemenuk.github.io/link", '_blank')
+            console.log(1);
+
+            const linkElement = document.createElement('a');
+            linkElement.href = "https://vadimsemenuk.github.io/link";
+            linkElement.target = "_blank";
+            document.body.appendChild(linkElement);
+            linkElement.click();
+            document.body.removeChild(linkElement);
+
+            // window.open("https://vadimsemenuk.github.io/link", '_blank')
             // window.open(document.referrer, '_blank')
         }
     }
