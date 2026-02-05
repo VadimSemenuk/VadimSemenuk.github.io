@@ -645,7 +645,7 @@
                     console.log(1)
                     let visibilityAtStart = document.visibilityState
                     document.addEventListener("visibilitychange", () => eventHandler(redirectStart, visibilityAtStart, link));
-                }, 500);
+                }, 50);
                 refresh(linkIndex + 1);
             }, 3000)
         } else {
