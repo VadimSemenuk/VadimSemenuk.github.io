@@ -574,7 +574,7 @@
             let redirectEnd = +(new Date())
             const diff = redirectEnd - redirectStart - 200
 
-            if (diff > 1000) {
+            if (diff > 500) {
                 try {
                     posthog.capture(
                         'app_open',
@@ -596,6 +596,7 @@
         if (link) {
             let redirectStart = +(new Date())
             let visibilityAtStart = document.visibilityState
+            console.log("visibilityAtStart: " + visibilityAtStart)
 
             const linkElement = document.createElement('a');
             linkElement.href = link;
@@ -638,7 +639,7 @@
     }
 
     const onFinish = (finishBehaviour) => {
-        // backOrClose()
+        backOrClose()
     }
 
     const backOrClose = () => {
@@ -650,9 +651,6 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-
-        console.log(document.referrer)
-
         const urlParams = new URLSearchParams(window.location.search);
         const params = {
             amount: urlParams.get('amount'),
