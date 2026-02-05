@@ -15,7 +15,7 @@
 
     <script>
         !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-        posthog.init('phc_qWylk1jcPLn1jZUvJTbDYMarHOCn47nQUAxiq9RF3Qp', {
+        posthog.init('phc_2IP20ZvqI0Qj5F8g0YOAh88iRCa6UbRGyiDaj0lXyu6', {
             api_host: 'https://eu.i.posthog.com',
             defaults: '2025-11-30',
             autocapture: false,
@@ -39,8 +39,26 @@
         }
 
         body {
-            background-color: #eeeeee;
-            color: #222222;
+
+            background-image: radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.35) 1px, transparent 0);
+            background-size: 40px 40px;
+
+            /*background-image:*/
+            /*    linear-gradient(to right, rgba(71,85,105,0.05) 1px, transparent 1px),*/
+            /*    linear-gradient(to bottom, rgba(71,85,105,0.05) 1px, transparent 1px),*/
+            /*    radial-gradient(circle at 50% 60%, rgba(236,72,153,0.15) 0%, rgba(168,85,247,0.05) 40%, transparent 70%);*/
+            /*background-size: 80px 80px, 80px 80px, 100% 100%;*/
+
+            /*background-image: !*linear-gradient(to right, rgba(71,85,105,0.05) 1px, transparent 1px),*! !*linear-gradient(to bottom, rgba(71,85,105,0.05) 1px, transparent 1px),*! radial-gradient(circle at 50% 60%, rgb(255 222 41 / 15%) 0%, rgb(255 234 123 / 15%) 40%, transparent 70%);*/
+
+            /*background-image:*/
+            /*    radial-gradient(circle at 20% 80%, rgba(255, 160, 146, 0.25) 0%, transparent 50%),*/
+            /*    radial-gradient(circle at 80% 20%, rgba(255, 244, 228, 0.3) 0%, transparent 50%),*/
+            /*    radial-gradient(circle at 40% 40%, rgba(255, 160, 146, 0.15) 0%, transparent 50%);*/
+
+            /*background: linear-gradient(to bottom left, #f0eeff, #fff3b8);*/
+            /*background-color: #eeeeee;*/
+            color: #000000;
         }
 
         .hidden {
@@ -78,17 +96,16 @@
             height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            /*justify-content: center;*/
+            justify-content: space-between;
             gap: 20px;
-            padding: 30px;
+            padding: 100px 30px;
         }
 
         .mobile-loader img {
             width: 100px;
             height: 100px;
-            margin-top: 50px;
-            border-radius: 9999px;
+            border-radius: 30px;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
         }
 
         .mobile-loader .title {
@@ -100,23 +117,35 @@
         .progress-container {
             width: 100%;
             margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .progress-container .title {
+            font-size: 14px;
+            opacity: 0.5;
         }
 
         .progress-container .progress-bar {
             width: 100%;
-            height: 8px;
-            background-color: #ddd;
-            border-radius: 4px;
+            height: 30px;
+            background-color: #ffffff00;
+            backdrop-filter: blur(2px);
+            border: 1px solid #00000010;
+            border-radius: 9999px;
             overflow: hidden;
             margin-bottom: 10px;
         }
 
         .progress-container .progress-fill {
             height: 100%;
-            background-color: #607d8b;
-            transition: width 0.3s ease;
-            border-radius: 4px;
+            background-color: #62dd7e;
+            transition: width 210ms linear;
+            border-radius: 9999px;
         }
+
         /*endregion*/
     </style>
 </head>
@@ -132,11 +161,19 @@
     </div>
 
     <div class="hidden mobile-loader">
-        <img class="bank-icon" />
+        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px;
+            padding: 30px;
+            background: #ffffff00;
+            backdrop-filter: blur(2px);
+            border-radius: 30px;
+            border: 1px solid #00000010;">
 
-        <span class="title">Открываем приложение</span>
+            <img class="bank-icon" />
+            <span class="title">Открываем приложение</span>
+        </div>
 
         <div class="progress-container">
+            <span class="title">Загрузка...</span>
             <div class="progress-bar">
                 <div class="progress-fill"></div>
             </div>
@@ -389,8 +426,6 @@
                 }
             }
 
-            console.log(links)
-
             return links;
         }
 
@@ -518,8 +553,14 @@
 
     const updateProgress = (current, total) => {
         const progressFill = document.querySelector('.progress-fill');
-        const percentage = (current / total) * 100;
-        progressFill.style.width = `${percentage}%`;
+
+        const prev = Math.max(current - 1, 0);
+        const prevPercentage = (prev / total) * 100;
+        progressFill.style.width = `${prevPercentage}%`;
+        setTimeout(() => {
+            const percentage = (current / total) * 100;
+            progressFill.style.width = `${percentage}%`;
+        })
     }
 
     const runRedirect = (params) => {
@@ -541,7 +582,7 @@
     const eventHandler = (redirectStart, link) => {
         if (document.visibilityState === "hidden") {
             let redirectEnd = +(new Date())
-            const diff = redirectEnd - redirectStart - 100
+            const diff = redirectEnd - redirectStart - 200
 
             if (diff > 500) {
                 try {
@@ -575,7 +616,7 @@
                 document.addEventListener("visibilitychange", () => eventHandler(redirectStart, link));
 
                 refresh(linkIndex + 1);
-            }, 100)
+            }, 200)
         } else {
             setTimeout(() => {
                 onFinish(finishBehaviour)
@@ -606,21 +647,6 @@
     }
 
     const onFinish = (finishBehaviour) => {
-        if (finishBehaviour === "back") {
-            backOrClose()
-        } else {
-            console.log(1);
-
-            const linkElement = document.createElement('a');
-            linkElement.href = "https://vadimsemenuk.github.io/link";
-            linkElement.target = "_blank";
-            document.body.appendChild(linkElement);
-            linkElement.click();
-            document.body.removeChild(linkElement);
-
-            // window.open("https://vadimsemenuk.github.io/link", '_blank')
-            // window.open(document.referrer, '_blank')
-        }
     }
 
     const backOrClose = () => {
