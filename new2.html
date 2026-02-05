@@ -528,11 +528,11 @@
         const links = new LinksHelper().getLinks(params.bank, params.amount, params.to, params.countryCode, params.targetBank)
 
         if (links.length > 0 && links[0].startsWith("https://")) {
-            runRedirectDefault(links)
+            runRedirectDefault(links, params.finishBehaviour)
         } else if (DeviceDetector.isAppleMobile()) {
-            runRedirectIOS(links, params.linkIndex)
+            runRedirectIOS(links, params.linkIndex, params.finishBehaviour)
         } else {
-            runRedirectDefault(links)
+            runRedirectDefault(links, params.finishBehaviour)
         }
     }
 
@@ -558,7 +558,7 @@
         }
     }
 
-    const runRedirectIOS = (links, linkIndex) => {
+    const runRedirectIOS = (links, linkIndex, finishBehaviour) => {
         updateProgress(linkIndex + 1, links.length);
 
         const link = links[linkIndex];
@@ -578,7 +578,7 @@
             }, 100)
         } else {
             setTimeout(() => {
-                backOrClose()
+                onFinish(finishBehaviour)
             }, 500)
         }
     }
@@ -592,25 +592,33 @@
         window.location.replace(url.toString())
     }
 
-    const runRedirectDefault = (links) => {
+    const runRedirectDefault = (links, finishBehaviour) => {
         links.forEach((item, index) => {
             setTimeout(() => {
-                location.href = item;
+                // location.href = item;
                 updateProgress(index + 1, links.length);
 
                 if (index === links.length - 1) {
-                    setTimeout(() => backOrClose(), 10000)
+                    setTimeout(() => onFinish(finishBehaviour), 10000)
                 }
             }, index * 500)
         })
     }
 
+    const onFinish = (finishBehaviour) => {
+        if (finishBehaviour === "back") {
+            backOrClose()
+        } else {
+            window.open(document.referrer, '_blank')
+        }
+    }
+
     const backOrClose = () => {
-        // if (window.history.length > 1) {
-        //     window.history.back();
-        // } else {
-        //     window.close();
-        // }
+        if (window.history.length > 1) {
+            window.history.back();
+        } else {
+            window.close();
+        }
     }
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -622,6 +630,7 @@
             countryCode: urlParams.get('countryCode'),
             targetBank: urlParams.get('targetBank'),
             linkIndex: parseInt(urlParams.get("_i") || "0", 10),
+            finishBehaviour: urlParams.get('finishBehaviour') || "openNewTab", // "back" to go back throw history or close tab is no history
         }
 
         setupUI(params)
