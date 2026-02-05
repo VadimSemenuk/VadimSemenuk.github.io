@@ -521,7 +521,7 @@
             }
             case 'tbank':
             case 'tbank_international': {
-                return 'tbank.png'
+                return 'sber.png'
                 // return 'https://drive.google.com/uc?export=view&id=1seoPZ0V0xazTBYHoj4LZ32gnpr0YzoAE&export=view'
             }
             case 'vtb':
@@ -570,7 +570,7 @@
             let redirectEnd = +(new Date())
             const diff = redirectEnd - redirectStart - 200
 
-            if (diff > 500) {
+            if (diff > 1000) {
                 try {
                     posthog.capture(
                         'app_open',
