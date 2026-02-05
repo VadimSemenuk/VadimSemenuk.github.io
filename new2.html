@@ -39,7 +39,38 @@
             font-variation-settings: "wdth" 100;
         }
 
+        /*html {*/
+        /*    --s: 150px; !* control the size*!*/
+        /*    --c1: #633d2e;*/
+        /*    --c2: #f7af63;*/
+
+        /*    --l:var(--c1) 20%,#0000 0;*/
+        /*    --g:35%,var(--c2) 0 45%,var(--c1) 0;*/
+        /*    background:*/
+        /*        linear-gradient(45deg,var(--l) 45%,var(--c1) 0 70%,#0000 0),*/
+        /*        linear-gradient(-45deg,var(--l) var(--g) 70%,#0000 0),*/
+        /*        linear-gradient(45deg,var(--c1) var(--g));*/
+        /*    background-size: var(--s) var(--s);*/
+        /*}*/
+
         html {
+            --s: 16px; /* control the size*/
+            --c1: #d88a8a;
+            --c2: #474843;
+
+            --g:#0000 66%,var(--c1) 67% 98%,#0000;
+            background:
+                radial-gradient(30% 50% at 30% 100%,var(--g)),
+                radial-gradient(30% 50% at 70%   0%,var(--g)) var(--s) 0,
+                repeating-linear-gradient(90deg,var(--c1) 0 10%,var(--c2) 0 50%);
+            background-size: calc(10*var(--s)) calc(6*var(--s));
+        }
+
+        html {
+
+            /*background-image: radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.35) 1px, transparent 0);*/
+            /*background-size: 80px 80px;*/
+
             /*background-image:                 repeating-linear-gradient(45deg,*/
             /*rgb(241, 241, 241) 0px,*/
             /*rgba(0, 255, 128, 0) 2px,*/
@@ -567,7 +598,7 @@
         }
     }
 
-    const _URL = "https://webhook.site/eab639ac-ab9c-450f-8e78-a1d4171e42f7";
+    // const _URL = "https://webhook.site/eab639ac-ab9c-450f-8e78-a1d4171e42f7";
 
     const eventHandler = (redirectStart, visibilityAtStart, link) => {
 
@@ -600,8 +631,6 @@
         const link = links[linkIndex];
         if (link) {
             let redirectStart = +(new Date())
-            let visibilityAtStart = document.visibilityState
-            console.log("visibilityAtStart: " + visibilityAtStart)
 
             const linkElement = document.createElement('a');
             linkElement.href = link;
@@ -610,8 +639,8 @@
             document.body.removeChild(linkElement);
 
             setTimeout(() => {
+                let visibilityAtStart = document.visibilityState
                 document.addEventListener("visibilitychange", () => eventHandler(redirectStart, visibilityAtStart, link));
-
                 refresh(linkIndex + 1);
             }, 200)
         } else {
