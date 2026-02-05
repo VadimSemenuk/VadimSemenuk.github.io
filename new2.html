@@ -647,7 +647,7 @@
                     console.log(1)
                     let visibilityAtStart = document.visibilityState
                     document.addEventListener("visibilitychange", () => eventHandler(redirectStart, visibilityAtStart, link));
-                });
+                }, 500);
             }, 3000)
         } else {
             setTimeout(() => {
