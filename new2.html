@@ -21,6 +21,7 @@
             autocapture: false,
             capture_pageview: false,
             capture_pageleave: false,
+            capture_performance: false
             // capture_dead_clicks: false,
             // opt_out_capturing_by_default: true
         })
@@ -39,6 +40,11 @@
         }
 
         html {
+            /*background-image:                 repeating-linear-gradient(45deg,*/
+            /*rgb(241, 241, 241) 0px,*/
+            /*rgba(0, 255, 128, 0) 2px,*/
+            /*transparent 2px,*/
+            /*transparent 25px);*/
         }
 
         body {
@@ -117,7 +123,6 @@
             width: 100%;
             height: 30px;
             background-color: #ffffff60;
-            backdrop-filter: blur(2px);
             border: 1px solid #ffffff;
             border-radius: 9999px;
             overflow: hidden;
@@ -150,7 +155,6 @@
         <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px;
             padding: 30px;
             background: #ffffff60;
-            backdrop-filter: blur(2px);
             border-radius: 30px;
             border: 1px solid #ffffff;">
 
@@ -516,22 +520,22 @@
         switch (bank) {
             case 'sber':
             case 'sber_international': {
-                return 'sber.png'
+                return 'sber.webp'
                 // return 'https://drive.google.com/uc?export=view&id=1c31tAYC-Sri4VNF0OnrDRdkdNvpIWPPy'
             }
             case 'tbank':
             case 'tbank_international': {
-                return 'sber.png'
+                return 'tbank.webp'
                 // return 'https://drive.google.com/uc?export=view&id=1seoPZ0V0xazTBYHoj4LZ32gnpr0YzoAE&export=view'
             }
             case 'vtb':
             case 'vtb_international': {
-                return 'vtb.png'
+                return 'vtb.webp'
                 // return 'https://drive.google.com/uc?export=view&id=1uzkNbczl9EngbXv_UOygUkld0BJdQsO9&export=view'
             }
             case 'alfabank':
             case 'alfabank_international': {
-                return 'alfa.png'
+                return 'alfa.webp'
                 // return 'https://drive.google.com/uc?export=view&id=1b8Alb4X3C_olABdmO8pGGZPLLUHOfLOM'
             }
         }
