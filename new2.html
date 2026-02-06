@@ -40,12 +40,6 @@
         }
 
         html {
-            /*background-image: radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.35) 1px, transparent 0);*/
-            /*background-size: 40px 40px;*/
-        }
-
-        body {
-            background: linear-gradient(to right, rgb(100 238 97 / 20%), rgb(50 184 211 / 20%));
             color: #000000;
         }
 
@@ -80,7 +74,7 @@
             height: 300px;
         }
 
-        .mobile-loader {
+        .loading-container {
             height: 100vh;
             display: flex;
             flex-direction: column;
@@ -89,14 +83,26 @@
             padding: 100px 30px;
         }
 
-        .mobile-loader img {
+        .loading-container img {
             width: 100px;
             height: 100px;
             border-radius: 30px;
             box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
         }
 
-        .mobile-loader .title {
+        .loading-container .title-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            padding: 30px;
+            background: #ffffff80;
+            border-radius: 30px;
+            border: 1px solid #ffffff;
+        }
+
+        .loading-container .title {
             font-size: 24px;
             text-align: center;
         }
@@ -113,14 +119,14 @@
 
         .progress-container .title {
             font-size: 14px;
-            opacity: 0.5;
+            /*opacity: 0.5;*/
         }
 
         .progress-container .progress-bar {
             width: 100%;
             height: 30px;
-            background-color: #ffffff60;
-            border: 1px solid #ffffff;
+            background-color: #ffffff;
+            border: 2px solid #ffffff;
             border-radius: 9999px;
             overflow: hidden;
             margin-bottom: 10px;
@@ -128,10 +134,50 @@
 
         .progress-container .progress-fill {
             height: 100%;
-            /*background-color: #62dd7e;*/
-            background: linear-gradient(to right, rgb(100 238 97), rgb(50 184 211));
-            transition: width 210ms linear;
+            transition: width 200ms linear;
             border-radius: 9999px;
+        }
+        /*endregion*/
+
+        /*region bank specific styles*/
+        .sber-bg-100 {
+            background: linear-gradient(to right, rgb(100 238 97 / 10%), rgb(50 184 211 / 10%));
+        }
+        .sber-bg-500 {
+            background: linear-gradient(to right, rgb(100 238 97), rgb(50 184 211));
+        }
+        .sber-color-900 {
+            color: #004723;
+        }
+
+        .tbank-bg-100 {
+            background: linear-gradient(to right, rgb(255 233 121 / 20%), rgb(254 221 44 / 20%));
+        }
+        .tbank-bg-500 {
+            background: linear-gradient(to right, rgb(255 233 121), rgb(254 221 44));
+        }
+        .tbank-color-900 {
+            color: #8a6f00;
+        }
+
+        .vtb-bg-100 {
+            background: linear-gradient(to right, rgb(206 182 250 / 10%), rgb(3 72 185 / 10%));
+        }
+        .vtb-bg-500 {
+            background: linear-gradient(to right, rgb(206 182 250), rgb(3 72 185));
+        }
+        .vtb-color-900 {
+            color: #001639;
+        }
+
+        .alfabank-bg-100 {
+            background: rgb(239 50 36 / 10%);
+        }
+        .alfabank-bg-500 {
+            background: rgb(239 50 36);
+        }
+        .alfabank-color-900 {
+            color: #001639;
         }
         /*endregion*/
     </style>
@@ -147,13 +193,8 @@
         <span class="title">Для оплаты отсканируйте QR-код с помощью камеры телефона и перейдите по ссылке</span>
     </div>
 
-    <div class="hidden mobile-loader">
-        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px;
-            padding: 30px;
-            background: #ffffff60;
-            border-radius: 30px;
-            border: 1px solid #ffffff;">
-
+    <div class="hidden loading-container">
+        <div class="title-container">
             <img class="bank-icon" />
             <span class="title">Открываем приложение</span>
         </div>
@@ -475,7 +516,7 @@
 
     const setupUI = (params) => {
         setupQR()
-        setupMobileLoadingComponent(params.bank)
+        setupLoadingUI(params.bank)
     }
 
     const setupQR = () => {
@@ -494,8 +535,8 @@
         }
     }
 
-    const setupMobileLoadingComponent = (bank) => {
-        const loaderElement = document.querySelector('.mobile-loader')
+    const setupLoadingUI = (bank) => {
+        const loaderElement = document.querySelector('.loading-container')
         if (DeviceDetector.isMobile()) {
             loaderElement.classList.remove('hidden');
         } else {
@@ -504,12 +545,14 @@
 
         const bankIconElement = document.querySelector('.bank-icon')
         const iconName = getBankIconName(bank)
-        if (!iconName) {
-            bankIconElement.classList.add('hidden');
-        } else {
-            bankIconElement.classList.remove('hidden');
-        }
         bankIconElement.src = "./media/img/" + iconName
+
+        const styleClassPrefix = getBankStyleClassPrefix(bank)
+        if (styleClassPrefix) {
+            document.querySelector('html').classList.add(styleClassPrefix + '-bg-100')
+            document.querySelector('.progress-fill').classList.add(styleClassPrefix + '-bg-500')
+            document.querySelector('.progress-container .title').classList.add(styleClassPrefix + '-color-900')
+        }
     }
 
     const getBankIconName = (bank) => {
@@ -533,6 +576,27 @@
             case 'alfabank_international': {
                 return 'alfa.webp'
                 // return 'https://drive.google.com/uc?export=view&id=1b8Alb4X3C_olABdmO8pGGZPLLUHOfLOM'
+            }
+        }
+    }
+
+    const getBankStyleClassPrefix = (bank) => {
+        switch (bank) {
+            case 'sber':
+            case 'sber_international': {
+                return 'sber'
+            }
+            case 'tbank':
+            case 'tbank_international': {
+                return 'tbank'
+            }
+            case 'vtb':
+            case 'vtb_international': {
+                return 'vtb'
+            }
+            case 'alfabank':
+            case 'alfabank_international': {
+                return 'alfabank'
             }
         }
     }
@@ -635,7 +699,7 @@
         })
     }
 
-    const onFinish = (finishBehaviour) => {
+    const onFinish = () => {
         backOrClose()
     }
 
@@ -656,13 +720,12 @@
             countryCode: urlParams.get('countryCode'),
             targetBank: urlParams.get('targetBank'),
             linkIndex: parseInt(urlParams.get("_i") || "0", 10),
-            finishBehaviour: urlParams.get('finishBehaviour') || "openNewTab", // "back" to go back throw history or close tab is no history
         }
 
         setupUI(params)
 
         if (DeviceDetector.isMobile()) {
-            runRedirect(params)
+            // runRedirect(params)
         }
     })
 </script>
