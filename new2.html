@@ -22,8 +22,6 @@
             capture_pageview: false,
             capture_pageleave: false,
             capture_performance: false
-            // capture_dead_clicks: false,
-            // opt_out_capturing_by_default: true
         })
     </script>
 
@@ -619,11 +617,11 @@
         const links = new LinksHelper().getLinks(params.bank, params.amount, params.to, params.countryCode, params.targetBank)
 
         if (links.length > 0 && links[0].startsWith("https://")) {
-            runRedirectDefault(links, params.finishBehaviour)
+            runRedirectDefault(links)
         } else if (DeviceDetector.isAppleMobile()) {
-            runRedirectIOS(links, params.linkIndex, params.finishBehaviour)
+            runRedirectIOS(links, params.linkIndex)
         } else {
-            runRedirectDefault(links, params.finishBehaviour)
+            runRedirectDefault(links)
         }
     }
 
@@ -651,7 +649,7 @@
         }
     }
 
-    const runRedirectIOS = (links, linkIndex, finishBehaviour) => {
+    const runRedirectIOS = (links, linkIndex) => {
         updateProgress(linkIndex + 1, links.length);
 
         const link = links[linkIndex];
@@ -672,7 +670,7 @@
             }, 200)
         } else {
             setTimeout(() => {
-                onFinish(finishBehaviour)
+                onFinish()
             }, 500)
         }
     }
@@ -686,14 +684,14 @@
         window.location.replace(url.toString())
     }
 
-    const runRedirectDefault = (links, finishBehaviour) => {
+    const runRedirectDefault = (links) => {
         links.forEach((item, index) => {
             setTimeout(() => {
                 location.href = item;
                 updateProgress(index + 1, links.length);
 
                 if (index === links.length - 1) {
-                    setTimeout(() => onFinish(finishBehaviour), 10000)
+                    setTimeout(() => onFinish(), 10000)
                 }
             }, index * 500)
         })
