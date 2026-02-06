@@ -633,12 +633,14 @@
 
         console.log(2)
         if (document.visibilityState === "hidden") {
+            console.log(3)
+
             let redirectEnd = +(new Date())
             const diff = redirectEnd - redirectStart - 3000
 
             if (diff > 1000) {
                 try {
-                    console.log(3)
+                    console.log(4)
 
                     posthog.capture(
                         'app_open',
