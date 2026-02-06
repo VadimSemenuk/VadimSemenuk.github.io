@@ -628,7 +628,6 @@
     // const _URL = "https://webhook.site/eab639ac-ab9c-450f-8e78-a1d4171e42f7";
 
     const eventHandler = (redirectStart, visibilityAtStart, link) => {
-        console.log(visibilityAtStart)
         if (visibilityAtStart === "hidden") return
 
         if (document.visibilityState === "hidden") {
@@ -636,7 +635,6 @@
             const diff = redirectEnd - redirectStart - 3000
 
             if (diff > 1000) {
-                console.log(1)
                 try {
                     posthog.capture(
                         'app_open',
