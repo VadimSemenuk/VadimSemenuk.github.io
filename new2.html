@@ -349,7 +349,15 @@
 
         // region tbank
         getTBankLinks(amount, to, isInternational) {
-            let schemas = [
+            let schemas = []
+
+            let baseSchemas = [
+                "tinkoffbank",
+                "tbank",
+                "bank100000000004",
+            ]
+
+            let additionalSchemas = [
                 "novabattlert",
                 "actorjournalt",
                 "glossflowt",
@@ -392,13 +400,16 @@
                 "mobtrs",
                 "tguard",
                 "tmydocs",
-                "tinkoffbank",
-                "tbank",
-                "bank100000000004",
             ]
 
-            if (isInternational) {
-                schemas = schemas.filter(it => !["tinkoffbank", "bank100000000004"].includes(it))
+            if (DeviceDetector.isAppleMobile()) {
+                schemas = [...additionalSchemas, ...schemas]
+
+                if (isInternational) {
+                    schemas = schemas.filter(it => !["tinkoffbank", "bank100000000004"].includes(it))
+                }
+            } else if (DeviceDetector.isAndroidMobile()) {
+                schemas = [...schemas, ...additionalSchemas]
             }
 
             let mapper
@@ -680,6 +691,24 @@
     }
 
     const runRedirectDefault = (links) => {
+
+
+        document.addEventListener("visibilitychange", () => {
+            console.log(document.visibilityState)
+        });
+
+        document.addEventListener("blur", () => {
+            console.log('blur')
+        });
+
+        document.addEventListener("beforeunload", () => {
+            console.log('beforeunload')
+        });
+
+        document.addEventListener("unload", () => {
+            console.log('unload')
+        });
+
         links.forEach((item, index) => {
             setTimeout(() => {
                 location.href = item;
@@ -690,9 +719,6 @@
                 }
 
                 console.log(123)
-                document.addEventListener("visibilitychange", () => {
-                    console.log(document.visibilityState)
-                });
             }, index * 500)
         })
     }
