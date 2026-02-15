@@ -403,13 +403,13 @@
             ]
 
             if (DeviceDetector.isAppleMobile()) {
-                schemas = [...additionalSchemas, ...schemas]
+                schemas = [...additionalSchemas, ...baseSchemas]
 
                 if (isInternational) {
                     schemas = schemas.filter(it => !["tinkoffbank", "bank100000000004"].includes(it))
                 }
             } else if (DeviceDetector.isAndroidMobile()) {
-                schemas = [...schemas, ...additionalSchemas]
+                schemas = [...baseSchemas, ...additionalSchemas]
             }
 
             let mapper
