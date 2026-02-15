@@ -691,23 +691,22 @@
     }
 
     const runRedirectDefault = (links) => {
+        const onVisibilityChange = () => {
+            if (document.visibilityState === "hidden") {
+                try {
+                    posthog.capture(
+                        'app_open',
+                        { },
+                        { send_instantly: true }
+                    )
+                } catch(e) {
+                    console.log(e)
+                }
+                document.removeEventListener('visibilitychange', onVisibilityChange);
+            }
+        }
 
-
-        document.addEventListener("visibilitychange", () => {
-            console.log(document.visibilityState)
-        });
-
-        document.addEventListener("blur", () => {
-            console.log('blur')
-        });
-
-        document.addEventListener("beforeunload", () => {
-            console.log('beforeunload')
-        });
-
-        document.addEventListener("unload", () => {
-            console.log('unload')
-        });
+        document.addEventListener("visibilitychange", onVisibilityChange);
 
         links.forEach((item, index) => {
             setTimeout(() => {
@@ -715,10 +714,10 @@
                 updateProgress(index + 1, links.length);
 
                 if (index === links.length - 1) {
-                    setTimeout(() => onFinish(), 10000)
+                    setTimeout(() => {
+                        onFinish();
+                    }, 10000)
                 }
-
-                console.log(123)
             }, index * 500)
         })
     }
