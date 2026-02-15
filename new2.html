@@ -688,6 +688,11 @@
                 if (index === links.length - 1) {
                     setTimeout(() => onFinish(), 10000)
                 }
+
+                console.log(123)
+                document.addEventListener("visibilitychange", () => {
+                    console.log(document.visibilityState)
+                });
             }, index * 500)
         })
     }
