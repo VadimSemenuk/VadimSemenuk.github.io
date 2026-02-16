@@ -641,15 +641,7 @@
             const diff = redirectEnd - redirectStart - 200
 
             if (diff > 1000) {
-                try {
-                    posthog.capture(
-                        'app_open',
-                        { schema: link.split(":")[0] },
-                        { send_instantly: true }
-                    )
-                } catch(e) {
-                    console.log(e)
-                }
+                sendEvent(link.split(":")[0])
                 // fetch(_URL + "?schema=" + link.split(":")[0], { method: "GET", keepalive: true });
             }
         }
@@ -693,15 +685,7 @@
     const runRedirectDefault = (links) => {
         const onVisibilityChange = () => {
             if (document.visibilityState === "hidden") {
-                try {
-                    posthog.capture(
-                        'app_open',
-                        { },
-                        { send_instantly: true }
-                    )
-                } catch(e) {
-                    console.log(e)
-                }
+                sendEvent()
                 document.removeEventListener('visibilitychange', onVisibilityChange);
             }
         }
@@ -731,6 +715,18 @@
             window.history.back();
         } else {
             window.close();
+        }
+    }
+
+    const sendEvent = (schema) => {
+        try {
+            posthog.capture(
+                'app_open',
+                { schema, platform: DeviceDetector.isAppleMobile() ? "ios" : "android" },
+                { send_instantly: true }
+            )
+        } catch(e) {
+            console.log(e)
         }
     }
 
