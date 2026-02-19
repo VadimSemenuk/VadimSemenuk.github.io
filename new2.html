@@ -15,7 +15,7 @@
 
     <script>
         !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-        posthog.init('phc_2IP20ZvqI0Qj5F8g0YOAh88iRCa6UbRGyiDaj0lXyu6', {
+        posthog.init('phc_qWylk1jcPLn1jZUvJTbDYMarHOCn47nQUAxiq9RF3Qp', {
             api_host: 'https://eu.i.posthog.com',
             defaults: '2025-11-30',
             autocapture: false,
@@ -633,7 +633,7 @@
 
     // const _URL = "https://webhook.site/eab639ac-ab9c-450f-8e78-a1d4171e42f7";
 
-    const eventHandler = (redirectStart, visibilityAtStart, link) => {
+    const onVisibilityChange = (redirectStart, visibilityAtStart, link) => {
         if (visibilityAtStart === "hidden") return
 
         if (document.visibilityState === "hidden") {
@@ -641,8 +641,8 @@
             const diff = redirectEnd - redirectStart - 200
 
             if (diff > 1000) {
-                sendEvent(link.split(":")[0])
-                // fetch(_URL + "?schema=" + link.split(":")[0], { method: "GET", keepalive: true });
+                sendAppOpenEvent(link.split(":")[0])
+                incrementRedirectsCount()
             }
         }
     }
@@ -662,7 +662,7 @@
 
             setTimeout(() => {
                 let visibilityAtStart = document.visibilityState
-                document.addEventListener("visibilitychange", () => eventHandler(redirectStart, visibilityAtStart, link));
+                document.addEventListener("visibilitychange", () => onVisibilityChange(redirectStart, visibilityAtStart, link));
 
                 refresh(linkIndex + 1);
             }, 200)
@@ -685,7 +685,8 @@
     const runRedirectDefault = (links) => {
         const onVisibilityChange = () => {
             if (document.visibilityState === "hidden") {
-                sendEvent()
+                sendAppOpenEvent()
+                incrementRedirectsCount()
                 document.removeEventListener('visibilitychange', onVisibilityChange);
             }
         }
@@ -707,6 +708,7 @@
     }
 
     const onFinish = () => {
+        sendOutEventIfNeed()
         backOrClose()
     }
 
@@ -718,7 +720,24 @@
         }
     }
 
-    const sendEvent = (schema) => {
+    const sendInitEventIfNeed = () => {
+        const initEventWasSent = sessionStorage.getItem("initEventWasSent");
+        if (!initEventWasSent) {
+            sessionStorage.setItem("initEventWasSent", "true");
+
+            try {
+                posthog.capture(
+                    'init',
+                    { platform: DeviceDetector.isAppleMobile() ? "ios" : "android" },
+                    { send_instantly: true }
+                )
+            } catch(e) {
+                console.log(e)
+            }
+        }
+    }
+
+    const sendAppOpenEvent = (schema) => {
         try {
             posthog.capture(
                 'app_open',
@@ -730,7 +749,38 @@
         }
     }
 
+    const sendOutEventIfNeed = () => {
+        const redirectsCount = getRedirectsCount()
+        if (redirectsCount === 0) {
+            try {
+                posthog.capture(
+                    'app_was_not_opened',
+                    { platform: DeviceDetector.isAppleMobile() ? "ios" : "android" },
+                    { send_instantly: true }
+                )
+            } catch(e) {
+                console.log(e)
+            }
+        }
+        resetRedirectsCount()
+    }
+
+    const getRedirectsCount = () => {
+        return Number(sessionStorage.getItem("redirectsCount") || "0");
+    }
+
+    const incrementRedirectsCount = () => {
+        const redirectsCount = getRedirectsCount()
+        sessionStorage.setItem("redirectsCount", (redirectsCount + 1).toString())
+    }
+
+    const resetRedirectsCount = () => {
+        sessionStorage.removeItem("redirectsCount")
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
+        sendInitEventIfNeed()
+
         const urlParams = new URLSearchParams(window.location.search);
         const params = {
             amount: urlParams.get('amount'),
