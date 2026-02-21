@@ -374,6 +374,7 @@
                 "gymapp",
                 "weavet",
                 "wheels",
+                ...baseSchemas,
                 "clanstrix",
                 "catch",
                 "logapp",
@@ -410,8 +411,8 @@
                     schemas = schemas.filter(it => !["tinkoffbank", "bank100000000004"].includes(it))
                 }
             } else if (DeviceDetector.isAndroidMobile()) {
-                schemas = [...additionalSchemas, ...baseSchemas]
-
+                schemas = baseSchemas
+                // schemas = [...additionalSchemas, ...baseSchemas]
                 // schemas = [...baseSchemas, ...additionalSchemas]
             }
 
@@ -707,6 +708,7 @@
 
                 if (index === links.length - 1) {
                     setTimeout(() => {
+                        document.removeEventListener('visibilitychange', onVisibilityChange);
                         onFinish();
                     }, 10000)
                 }
@@ -730,6 +732,8 @@
 
     const sendInitEventIfNeed = () => {
         const initEventWasSent = sessionStorage.getItem("initEventWasSent");
+        console.log('sendInitEventIfNeed: ' + initEventWasSent)
+
         if (!initEventWasSent) {
             sessionStorage.setItem("initEventWasSent", "true");
 
@@ -766,6 +770,8 @@
 
     const sendOutEventIfNeed = () => {
         const redirectsCount = getRedirectsCount()
+        console.log('sendOutEventIfNeed: ' + redirectsCount)
+
         if (redirectsCount === 0) {
             try {
                 posthog.capture(
@@ -793,10 +799,12 @@
     }
 
     const resetRedirectsCount = () => {
+        console.log('resetRedirectsCount')
         sessionStorage.removeItem("redirectsCount")
     }
 
     const resetInitEventWasSent = () => {
+        console.log('resetInitEventWasSent')
         sessionStorage.removeItem("initEventWasSent")
     }
 
