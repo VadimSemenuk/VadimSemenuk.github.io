@@ -420,6 +420,8 @@
                 mapper = (schema) => `${schema}://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`
             }
 
+            console.log(schemas)
+
             return schemas.map(mapper);
         }
         // endregion
