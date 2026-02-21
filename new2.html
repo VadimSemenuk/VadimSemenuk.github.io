@@ -6,6 +6,7 @@
     <title>App redirect</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="">
+    <meta name="referrer" content="no-referrer">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -46,7 +47,7 @@
         }
 
         .qr-code-container {
-            height: 100vh;
+            height: 100dvh;
             width: 100vw;
             padding: 30px;
             display: flex;
@@ -709,6 +710,7 @@
 
     const onFinish = () => {
         sendOutEventIfNeed()
+        resetInitEventWasSent()
         backOrClose()
     }
 
@@ -776,6 +778,10 @@
 
     const resetRedirectsCount = () => {
         sessionStorage.removeItem("redirectsCount")
+    }
+
+    const resetInitEventWasSent = () => {
+        sessionStorage.removeItem("initEventWasSent")
     }
 
     document.addEventListener('DOMContentLoaded', () => {
