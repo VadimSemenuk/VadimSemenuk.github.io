@@ -691,28 +691,28 @@
     }
 
     const runRedirectDefault = (links) => {
-        const onVisibilityChange = () => {
-            if (document.visibilityState === "hidden") {
-                sendAppOpenEvent()
-                incrementRedirectsCount()
-                document.removeEventListener('visibilitychange', onVisibilityChange);
-            }
-        }
-
-        document.addEventListener("visibilitychange", onVisibilityChange);
+        // const onVisibilityChange = () => {
+        //     if (document.visibilityState === "hidden") {
+        //         sendAppOpenEvent()
+        //         incrementRedirectsCount()
+        //         document.removeEventListener('visibilitychange', onVisibilityChange);
+        //     }
+        // }
+        //
+        // document.addEventListener("visibilitychange", onVisibilityChange);
 
         links.forEach((item, index) => {
             setTimeout(() => {
-                window.open(item)
-                // window.location.href = item;
-                updateProgress(index + 1, links.length);
-
-                if (index === links.length - 1) {
-                    setTimeout(() => {
-                        document.removeEventListener('visibilitychange', onVisibilityChange);
-                        onFinish();
-                    }, 10000)
-                }
+                // window.open(item)
+                window.location.href = item;
+                // updateProgress(index + 1, links.length);
+                //
+                // if (index === links.length - 1) {
+                //     setTimeout(() => {
+                //         document.removeEventListener('visibilitychange', onVisibilityChange);
+                //         onFinish();
+                //     }, 10000)
+                // }
             }, index * 500)
         })
     }
