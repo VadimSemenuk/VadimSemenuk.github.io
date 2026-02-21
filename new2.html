@@ -631,6 +631,7 @@
 
             runRedirectIOS(links, params.linkIndex)
         } else {
+            resetRedirectsCount()
             resetInitEventWasSent()
             sendInitEventIfNeed()
             resetInitEventWasSent()
@@ -710,7 +711,7 @@
                     setTimeout(() => {
                         document.removeEventListener('visibilitychange', onVisibilityChange);
                         onFinish();
-                    }, 10000)
+                    }, 3000)
                 }
             }, index * 500)
         })
