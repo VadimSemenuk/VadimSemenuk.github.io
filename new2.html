@@ -374,7 +374,6 @@
                 "gymapp",
                 "weavet",
                 "wheels",
-                ...baseSchemas,
                 "clanstrix",
                 "catch",
                 "logapp",
@@ -411,9 +410,7 @@
                     schemas = schemas.filter(it => !["tinkoffbank", "bank100000000004"].includes(it))
                 }
             } else if (DeviceDetector.isAndroidMobile()) {
-                schemas = additionalSchemas
-                // schemas = [...additionalSchemas, ...baseSchemas]
-                // schemas = [...baseSchemas, ...additionalSchemas]
+                schemas = [...baseSchemas, ...additionalSchemas]
             }
 
             let mapper
@@ -422,8 +419,6 @@
             } else {
                 mapper = (schema) => `${schema}://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`
             }
-
-            console.log(schemas)
 
             return schemas.map(mapper);
         }
@@ -629,16 +624,17 @@
         if (!params.amount || !params.to) return
 
         const links = new LinksHelper().getLinks(params.bank, params.amount, params.to, params.countryCode, params.targetBank)
+        if (links.length === 0) return
 
-        if (links.length > 0 && links[0].startsWith("https://")) {
+        if (DeviceDetector.isAppleMobile() && !links[0].startsWith("https://")) {
             sendInitEventIfNeed()
-            runRedirectDefault(links)
-        } else if (DeviceDetector.isAppleMobile()) {
-            sendInitEventIfNeed()
+
             runRedirectIOS(links, params.linkIndex)
         } else {
+            resetInitEventWasSent()
             sendInitEventIfNeed()
             resetInitEventWasSent()
+
             runRedirectDefault(links)
         }
     }
@@ -695,41 +691,38 @@
     }
 
     const runRedirectDefault = (links) => {
-        // const onVisibilityChange = () => {
-        //     if (document.visibilityState === "hidden") {
-        //         sendAppOpenEvent()
-        //         incrementRedirectsCount()
-        //         document.removeEventListener('visibilitychange', onVisibilityChange);
-        //     }
-        // }
-        //
-        // document.addEventListener("visibilitychange", onVisibilityChange);
+        const onVisibilityChange = () => {
+            if (document.visibilityState === "hidden") {
+                sendAppOpenEvent()
+                incrementRedirectsCount()
+                document.removeEventListener('visibilitychange', onVisibilityChange);
+            }
+        }
+
+        document.addEventListener("visibilitychange", onVisibilityChange);
 
         links.forEach((item, index) => {
             setTimeout(() => {
-                // window.open(item)
                 window.location.href = item;
-                // updateProgress(index + 1, links.length);
-                //
-                // if (index === links.length - 1) {
-                //     setTimeout(() => {
-                //         document.removeEventListener('visibilitychange', onVisibilityChange);
-                //         onFinish();
-                //     }, 10000)
-                // }
+                updateProgress(index + 1, links.length);
+
+                if (index === links.length - 1) {
+                    setTimeout(() => {
+                        document.removeEventListener('visibilitychange', onVisibilityChange);
+                        onFinish();
+                    }, 10000)
+                }
             }, index * 500)
         })
     }
 
     const onFinish = () => {
-        // sendOutEventIfNeed()
-        // resetInitEventWasSent()
-        // backOrClose()
+        sendOutEventIfNeed()
+        resetInitEventWasSent()
+        backOrClose()
     }
 
     const backOrClose = () => {
-        console.log("backOrClose")
-
         if (window.history.length > 1) {
             window.history.back();
         } else {
@@ -739,7 +732,6 @@
 
     const sendInitEventIfNeed = () => {
         const initEventWasSent = sessionStorage.getItem("initEventWasSent");
-        console.log('sendInitEventIfNeed: ' + initEventWasSent)
 
         if (!initEventWasSent) {
             sessionStorage.setItem("initEventWasSent", "true");
@@ -777,7 +769,6 @@
 
     const sendOutEventIfNeed = () => {
         const redirectsCount = getRedirectsCount()
-        console.log('sendOutEventIfNeed: ' + redirectsCount)
 
         if (redirectsCount === 0) {
             try {
@@ -806,12 +797,10 @@
     }
 
     const resetRedirectsCount = () => {
-        console.log('resetRedirectsCount')
         sessionStorage.removeItem("redirectsCount")
     }
 
     const resetInitEventWasSent = () => {
-        console.log('resetInitEventWasSent')
         sessionStorage.removeItem("initEventWasSent")
     }
 
