@@ -631,10 +631,14 @@
         const links = new LinksHelper().getLinks(params.bank, params.amount, params.to, params.countryCode, params.targetBank)
 
         if (links.length > 0 && links[0].startsWith("https://")) {
+            sendInitEventIfNeed()
             runRedirectDefault(links)
         } else if (DeviceDetector.isAppleMobile()) {
+            sendInitEventIfNeed()
             runRedirectIOS(links, params.linkIndex)
         } else {
+            sendInitEventIfNeed()
+            resetInitEventWasSent()
             runRedirectDefault(links)
         }
     }
@@ -718,9 +722,9 @@
     }
 
     const onFinish = () => {
-        sendOutEventIfNeed()
-        resetInitEventWasSent()
-        backOrClose()
+        // sendOutEventIfNeed()
+        // resetInitEventWasSent()
+        // backOrClose()
     }
 
     const backOrClose = () => {
@@ -830,8 +834,6 @@
         }
 
         idParams = params.idParams
-
-        sendInitEventIfNeed()
 
         setupUI(params)
 
