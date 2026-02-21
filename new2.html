@@ -703,7 +703,8 @@
 
         links.forEach((item, index) => {
             setTimeout(() => {
-                location.href = item;
+                window.open(item)
+                // window.location.href = item;
                 updateProgress(index + 1, links.length);
 
                 if (index === links.length - 1) {
