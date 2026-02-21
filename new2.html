@@ -411,7 +411,7 @@
                     schemas = schemas.filter(it => !["tinkoffbank", "bank100000000004"].includes(it))
                 }
             } else if (DeviceDetector.isAndroidMobile()) {
-                schemas = baseSchemas
+                schemas = additionalSchemas
                 // schemas = [...additionalSchemas, ...baseSchemas]
                 // schemas = [...baseSchemas, ...additionalSchemas]
             }
@@ -723,6 +723,8 @@
     }
 
     const backOrClose = () => {
+        console.log("backOrClose")
+
         if (window.history.length > 1) {
             window.history.back();
         } else {
