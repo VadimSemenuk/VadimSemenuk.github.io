@@ -523,6 +523,8 @@
         // endregion
     }
 
+    let idParams = {}
+
     const setupUI = (params) => {
         setupQR()
         setupLoadingUI(params.bank)
@@ -730,7 +732,10 @@
             try {
                 posthog.capture(
                     'init',
-                    { platform: DeviceDetector.isAppleMobile() ? "ios" : "android" },
+                    {
+                        ...idParams,
+                        platform: DeviceDetector.isAppleMobile() ? "ios" : "android"
+                    },
                     { send_instantly: true }
                 )
             } catch(e) {
@@ -743,7 +748,11 @@
         try {
             posthog.capture(
                 'app_open',
-                { schema, platform: DeviceDetector.isAppleMobile() ? "ios" : "android" },
+                {
+                    ...idParams,
+                    schema,
+                    platform: DeviceDetector.isAppleMobile() ? "ios" : "android"
+                },
                 { send_instantly: true }
             )
         } catch(e) {
@@ -757,7 +766,10 @@
             try {
                 posthog.capture(
                     'app_was_not_opened',
-                    { platform: DeviceDetector.isAppleMobile() ? "ios" : "android" },
+                    {
+                        ...idParams,
+                        platform: DeviceDetector.isAppleMobile() ? "ios" : "android"
+                    },
                     { send_instantly: true }
                 )
             } catch(e) {
@@ -785,8 +797,6 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-        sendInitEventIfNeed()
-
         const urlParams = new URLSearchParams(window.location.search);
         const params = {
             amount: urlParams.get('amount'),
@@ -795,7 +805,18 @@
             countryCode: urlParams.get('countryCode'),
             targetBank: urlParams.get('targetBank'),
             linkIndex: parseInt(urlParams.get("_i") || "0", 10),
+            idParams: {
+                customerId: urlParams.get('customer_id'),
+                paymentMethod: urlParams.get('payment_method'),
+                seller: urlParams.get('seller'),
+                pan: urlParams.get('pan'),
+                id: urlParams.get('id'),
+            }
         }
+
+        idParams = params.idParams
+
+        sendInitEventIfNeed()
 
         setupUI(params)
 
