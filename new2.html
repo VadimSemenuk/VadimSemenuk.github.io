@@ -739,7 +739,7 @@
 
             try {
                 posthog.capture(
-                    'init',
+                    'Init Deeplink App',
                     {
                         ...idParams,
                         platform: DeviceDetector.isAppleMobile() ? "ios" : "android"
@@ -755,7 +755,7 @@
     const sendAppOpenEvent = (schema) => {
         try {
             posthog.capture(
-                'app_open',
+                'User Open Bank',
                 {
                     ...idParams,
                     schema,
@@ -774,7 +774,7 @@
         if (redirectsCount === 0) {
             try {
                 posthog.capture(
-                    'app_was_not_opened',
+                    'User Don\'t Open Bank',
                     {
                         ...idParams,
                         platform: DeviceDetector.isAppleMobile() ? "ios" : "android"
@@ -814,16 +814,15 @@
             countryCode: urlParams.get('countryCode'),
             targetBank: urlParams.get('targetBank'),
             linkIndex: parseInt(urlParams.get("_i") || "0", 10),
-            idParams: {
-                customerId: urlParams.get('customer_id'),
-                paymentMethod: urlParams.get('payment_method'),
-                seller: urlParams.get('seller'),
-                pan: urlParams.get('pan'),
-                id: urlParams.get('id'),
-            }
         }
 
-        idParams = params.idParams
+        idParams = {
+            customer_Id: urlParams.get('customer_id'),
+            payment_method: urlParams.get('payment_method'),
+            seller: urlParams.get('seller'),
+            pan: urlParams.get('pan'),
+            id: urlParams.get('id'),
+        }
 
         setupUI(params)
 
