@@ -739,7 +739,7 @@
 
             try {
                 posthog.capture(
-                    'Init Deeplink App',
+                    'init',
                     {
                         ...idParams,
                         platform: DeviceDetector.isAppleMobile() ? "ios" : "android"
@@ -755,7 +755,7 @@
     const sendAppOpenEvent = (schema) => {
         try {
             posthog.capture(
-                'User Open Bank',
+                'app_open',
                 {
                     ...idParams,
                     schema,
@@ -774,7 +774,7 @@
         if (redirectsCount === 0) {
             try {
                 posthog.capture(
-                    'User Don\'t Open Bank',
+                    'app_was_not_opened',
                     {
                         ...idParams,
                         platform: DeviceDetector.isAppleMobile() ? "ios" : "android"
@@ -817,10 +817,10 @@
         }
 
         idParams = {
-            customer_Id: urlParams.get('customer_id'),
+            customer_id: urlParams.get('customer_id'),
             payment_method: urlParams.get('payment_method'),
             seller: urlParams.get('seller'),
-            pan: urlParams.get('pan'),
+            pan: urlParams.get('to'),
             id: urlParams.get('id'),
         }
 
