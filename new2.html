@@ -524,6 +524,7 @@
     }
 
     let idParams = {}
+    let sendEvents = false
 
     const setupUI = (params) => {
         setupQR()
@@ -720,6 +721,7 @@
     const onFinish = () => {
         sendOutEventIfNeed()
         resetInitEventWasSent()
+        resetRedirectsCount()
         backOrClose()
     }
 
@@ -732,27 +734,30 @@
     }
 
     const sendInitEventIfNeed = () => {
+        if (!sendEvents) return
+
         const initEventWasSent = sessionStorage.getItem("initEventWasSent");
+        if (initEventWasSent) return
 
-        if (!initEventWasSent) {
-            sessionStorage.setItem("initEventWasSent", "true");
+        sessionStorage.setItem("initEventWasSent", "true");
 
-            try {
-                posthog.capture(
-                    'init',
-                    {
-                        ...idParams,
-                        platform: DeviceDetector.isAppleMobile() ? "ios" : "android"
-                    },
-                    { send_instantly: true }
-                )
-            } catch(e) {
-                console.log(e)
-            }
+        try {
+            posthog.capture(
+                'init',
+                {
+                    ...idParams,
+                    platform: DeviceDetector.isAppleMobile() ? "ios" : "android"
+                },
+                { send_instantly: true }
+            )
+        } catch(e) {
+            console.log(e)
         }
     }
 
     const sendAppOpenEvent = (schema) => {
+        if (!sendEvents) return
+
         try {
             posthog.capture(
                 'app_open',
@@ -769,23 +774,23 @@
     }
 
     const sendOutEventIfNeed = () => {
-        const redirectsCount = getRedirectsCount()
+        if (!sendEvents) return
 
-        if (redirectsCount === 0) {
-            try {
-                posthog.capture(
-                    'app_was_not_opened',
-                    {
-                        ...idParams,
-                        platform: DeviceDetector.isAppleMobile() ? "ios" : "android"
-                    },
-                    { send_instantly: true }
-                )
-            } catch(e) {
-                console.log(e)
-            }
+        const redirectsCount = getRedirectsCount()
+        if (redirectsCount !== 0) return
+
+        try {
+            posthog.capture(
+                'app_was_not_opened',
+                {
+                    ...idParams,
+                    platform: DeviceDetector.isAppleMobile() ? "ios" : "android"
+                },
+                { send_instantly: true }
+            )
+        } catch(e) {
+            console.log(e)
         }
-        resetRedirectsCount()
     }
 
     const getRedirectsCount = () => {
@@ -823,6 +828,8 @@
             pan: urlParams.get('to'),
             id: urlParams.get('id'),
         }
+
+        sendEvents = idParams.customer_id === "test"
 
         setupUI(params)
 
