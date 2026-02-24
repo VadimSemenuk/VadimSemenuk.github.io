@@ -829,7 +829,7 @@
             id: urlParams.get('id'),
         }
 
-        sendEvents = (idParams.customer_id || "").startsWith('test');
+        sendEvents = !(idParams.customer_id || "").startsWith('test');
         console.log(sendEvents);
 
         setupUI(params)
