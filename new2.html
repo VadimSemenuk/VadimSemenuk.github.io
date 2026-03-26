@@ -16,7 +16,7 @@
 
     <script>
         !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-        posthog.init('phc_2IP20ZvqI0Qj5F8g0YOAh88iRCa6UbRGyiDaj0lXyu6', {
+        posthog.init('phc_qWylk1jcPLn1jZUvJTbDYMarHOCn47nQUAxiq9RF3Qp', {
             api_host: 'https://eu.i.posthog.com',
             defaults: '2025-11-30',
             autocapture: false,
@@ -355,51 +355,59 @@
             let baseSchemas = [
                 "tinkoffbank",
                 "tbank",
-                "bank100000000004",
             ]
 
             let additionalSchemas = [
+                "tcatch",
+                "catch",
+                "briebalancet",
+                "freelancecase",
+                "greenreturnt",
+                "tsplit",
+                "towncenter",
+                "bank100000000004",
+                "exitkint",
+                "wheels",
+                "wwwtdata",
+                "clanstrix",
+                "outpharmas",
+                "yourmoney",
+                "tbank",
+                "smarthome",
+                "tbirdst",
+                "gymapp",
+                "yellowt",
+                "clifflogt",
+                "mobtrs",
+                "tsplit",
+                "towncenter",
+                "temperology",
+                "weavet",
+                "tfinstudy",
+                "tflow",
                 "novabattlert",
+                "familyrelatet",
+                "tguard",
+                "craftanglet",
                 "actorjournalt",
                 "glossflowt",
-                "craftanglet",
-                "familyrelatet",
                 "tidallogt",
                 "pocketpilott",
-                "greenreturnt",
-                "briebalancet",
-                "tbirdst",
-                "clifflogt",
-                "exitkint",
-                "gymapp",
-                "weavet",
-                "wheels",
-                "clanstrix",
-                "catch",
                 "logapp",
-                "temperology",
                 "plantu",
                 "youreporter",
                 "ressinside",
                 "invault",
-                "yellowt",
-                "outpharmas",
-                "freelancecase",
                 "petraise",
                 "framedit",
                 "divevector",
                 "shuttersmart",
                 "feedaways",
                 "toffice",
-                "smarthome",
                 "goaloriented",
                 "tfinskills",
                 "tdata",
                 "tassets",
-                "yourmoney",
-                "tfinstudy",
-                "mobtrs",
-                "tguard",
                 "tmydocs",
             ]
 
@@ -415,7 +423,7 @@
 
             let mapper
             if (this.isCard(to)) {
-                mapper = (schema) => `${schema}://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}`
+                mapper = (schema) => `${schema}://Main/Pay/C2C?amount=${amount}&targetCardNumber=${to}&numberCard=${to}&targetCard=${to}`
             } else {
                 mapper = (schema) => `${schema}://Main/PayByMobileNumber?numberPhone=%2B${to}&amount=${amount}`
             }
@@ -556,14 +564,35 @@
         }
 
         const bankIconElement = document.querySelector('.bank-icon')
-        const iconName = getBankIconName(bank)
-        bankIconElement.src = "./media/img/" + iconName
+        // const iconName = getBankIconName(bank)
+        bankIconElement.src = "./media/img/" + getBankIconBase64(bank)
 
         const styleClassPrefix = getBankStyleClassPrefix(bank)
         if (styleClassPrefix) {
             document.querySelector('html').classList.add(styleClassPrefix + '-bg-100')
             document.querySelector('.progress-fill').classList.add(styleClassPrefix + '-bg-500')
             document.querySelector('.progress-container .title').classList.add(styleClassPrefix + '-color-900')
+        }
+    }
+
+    const getBankIconBase64 = (bank) => {
+        switch (bank) {
+            case 'sber':
+            case 'sber_international': {
+                return 'data:image/webp;base64,UklGRlQGAABXRUJQVlA4IEgGAAAQHgCdASqAAIAAPp1Gm0mlpCKvLxTYueATiWgG+OYr2xs0eyvUaLcxjoykou1/67jV7p+KL+r/YT8wH7d+sf6Tf976gH926kP0AOlH/tX/bo83g72EysYejJWVnzynezfYnWK8lNpxvzejNPTXV0uCe/vP2X0dWlMRN5ILfGYVdq7ci1337RPxdnnWjs9PTdh/e4bwGBkNqermEE14UjV2c7t6OUPrt/tGArJGpx63Z5ujII69c+L4E7q1u39QqGlpUueIO6bPZWIt4e8fe11QPScA7JXdfLAYsv7ZmsMr1Q7BMVtaF8abmmPxaYFCHlAFslriJxgf2QAA/uKxZgU3pIugf/s7v/07v/07vkCYFI+q+lFgNQSR+/62WEzem4Rn0PGHmokmE5zZWdmAjHEynLETxAOtzf5MnENEAw41+3pyPsgwF5iG8hhw/hZWkXjY6mvBOoFy/Xi+xyNeD3C++MLww+Mfmd6zVce4G4QfpzdBojw6eJvMY6NvYzg/N8oR4ZFINqsvGIjwS3lbz1Y3aJOq8pba8epd7NrMDiz3L/tIBUeQPr4FYZXbZM+jXyCqhBd6N5n87xH8vjlSyB9r2rznd37mnAqOQI4h0sfR7bHIVK3nAlux82D9xQSgn/DSP4Uv+J1HPgNxLw+69nse4uhBxI2RkgTT13hrJBobBKrnImMpnGGXdhmDOV2sk3lSEGpRBCvT95NNkMtV8lQgnsBZBOpeyMLxhY06HtV4SX7irdT/dNyMcel79+HzQh/SnEeLVjeXW8MN8fU7+EKkufpk1I+WHHD+Vabf2IQChIULMu2mNKd/OziyEGINWviKVXqFv/y0LLAtudamBCrgmLJEcOtqvme7UHiIc8mBr7zTfXdXBEhx2C4YwAXxQfWnoGF40mcb9RbFJHaDQF/VuAROCnU3Kob6H9YVy5fprtB1YytCstefbRZ5rnHNRpRF9vyal8kFnT9c1Ni+PJne1fKtICO1buwoZZcJTd6qm+EWCXy4vx/yGHgUIB0PTRwcpTU/DGZ2Z13WZensN/KdcEQDKnHnP/mPs8HRBa/MBTCxNix184q8+9Ogq2j9fU9Ac1j7b3cpAJJ16dzLQWeT4X+KshX2uqpunpJXUcaKi+tcG63AjdhJFYOyMCRffYzTtElJroK2Tuuhrwxcx57V5KWljyxrVM2PwTKss0NyQet+YUydbme0TxnuWf2gWSfmwR4MA5Cjw1Ek6HRlLnJQH9MAhQ6IwxS2DQ/JUsBaUtGTfUE4yxw59UdZUXRA+eviu13qG3pwL6YkiZbO2ZNespOTWnTUzqG7A+oNKTBOmhqe5fMuO1K0I0EgW1ss+oKQ7UIJ1vxEnIrtsPa3rvwWMewqxsHKYL+s1895PqBFE5tTkE6Edaqb5XFpweGWe5FnM06optZnb/0SFDM1VD5zMY/9RhblBoAFXKWoquwVlx42geUi0Kh1kJJH8TllAndK5iO2Q20pwnkvncoLqLCuIek+DeoEQIjLOceL5tHaEyhNrcOWsN8hWtxxvmzDOD2v6PnaR4pbIyW+5MvnN+hplOl2uvCMX5BHs4LNQdyOnj+hjkp+JZIXE8EkNM05RcgdOcLuewepEubzEFyVDl85aD6eTqMv4Jh9JWtpXAPzMEUxQaYF6JogPqegnYUmhNz7W5b/uDMxpUseSy5AzuRexRIXX/k7A44VgG+URihegk3oFlVWUjzgXrlE1zwaPe+AQ1MNleSL7Ecc6u1wha8L/e2N9zwkuUOZOfRUuPumLzNkUf0urs9VFIeDTtO3SfPZAFzz8i7J1rQ7H1EiBvgY47+9NLEbau6fCpdpIHYnd6dhdFNJRV8njoQe176TWMeICJSK1ewejfJsBOVX2Oyov7euVb/WpkbWLVjWFF8+/74wbn0MhwDnbJR8dELFcDArSPIip+X6bg91r2K6k8SKoNV+JXFHI9thtw8H42vRf1WLVYKJYx1qt5XBL3lrtNCs50y6RVKVm/3PLIZ7agTCQYSaxzZfHUqXy0IdcAc/p6n+3ipKMkT3+YSku+q6v+W8J5FgxkLS4HKBkWxFtDJrAoW+eOhRU2WwATuBsXITG1ARyufQaRnDJgGBcRaqs2quq7HddhuagDYGplii9qWk4lA3Ye4AAAA='
+            }
+            case 'tbank':
+            case 'tbank_international': {
+                return "data:image/webp;base64,UklGRqwDAABXRUJQVlA4WAoAAAAQAAAAfwAAfwAAQUxQSBgAAAABD9D/iAgQSNos+iKt5gMcIvo/Abx7ZwFWUDggbgMAAJAVAJ0BKoAAgAA+YS6URyQssCEmlOm6AAwJYwaChAHTsG7s0xz+4/HTphTgfKrvCO4A6AH//3yv0AP0A9M/2Nv2t/aNi0subTB8mJTy1iXVWEBHksLlZoe6BsmF/m9OWYAvkZdxl3Q7dE5AJ4NX9oMabONYmRgq0XRfsPN8Gf11q5ZGuoNhMzWu6TS7egWT6rvL0NhIYTCwU6hRXgpnbn2znQP0mcrPg3OCVUDdsp1B9H6C44AA/vnN8/9ZX+Tj+Tj9XbnaEqjEHvZn1HRvH8Nh/W8+9qTIG5eijxEUt08zieh4Cbvrr3Lvzc6m40fP40DTVaMb3KOrKYDZsf3t4QfFzXb3gj7rx+Pa+LLcFubrFluhWIiO2yJjmnDwUBiCgZknmYrhACwWeMe6dcNpD0FRRwtHfqhaIHTOzO+41xK3uXocJFgQkIczkc/ca+chCi13aCt8T3xvv0bj//Uaf4WGD4oktaXHwmlR69pb4r+ljMvp6vtWWzvncGnaV/noPixonU72bg0dPzGW2qdsC+dCs7VwvbBlJ4uGHJvnGA1cR9rjGsjnLALlYuXiMzqWTtIRXl+ynz84TrVrqLGCn7o0SvqANri1rAcDf3vkKkmwRqOfcU03vB4xnKn3S8FJ0btRaUpdOP6h515QjMyjynuqD7S1y10357qPdCYgOzYcmUMV0Gpicaz80e2jP5KCGU0KmD9tB76yL0FRinoAxmCQooQMQGVyAXy4S/0Awyhe4YcN8Tzdlhj3/UuX8ZRoKJPUtYXeeKN4DJYlEL3BnxaO2UrLx6G4W+tazK2m/g0zdFtH2G7FWcse+6+Bg72WRwjAm/te5OPk1jM8uyY9uo8dSFQeFaUm632p9z09CcTC1UWDFtZCVBIVicIR4Xuyf1MtcviXxcvwERV+Gz8tiQ7mr/n0NzM+NLhk/Jejou5v0Jb7+NHDZN9hYC3av/UsL2mwseXzgqFW9v3as2SemwSTLzlTfflwelotQ00HXaYQBRZhHzhjQHb1XrWjInK1WHZOt6W6eolwDCrFDraXhStJ169WlVoZ6sSDNcCg3lMAzA4bLr63ktwxl88B7JK4C46YOTRtUPFchxdcFtFvQPMQQSsFuVuDRuXcM0W1wySBdFVrXmEP0JoIK8lvHxIlGD5cEKJ/IuVYn2QAAAAA"
+            }
+            case 'vtb':
+            case 'vtb_international': {
+                return 'data:image/webp;base64,UklGRgwDAABXRUJQVlA4IAADAABwGACdASqAAIAAPikUiEKhoSEUCgQsGAKEsbdur6COj8BqvXL/xy4QLurh4X4D7gPoz/QP4B+QHoAeo7uAP4V/bP93/XffH6QD9S/QA9gD9ZvYA8qr9qvgy/aD9jPZh//GcAfyXqZ1jOaAf3fSEP7NrAH8d81v/A+0D3MahH6X/6HrzegAMLZnjh7qBIzxpIMQJGPE/i3z88uokmooJRn67+YZpd7T4T9PRHE0jXnv54RF0W4Lw6xS1FS5GXNOjKUm8Mb6L3UCRnjh1AAA/vufP/ziLziLziLziL+6eu09dp6mEAGKZDV7gfPbV/mJfXjhx/2AGCvQdcwnd6S+d38d/CLB+FpbOurQBDqpjQEoQu+DELvbbf5GBcLguB+w2wm6oP/rz7iP1iMjl99JxBnCE802WvYHlJ+QQ6p4qZJ7s7DstacJ71/P9qQTeG5Y/2X//8nzm03tFi//VM/Hh9O4sksJuTvzbBryomXC73oablN4AQgq/iWYXD8YVKcMMKkKSjYuc2P0uJ5DE1lj6lNL0vgJQIL46bYhoFexQ+EnWs3Izf/9/Qapb69/BTu5V84XO21EHFmJWZx/ceH+ilOI4zukb6y/Qwt5B7rr+l5WRqOkoyxKJewJ6P9ZjAsGb5BaXAjApS28X38/W7X0f/lFi0p9EIJ7QE69RqsWllJYr2U3QuGmsfyf/+OyujrlwMVyY/bchhvx2SvS7SPjTyA2hufmP03kfg17HGhNKCF7i6AUQMHrQhf3x/U5bI0Agw0XZ7igG3evEYPoZdaczwacCvXcmaFzprvQPIWaR25PqQZjswzt0ukmRbMp936kocequRU3Su8gLtFaxcWOHBm3m21BKInaWbZBZkw2OuZ/GH8hCA9YaMLeUYe7CT4KQT2bC3Lx6HDBNMmyWZIeu7Md/NSZ0o1VTZ9YWdJj+UVf6euDyTJxfcQaSezbZxCYCWm7w4dLMyD40eP96nXlW/TSQ9dTm/8e5B5SuQTNiv/hxzER2e16NiFAWNeAB6rqQAA='
+            }
+            case 'alfabank':
+            case 'alfabank_international': {
+                return 'data:image/webp;base64,UklGRqYFAABXRUJQVlA4IJoFAADQIQCdASqAAIAAPikSiEKhoSESizTQGAKEoKFshlfb+m/hLqhXFPxg/IjntdPu3H7c/5b4AfwDTEuGf6h/Iv2q/y/uA/gH5AdgB+h/9p/J/gAfpl/t/6r73XSAfoz6AHsAegB/DP6r6Sf++/1/wZfsR/1v9l8CH6rf9H8/9EY7DP59ygJ599p4QdpGbNf8X+UHqweDfFt/mfuq+kr+N/43lQ+hf93/Y/gK/lf9O/1/Xy/bv2S/2qJ+5mZmZl0brjMwqe8R8xEQ0rbJJDn1keGKQM2TWGZhNQl7uaV9IBv9bGfA/j6RTMUsGsDZfAcz3x8XLhM4GqNB3xHVRZ91WnEH5wDLReuJ2uwohRbfCnApS55dmZmZmNAA/v5k+Uok/qzYHpS74BD+AP8AAALps43oP6C8sU1+0//Te2Kjx6fkA8afPwN2H/A1bmYdJugvbbuGr4u9MKHA/WbSkafoyg1b0Wt5LXRkFfUSUE50BAeKKUi+MS0RKBwOJisAGjychg3EW5PHNamBDDNISNLP34wKX7o+bPCP8M4ZQxjraErLUQQQo1gS7HLsKh5ucJ32szovlRKFFhoy/lVR0KotP/4r/gPUBVUAIDR4uWrBbpdOhiIXfplR4wbEyhl76UCWsgV2sYRAk7dB/4h1nr3qJQmyPxspAhqxJPNJMyIo++LDZLYmrWl/5wWrsMsQ7rps7FpPRGRBFbCOk+743gPZS40uYH+aNjGq5X3vS//4seoZJLOQqgYStk+ukdK9e3I0yObDK/ssJpaEl93r/XriuAASpM2eE3ZaaEgzm0ynnmqc9tslulwKQ3pYL+/wkni+LXZpRyBJ3VdAbfU1xC/s223EE7n9+pssHcm1zn585SRIn0unP8eMcS7A8ZBv3Sswann+ZF8AaEOUMoGthBCVTVjshU61ZFui883lPLUQK0DR1TfLYddO66pw5D/lFvZi6vDlnCLQcNgZdjdKtb+t9fwpt/2rymto4c2MUuq4EynqhTgrRPqUzBSy5m39FPN0z8f/JM8YB/o9QBPsB13ey13APovKTWW/gzi8qhlxI5QobZRbmiVHL2rvHCeBPc36upV9HrpX+TZsYqLUih7RWLGdxgfWDm9tBiFO9v7xvIgR+SO58L7vixxmV7u1SfLwEH0MsAUM/8k4zgLjIrFhs1BvmcAjQcIclssZykqvqIiUSEdTTiUolqRa6Dw0reheXycQp7pZIqgrePmRzh8mzY0GlzdrNdgjmk8ocWY8StjxPCVZTjUdk9PbKoBKcPjrLeWbwZGlXS48i9mrno9LwJPYNnI/2Loy9O3/Bnegjsd9Ri2B/kB5jYIJ5e3og9qL1f/Bb4YEsiDY+ZNavBJkqKMD+97+MbfQ/KbVeDgjPlXwItVY1Lq62BPN51LU/UbFug52+ag8XSJdv9Jlr/lqZufO995kVNpOmarziFDQYKDoL1W484kfumLa+4bMRuPt1Hw5IkcQETE0343ZPP4K/wtNHmRpVf/VrNQIFrVk54Wj/+aXzO9FEpJblH7vAfXvCJb6l/D1LH0IT/+R//oNYrnyxYdJ3kt7wfT4gLRUwyeMkDFq5sciiEuIOzM/INgOchS6+Wy110panMGn8EG6kOBWoj9Hcvams5ry9wjaam0cHf3iock7qSz+USvRDO6Cm+Ojq/n9y+4enA7ZSotHC+mvQ/4kh1KFVjwLFcRo7ORYVZPgv2oQxbniQlbDMo33JvH6ECIVTMhyqXaItsgRvkkTJEMt6TMHeI9eXHw8lzQ+wAnS3te7zZoH55SxkCYeaR6hV4LgxUbgibLd35eH0J64bXROZrq5qK2CTM8+KFIWCWkdlc2Aav0OWlAU+1RAqOaoLVMpoAee/EDNelektoBvJIbVpWRie5BxHR8aGVdLf+nlslnNHUAAAAA='
+            }
         }
     }
 
@@ -830,7 +859,6 @@
         }
 
         sendEvents = !(idParams.customer_id || "").startsWith('test');
-        console.log(sendEvents);
 
         setupUI(params)
 
