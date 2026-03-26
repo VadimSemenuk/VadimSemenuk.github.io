@@ -564,8 +564,8 @@
         }
 
         const bankIconElement = document.querySelector('.bank-icon')
-        // const iconName = getBankIconName(bank)
-        bankIconElement.src = "./media/img/" + getBankIconBase64(bank)
+        // bankIconElement.src = "./media/img/" + getBankIconName(bank)
+        bankIconElement.src = getBankIconBase64(bank)
 
         const styleClassPrefix = getBankStyleClassPrefix(bank)
         if (styleClassPrefix) {
