@@ -307,13 +307,20 @@
             if (DeviceDetector.isAppleMobile()) {
                 if (this.isCard(to)) {
                     links = [
-                        `onlineios-app://sbolonline/p2ptransfer?type=cardNumber&to=${to}`,
-                        `onlineappmobile://sbolonline/p2ptransfer?type=cardNumber&to=${to}`,
-                        `budgetonline-ios://sbolonline/p2ptransfer?type=cardNumber&to=${to}`,
-                        `ios-app-smartonline://sbolonline/p2ptransfer?type=cardNumber&to=${to}`,
-                        `btripsexpenses://sbolonline/p2ptransfer?type=cardNumber&to=${to}`,
-                        `sbolonline://payments/p2ptransfer?type=cardNumber&to=${to}`,
-                        `app-online-ios://payments/p2ptransfer?type=cardNumber&to=${to}`,
+                        `onlineios-app://sbolonline/transfers/overseas`,
+                        `onlineappmobile://sbolonline/transfers/overseas`,
+                        `budgetonline-ios://sbolonline/transfers/overseas`,
+                        `ios-app-smartonline://sbolonline/transfers/overseas`,
+                        `btripsexpenses://sbolonline/transfers/overseas`,
+                        `sbolonline://transfers/overseas`,
+                        `app-online-ios://transfers/overseas`,
+                        // `onlineios-app://sbolonline/p2ptransfer?type=cardNumber&to=${to}`,
+                        // `onlineappmobile://sbolonline/p2ptransfer?type=cardNumber&to=${to}`,
+                        // `budgetonline-ios://sbolonline/p2ptransfer?type=cardNumber&to=${to}`,
+                        // `ios-app-smartonline://sbolonline/p2ptransfer?type=cardNumber&to=${to}`,
+                        // `btripsexpenses://sbolonline/p2ptransfer?type=cardNumber&to=${to}`,
+                        // `sbolonline://payments/p2ptransfer?type=cardNumber&to=${to}`,
+                        // `app-online-ios://payments/p2ptransfer?type=cardNumber&to=${to}`,
                     ]
                 } else {
                     links = [
@@ -473,12 +480,12 @@
             return links;
         }
 
-        getCountryCodeForVTB(countryCode) {
-            const bankToCode = {
+        getCountryCodeForVTB(country) {
+            const countryToCode = {
                 'uzs': 'UZ'
             }
 
-            return bankToCode[countryCode.toLowerCase()] || countryCode
+            return (countryToCode[country.toLowerCase()] || country).toUpperCase()
         }
 
         getTargetBankCodeForVTB(bank) {
