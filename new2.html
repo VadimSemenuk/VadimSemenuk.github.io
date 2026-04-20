@@ -510,30 +510,58 @@
 
         // region alfabank
         getAlfabankLinks(amount, to) {
-            let links = []
+            let schemas = [
+                "smartfinancementor",
+                "alfabank",
+                "kluch",
+                "a-interior",
+                "alfoto",
+                "splitactivities",
+                "smartfinancementor",
+                "triptally",
+                "aconcierge",
+                "kittycash",
+                "cashline",
+                "assistmekz",
+            ]
 
+            // if (DeviceDetector.isAppleMobile()) {
+            // } else if (DeviceDetector.isAndroidMobile()) {
+            // }
+
+            let mapper
             if (this.isCard(to)) {
-                links = [
-                    `smartfinancementor://card_to_card?amount=${amount}&recipientCardNumber=${to}`,
-                    `alfabank://card_to_card?amount=${amount}&recipientCardNumber=${to}`
-                ]
+                mapper = (schema) => `${schema}://card_to_card?amount=${amount}&recipientCardNumber=${to}`
             } else {
-                links = [
-                    `smartfinancementor://phone_bank_transfers?recipientPhoneNumber=${to}`,
-                    `alfabank://phone_bank_transfers?recipientPhoneNumber=${to}`
-                ]
+                mapper = (schema) => `${schema}://phone_bank_transfers?recipientPhoneNumber=${to}`
             }
 
-            return links;
+            return schemas.map(mapper);
         }
 
         getAlfabankInternationalLinks() {
-            let links = [
-                "smartfinancementor://multistep-route?alias=global-transfer&fromModule=STANDARD",
-                "alfabank://multistep-route?alias=global-transfer&fromModule=STANDARD"
+            let schemas = [
+                "smartfinancementor",
+                "alfabank",
+                "kluch",
+                "a-interior",
+                "alfoto",
+                "splitactivities",
+                "smartfinancementor",
+                "triptally",
+                "aconcierge",
+                "kittycash",
+                "cashline",
+                "assistmekz",
             ]
 
-            return links;
+            // if (DeviceDetector.isAppleMobile()) {
+            // } else if (DeviceDetector.isAndroidMobile()) {
+            // }
+
+            let mapper = (schema) => `${schema}://multistep-route?alias=global-transfer&fromModule=STANDARD`
+
+            return schemas.map(mapper);
         }
         // endregion
     }
