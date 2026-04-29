@@ -249,6 +249,10 @@
                 case 'alfabank_international': {
                     return this.getAlfabankInternationalLinks(amount, to, countryCode, targetBank)
                 }
+                case 'mts':
+                case 'mts_international': {
+                    return this.getMTSLinks(amount, to, countryCode, targetBank)
+                }
             }
         }
 
@@ -525,10 +529,6 @@
                 "assistmekz",
             ]
 
-            // if (DeviceDetector.isAppleMobile()) {
-            // } else if (DeviceDetector.isAndroidMobile()) {
-            // }
-
             let mapper
             if (this.isCard(to)) {
                 mapper = (schema) => `${schema}://card_to_card?amount=${amount}&recipientCardNumber=${to}`
@@ -547,7 +547,6 @@
                 "a-interior",
                 "alfoto",
                 "splitactivities",
-                "smartfinancementor",
                 "triptally",
                 "aconcierge",
                 "kittycash",
@@ -555,11 +554,20 @@
                 "assistmekz",
             ]
 
-            // if (DeviceDetector.isAppleMobile()) {
-            // } else if (DeviceDetector.isAndroidMobile()) {
-            // }
-
             let mapper = (schema) => `${schema}://multistep-route?alias=global-transfer&fromModule=STANDARD`
+
+            return schemas.map(mapper);
+        }
+        // endregion
+
+        // region mts
+        getMTSLinks() {
+            let schemas = [
+                "bank100000000017",
+                "bank100000000289"
+            ]
+
+            let mapper = (schema) => `${schema}://`
 
             return schemas.map(mapper);
         }
@@ -627,6 +635,10 @@
             case 'alfabank':
             case 'alfabank_international': {
                 return 'data:image/webp;base64,UklGRqYFAABXRUJQVlA4IJoFAADQIQCdASqAAIAAPikSiEKhoSESizTQGAKEoKFshlfb+m/hLqhXFPxg/IjntdPu3H7c/5b4AfwDTEuGf6h/Iv2q/y/uA/gH5AdgB+h/9p/J/gAfpl/t/6r73XSAfoz6AHsAegB/DP6r6Sf++/1/wZfsR/1v9l8CH6rf9H8/9EY7DP59ygJ599p4QdpGbNf8X+UHqweDfFt/mfuq+kr+N/43lQ+hf93/Y/gK/lf9O/1/Xy/bv2S/2qJ+5mZmZl0brjMwqe8R8xEQ0rbJJDn1keGKQM2TWGZhNQl7uaV9IBv9bGfA/j6RTMUsGsDZfAcz3x8XLhM4GqNB3xHVRZ91WnEH5wDLReuJ2uwohRbfCnApS55dmZmZmNAA/v5k+Uok/qzYHpS74BD+AP8AAALps43oP6C8sU1+0//Te2Kjx6fkA8afPwN2H/A1bmYdJugvbbuGr4u9MKHA/WbSkafoyg1b0Wt5LXRkFfUSUE50BAeKKUi+MS0RKBwOJisAGjychg3EW5PHNamBDDNISNLP34wKX7o+bPCP8M4ZQxjraErLUQQQo1gS7HLsKh5ucJ32szovlRKFFhoy/lVR0KotP/4r/gPUBVUAIDR4uWrBbpdOhiIXfplR4wbEyhl76UCWsgV2sYRAk7dB/4h1nr3qJQmyPxspAhqxJPNJMyIo++LDZLYmrWl/5wWrsMsQ7rps7FpPRGRBFbCOk+743gPZS40uYH+aNjGq5X3vS//4seoZJLOQqgYStk+ukdK9e3I0yObDK/ssJpaEl93r/XriuAASpM2eE3ZaaEgzm0ynnmqc9tslulwKQ3pYL+/wkni+LXZpRyBJ3VdAbfU1xC/s223EE7n9+pssHcm1zn585SRIn0unP8eMcS7A8ZBv3Sswann+ZF8AaEOUMoGthBCVTVjshU61ZFui883lPLUQK0DR1TfLYddO66pw5D/lFvZi6vDlnCLQcNgZdjdKtb+t9fwpt/2rymto4c2MUuq4EynqhTgrRPqUzBSy5m39FPN0z8f/JM8YB/o9QBPsB13ey13APovKTWW/gzi8qhlxI5QobZRbmiVHL2rvHCeBPc36upV9HrpX+TZsYqLUih7RWLGdxgfWDm9tBiFO9v7xvIgR+SO58L7vixxmV7u1SfLwEH0MsAUM/8k4zgLjIrFhs1BvmcAjQcIclssZykqvqIiUSEdTTiUolqRa6Dw0reheXycQp7pZIqgrePmRzh8mzY0GlzdrNdgjmk8ocWY8StjxPCVZTjUdk9PbKoBKcPjrLeWbwZGlXS48i9mrno9LwJPYNnI/2Loy9O3/Bnegjsd9Ri2B/kB5jYIJ5e3og9qL1f/Bb4YEsiDY+ZNavBJkqKMD+97+MbfQ/KbVeDgjPlXwItVY1Lq62BPN51LU/UbFug52+ag8XSJdv9Jlr/lqZufO995kVNpOmarziFDQYKDoL1W484kfumLa+4bMRuPt1Hw5IkcQETE0343ZPP4K/wtNHmRpVf/VrNQIFrVk54Wj/+aXzO9FEpJblH7vAfXvCJb6l/D1LH0IT/+R//oNYrnyxYdJ3kt7wfT4gLRUwyeMkDFq5sciiEuIOzM/INgOchS6+Wy110panMGn8EG6kOBWoj9Hcvams5ry9wjaam0cHf3iock7qSz+USvRDO6Cm+Ojq/n9y+4enA7ZSotHC+mvQ/4kh1KFVjwLFcRo7ORYVZPgv2oQxbniQlbDMo33JvH6ECIVTMhyqXaItsgRvkkTJEMt6TMHeI9eXHw8lzQ+wAnS3te7zZoH55SxkCYeaR6hV4LgxUbgibLd35eH0J64bXROZrq5qK2CTM8+KFIWCWkdlc2Aav0OWlAU+1RAqOaoLVMpoAee/EDNelektoBvJIbVpWRie5BxHR8aGVdLf+nlslnNHUAAAAA='
+            }
+            case 'mts':
+            case 'mts_international': {
+                return 'UklGRrgEAABXRUJQVlA4IKwEAACQKACdASoAAQABPpFIn0slpKMhpdU4WLASCWVu4XSg/cKKRaScb+wp+s3uj5W717WCBZMHvY6gTtzbUYZeNtRhl421GGXjbUYZeNtRhl421GGXjOlsv8Mg9tsxBMhNC43J5rQaGolDYQZG9wiq0hFXIHyWUzEDRarltJNj3g0v2lFvq86Mfm1HjNZLZP3keW8mmuJ3gx5d0fG0QuEi1xCk5uj6ABEAgY7JOgUjBRDcPdWXF4XDr/Hz0ALrkN8XSWhpftKBCf9yXrnzPMFVTPBKlM2RUXXAXDGfA58m4uF/iypqqGBbvNWj8Zp3X77niwWX6f69mtCvYGM8IyzclJJ6uGXfPu4glrL5B5PFVC2muphqR8zg93WFkooIYCRVkVZUtJHbMy5ZRfs8EKoiZfqAM0COEKog+BvFwz4G8XDPgbxcM+BvFwz4G8XDOQAA/v9tcAAAAAPah9MgOcbM35yCLL7bdGjy7iIN3izJdDOWWsPSv14XZY9o33scX+vle/QcsOp4E/bxhsU2B6IPquzPjWxni+jtmB8Z90Q6/lOowNqAOM794NxqQZwv7a30Yl247jj5kxV3YkR3/y0jUwTlUNNQ8A68pnsqGtqHY4gV8NIEfzpWvx8cri08DhnsACfzIAwgH1MYXJztLRcZm2uHdJ6pTnwavW9ExmumVBc4C95tDV8w7hotHiu7AzGLp/akkMzJH67RggfPPStnwwSvzNoP/qULQQZ/Jy++w7R0lilBFekDs4X6hSEAlnJfyu89xGUKUmMa9QL/6f48LkYysXH43NsZ77MgUqdGRULZXfj3OfU7jERTVdvqtBjfAruddOX2SYQPaB3jlHSeXWWicmx8ti5pJE2iHWuu7JBZrpoRCIJChVriqLDWAqfyi6hFsv2yEc83W5Jlu8N4V3+LQyzmfWg0Ht5q1DxwGnf4m1bLciz8LBKGYVrUaOZUpBMByM8kCT5A32oNyxDIW8ZlBtaRVMJ61N9DIJNau3sd1rGn7Xweb4tsqtGe/WD87NDNMc4WfmHKiQH0dw8M5cFx2i0G6Qbxgvn9nQO2Oi7owLbcAfl9S7pCP9z/ypH8XbgV8KA3Og0PycMYRntsEDNWUWLEoWwsvlZ0MILYmXJa9Xmlhdng/Whgci1iAt6BqdCmDpDF/EJB3uJCMOTOmX3zmSDQroWxEBZ7WncuxCmxWvMcgDMRlUC8UnPo/dosLxzLAKZ1WvoLtzrJYLPD0LseWGghXbakleXPmZU2lcpO+oyU8Fm7yQ8qjrdKQYyXgyFyIvpRUIq/j3/ntdEEiDzu++QppWjdHGkFvNEeB0mmJMlGFUZl8yOjVd6dGUF9rz9r5ibxaSq0pNSIZFevriAapCHCDthSwE6HPhIC6CRk5519yaxFcl12qzi16En33KGX/5QxUD0oB236OTz+fZu3Kg+xIz8sdHBTWBCXwOyf0oSW020OmNzGHBucQZrQdPDlA/0TgsqBlRInAn5hmrCaCeEks87qKD+S8bILEuUOBBMQmQc5T6QGo6YEd/LK8t08LMsGt0DBQODX+skt+5C+hK09mUH7VR5w7beoCI/NwZKWFAAAAAAAAAAAAA=='
             }
         }
     }
