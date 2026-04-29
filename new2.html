@@ -176,7 +176,17 @@
             background: rgb(239 50 36);
         }
         .alfabank-color-900 {
-            color: #001639;
+            color: rgb(78, 16, 11);
+        }
+
+        .mts-bg-100 {
+            background: rgb(239 50 36 / 10%);
+        }
+        .mts-bg-500 {
+            background: rgb(239 50 36);
+        }
+        .mts-color-900 {
+            color: rgb(78, 16, 11);
         }
         /*endregion*/
     </style>
@@ -649,28 +659,7 @@
             }
             case 'mts':
             case 'mts_international': {
-                return 'UklGRrgEAABXRUJQVlA4IKwEAACQKACdASoAAQABPpFIn0slpKMhpdU4WLASCWVu4XSg/cKKRaScb+wp+s3uj5W717WCBZMHvY6gTtzbUYZeNtRhl421GGXjbUYZeNtRhl421GGXjOlsv8Mg9tsxBMhNC43J5rQaGolDYQZG9wiq0hFXIHyWUzEDRarltJNj3g0v2lFvq86Mfm1HjNZLZP3keW8mmuJ3gx5d0fG0QuEi1xCk5uj6ABEAgY7JOgUjBRDcPdWXF4XDr/Hz0ALrkN8XSWhpftKBCf9yXrnzPMFVTPBKlM2RUXXAXDGfA58m4uF/iypqqGBbvNWj8Zp3X77niwWX6f69mtCvYGM8IyzclJJ6uGXfPu4glrL5B5PFVC2muphqR8zg93WFkooIYCRVkVZUtJHbMy5ZRfs8EKoiZfqAM0COEKog+BvFwz4G8XDPgbxcM+BvFwz4G8XDOQAA/v9tcAAAAAPah9MgOcbM35yCLL7bdGjy7iIN3izJdDOWWsPSv14XZY9o33scX+vle/QcsOp4E/bxhsU2B6IPquzPjWxni+jtmB8Z90Q6/lOowNqAOM794NxqQZwv7a30Yl247jj5kxV3YkR3/y0jUwTlUNNQ8A68pnsqGtqHY4gV8NIEfzpWvx8cri08DhnsACfzIAwgH1MYXJztLRcZm2uHdJ6pTnwavW9ExmumVBc4C95tDV8w7hotHiu7AzGLp/akkMzJH67RggfPPStnwwSvzNoP/qULQQZ/Jy++w7R0lilBFekDs4X6hSEAlnJfyu89xGUKUmMa9QL/6f48LkYysXH43NsZ77MgUqdGRULZXfj3OfU7jERTVdvqtBjfAruddOX2SYQPaB3jlHSeXWWicmx8ti5pJE2iHWuu7JBZrpoRCIJChVriqLDWAqfyi6hFsv2yEc83W5Jlu8N4V3+LQyzmfWg0Ht5q1DxwGnf4m1bLciz8LBKGYVrUaOZUpBMByM8kCT5A32oNyxDIW8ZlBtaRVMJ61N9DIJNau3sd1rGn7Xweb4tsqtGe/WD87NDNMc4WfmHKiQH0dw8M5cFx2i0G6Qbxgvn9nQO2Oi7owLbcAfl9S7pCP9z/ypH8XbgV8KA3Og0PycMYRntsEDNWUWLEoWwsvlZ0MILYmXJa9Xmlhdng/Whgci1iAt6BqdCmDpDF/EJB3uJCMOTOmX3zmSDQroWxEBZ7WncuxCmxWvMcgDMRlUC8UnPo/dosLxzLAKZ1WvoLtzrJYLPD0LseWGghXbakleXPmZU2lcpO+oyU8Fm7yQ8qjrdKQYyXgyFyIvpRUIq/j3/ntdEEiDzu++QppWjdHGkFvNEeB0mmJMlGFUZl8yOjVd6dGUF9rz9r5ibxaSq0pNSIZFevriAapCHCDthSwE6HPhIC6CRk5519yaxFcl12qzi16En33KGX/5QxUD0oB236OTz+fZu3Kg+xIz8sdHBTWBCXwOyf0oSW020OmNzGHBucQZrQdPDlA/0TgsqBlRInAn5hmrCaCeEks87qKD+S8bILEuUOBBMQmQc5T6QGo6YEd/LK8t08LMsGt0DBQODX+skt+5C+hK09mUH7VR5w7beoCI/NwZKWFAAAAAAAAAAAAA=='
-            }
-        }
-    }
-
-    const getBankIconName = (bank) => {
-        switch (bank) {
-            case 'sber':
-            case 'sber_international': {
-                return 'sber.webp'
-            }
-            case 'tbank':
-            case 'tbank_international': {
-                return 'tbank.webp'
-            }
-            case 'vtb':
-            case 'vtb_international': {
-                return 'vtb.webp'
-            }
-            case 'alfabank':
-            case 'alfabank_international': {
-                return 'alfa.webp'
+                return 'data:image/webp;base64,UklGRrgEAABXRUJQVlA4IKwEAACQKACdASoAAQABPpFIn0slpKMhpdU4WLASCWVu4XSg/cKKRaScb+wp+s3uj5W717WCBZMHvY6gTtzbUYZeNtRhl421GGXjbUYZeNtRhl421GGXjOlsv8Mg9tsxBMhNC43J5rQaGolDYQZG9wiq0hFXIHyWUzEDRarltJNj3g0v2lFvq86Mfm1HjNZLZP3keW8mmuJ3gx5d0fG0QuEi1xCk5uj6ABEAgY7JOgUjBRDcPdWXF4XDr/Hz0ALrkN8XSWhpftKBCf9yXrnzPMFVTPBKlM2RUXXAXDGfA58m4uF/iypqqGBbvNWj8Zp3X77niwWX6f69mtCvYGM8IyzclJJ6uGXfPu4glrL5B5PFVC2muphqR8zg93WFkooIYCRVkVZUtJHbMy5ZRfs8EKoiZfqAM0COEKog+BvFwz4G8XDPgbxcM+BvFwz4G8XDOQAA/v9tcAAAAAPah9MgOcbM35yCLL7bdGjy7iIN3izJdDOWWsPSv14XZY9o33scX+vle/QcsOp4E/bxhsU2B6IPquzPjWxni+jtmB8Z90Q6/lOowNqAOM794NxqQZwv7a30Yl247jj5kxV3YkR3/y0jUwTlUNNQ8A68pnsqGtqHY4gV8NIEfzpWvx8cri08DhnsACfzIAwgH1MYXJztLRcZm2uHdJ6pTnwavW9ExmumVBc4C95tDV8w7hotHiu7AzGLp/akkMzJH67RggfPPStnwwSvzNoP/qULQQZ/Jy++w7R0lilBFekDs4X6hSEAlnJfyu89xGUKUmMa9QL/6f48LkYysXH43NsZ77MgUqdGRULZXfj3OfU7jERTVdvqtBjfAruddOX2SYQPaB3jlHSeXWWicmx8ti5pJE2iHWuu7JBZrpoRCIJChVriqLDWAqfyi6hFsv2yEc83W5Jlu8N4V3+LQyzmfWg0Ht5q1DxwGnf4m1bLciz8LBKGYVrUaOZUpBMByM8kCT5A32oNyxDIW8ZlBtaRVMJ61N9DIJNau3sd1rGn7Xweb4tsqtGe/WD87NDNMc4WfmHKiQH0dw8M5cFx2i0G6Qbxgvn9nQO2Oi7owLbcAfl9S7pCP9z/ypH8XbgV8KA3Og0PycMYRntsEDNWUWLEoWwsvlZ0MILYmXJa9Xmlhdng/Whgci1iAt6BqdCmDpDF/EJB3uJCMOTOmX3zmSDQroWxEBZ7WncuxCmxWvMcgDMRlUC8UnPo/dosLxzLAKZ1WvoLtzrJYLPD0LseWGghXbakleXPmZU2lcpO+oyU8Fm7yQ8qjrdKQYyXgyFyIvpRUIq/j3/ntdEEiDzu++QppWjdHGkFvNEeB0mmJMlGFUZl8yOjVd6dGUF9rz9r5ibxaSq0pNSIZFevriAapCHCDthSwE6HPhIC6CRk5519yaxFcl12qzi16En33KGX/5QxUD0oB236OTz+fZu3Kg+xIz8sdHBTWBCXwOyf0oSW020OmNzGHBucQZrQdPDlA/0TgsqBlRInAn5hmrCaCeEks87qKD+S8bILEuUOBBMQmQc5T6QGo6YEd/LK8t08LMsGt0DBQODX+skt+5C+hK09mUH7VR5w7beoCI/NwZKWFAAAAAAAAAAAAA=='
             }
         }
     }
@@ -692,6 +681,10 @@
             case 'alfabank':
             case 'alfabank_international': {
                 return 'alfabank'
+            }
+            case 'mts':
+            case 'mts_international': {
+                return 'mts'
             }
         }
     }
