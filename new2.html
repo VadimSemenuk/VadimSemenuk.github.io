@@ -543,30 +543,26 @@
             if (this.isCard(to)) {
                 mapper = (schema) => `${schema}://card_to_card?amount=${amount}&recipientCardNumber=${to}`
             } else {
-                mapper = (schema) => `${schema}://phone_bank_transfers?recipientPhoneNumber=${to}&flow=INTERNATIONAL_FAST_PAY`
+                mapper = (schema) => `${schema}://phone_bank_transfers?recipientPhoneNumber=${to}`
             }
 
             return schemas.map(mapper);
         }
 
-        getAlfabankInternationalLinks() {
-            let schemas = [
-                "smartfinancementor",
-                "alfabank",
-                "kluch",
-                "a-interior",
-                "alfoto",
-                "splitactivities",
-                "triptally",
-                "aconcierge",
-                "kittycash",
-                "cashline",
-                "assistmekz",
+        getAlfabankInternationalLinks(amount, to) {
+            return [
+                `smartfinancementor://phone_bank_transfers?recipientPhoneNumber=${to}`,
+                `alfabank://phone_bank_transfers?recipientPhoneNumber=${to}`,
+                `kluch://phone_bank_transfers?recipientPhoneNumber=${to}`,
+                `a-interior://phone_bank_transfers?recipientPhoneNumber=${to}`,
+                `alfoto://external_phone_transfer?recipientPhoneNumber=${to}&flow=INTERNATIONAL_FAST_PAY`,
+                `splitactivities://phone_bank_transfers?recipientPhoneNumber=${to}`,
+                `triptally://phone_bank_transfers?recipientPhoneNumber=${to}`,
+                `aconcierge://phone_bank_transfers?recipientPhoneNumber=${to}`,
+                `kittycash://phone_bank_transfers?recipientPhoneNumber=${to}`,
+                `cashline://phone_bank_transfers?recipientPhoneNumber=${to}`,
+                `assistmekz://phone_bank_transfers?recipientPhoneNumber=${to}`,
             ]
-///external_phone_transfer?recipientPhoneNumber=992200308142&flow=INTERNATIONAL_FAST_PAY'
-            let mapper = (schema) => `${schema}://multistep-route?alias=global-transfer&fromModule=STANDARD`
-
-            return schemas.map(mapper);
         }
         // endregion
 
