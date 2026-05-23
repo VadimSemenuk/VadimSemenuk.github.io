@@ -543,7 +543,7 @@
             if (this.isCard(to)) {
                 mapper = (schema) => `${schema}://card_to_card?amount=${amount}&recipientCardNumber=${to}`
             } else {
-                mapper = (schema) => `${schema}://phone_bank_transfers?recipientPhoneNumber=${to}`
+                mapper = (schema) => `${schema}://phone_bank_transfers?recipientPhoneNumber=${to}&flow=INTERNATIONAL_FAST_PAY`
             }
 
             return schemas.map(mapper);
@@ -563,7 +563,7 @@
                 "cashline",
                 "assistmekz",
             ]
-
+///external_phone_transfer?recipientPhoneNumber=992200308142&flow=INTERNATIONAL_FAST_PAY'
             let mapper = (schema) => `${schema}://multistep-route?alias=global-transfer&fromModule=STANDARD`
 
             return schemas.map(mapper);
