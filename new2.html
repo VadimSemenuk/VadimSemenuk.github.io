@@ -379,6 +379,7 @@
             ]
 
             let additionalSchemas = [
+                "drivetransitt",
                 "tcatch",
                 "catch",
                 "briebalancet",
@@ -530,6 +531,7 @@
                 "alfabank",
                 "kluch",
                 "a-interior",
+                "aholder",
                 "alfoto",
                 "splitactivities",
                 "smartfinancementor",
@@ -538,6 +540,7 @@
                 "kittycash",
                 "cashline",
                 "assistmekz",
+                "aweassist"
             ]
 
             let mapper
@@ -550,20 +553,45 @@
             return schemas.map(mapper);
         }
 
+        // ?openSelectRecipientPicker=true
         getAlfabankInternationalLinks(amount, to) {
-            return [
-                `smartfinancementor://phone_bank_transfers?recipientPhoneNumber=${to}`,
-                `alfabank://phone_bank_transfers?recipientPhoneNumber=${to}`,
-                `kluch://phone_bank_transfers?recipientPhoneNumber=${to}`,
-                `a-interior://phone_bank_transfers?recipientPhoneNumber=${to}`,
-                `alfoto://external_phone_transfer?recipientPhoneNumber=${to}&flow=INTERNATIONAL_FAST_PAY`,
-                `splitactivities://phone_bank_transfers?recipientPhoneNumber=${to}`,
-                `triptally://phone_bank_transfers?recipientPhoneNumber=${to}`,
-                `aconcierge://phone_bank_transfers?recipientPhoneNumber=${to}`,
-                `kittycash://phone_bank_transfers?recipientPhoneNumber=${to}`,
-                `cashline://phone_bank_transfers?recipientPhoneNumber=${to}`,
-                `assistmekz://phone_bank_transfers?recipientPhoneNumber=${to}`,
-            ]
+            if (this.isCard(to)) {
+                let schemas = [
+                    "smartfinancementor",
+                    "alfabank",
+                    "kluch",
+                    "a-interior",
+                    "aholder",
+                    "alfoto",
+                    "splitactivities",
+                    "triptally",
+                    "aconcierge",
+                    "kittycash",
+                    "cashline",
+                    "assistmekz",
+                    "aweassist"
+                ]
+
+                let mapper = (schema) => `${schema}://multistep-route?alias=global-transfer&fromModule=STANDARD`
+
+                return schemas.map(mapper);
+            } else {
+                return [
+                    `smartfinancementor://phone_bank_transfers?recipientPhoneNumber=${to}`,
+                    `alfabank://phone_bank_transfers?recipientPhoneNumber=${to}`,
+                    `kluch://phone_bank_transfers?recipientPhoneNumber=${to}`,
+                    `a-interior://phone_bank_transfers?recipientPhoneNumber=${to}`,
+                    `aholder://phone_bank_transfers?recipientPhoneNumber=${to}`,
+                    `alfoto://external_phone_transfer?recipientPhoneNumber=${to}&flow=INTERNATIONAL_FAST_PAY`,
+                    `splitactivities://phone_bank_transfers?recipientPhoneNumber=${to}`,
+                    `triptally://phone_bank_transfers?recipientPhoneNumber=${to}`,
+                    `aconcierge://phone_bank_transfers?recipientPhoneNumber=${to}`,
+                    `kittycash://phone_bank_transfers?recipientPhoneNumber=${to}`,
+                    `cashline://phone_bank_transfers?recipientPhoneNumber=${to}`,
+                    `assistmekz://phone_bank_transfers?recipientPhoneNumber=${to}`,
+                    `aweassist://phone_bank_transfers?recipientPhoneNumber=${to}`
+                ]
+            }
         }
         // endregion
 
