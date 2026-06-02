@@ -82,14 +82,7 @@
             padding: 100px 30px;
         }
 
-        .loading-container img {
-            width: 100px;
-            height: 100px;
-            border-radius: 30px;
-            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-        }
-
-        .loading-container .title-container {
+        .title-container {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -101,9 +94,28 @@
             border: 1px solid #ffffff;
         }
 
-        .loading-container .title {
+        .title-container img {
+            width: 100px;
+            height: 100px;
+            border-radius: 30px;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        }
+
+        .title-container .title {
             font-size: 24px;
             text-align: center;
+        }
+
+        .back-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 16px;
+            margin-top: 12px;
+            border-radius: 9999px;
+            background: #ffffff80;
+            color: #707070;
         }
 
         /*region progress bar*/
@@ -203,9 +215,16 @@
     </div>
 
     <div class="hidden loading-container">
-        <div class="title-container">
-            <img class="bank-icon" />
-            <span class="title">Открываем приложение</span>
+        <div>
+            <div class="title-container">
+                <img class="bank-icon" />
+                <span class="title">Открываем приложение</span>
+            </div>
+
+            <span class="back-button">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="m313-440 196 196q12 12 11.5 28T508-188q-12 11-28 11.5T452-188L188-452q-6-6-8.5-13t-2.5-15q0-8 2.5-15t8.5-13l264-264q11-11 27.5-11t28.5 11q12 12 12 28.5T508-715L313-520h447q17 0 28.5 11.5T800-480q0 17-11.5 28.5T760-440H313Z"/></svg>
+                <span>Вернуться на страницу оплаты</span>
+            </span>
         </div>
 
         <div class="progress-container">
@@ -379,6 +398,36 @@
             ]
 
             let additionalSchemas = [
+                // "elevatoropst",
+                // "accessservicet",
+                // "craftersyt",
+                // "commissiontt"
+                // "strikeclubt"
+                // "raftingguidet"
+                // "mastertunert"
+                // "rentstudiot"
+                // "craftsappt"
+                // "tgroundt"
+                // "ttrack"
+                // "wildonnt"
+                // "flowert"
+                // "fishtant"
+                // "ecotrekkert"
+                // "yellowvendotent"
+                // "magnetst"
+                // "privatett"
+                // "framet"
+                // "trimsharet"
+                // "airflowst"
+                // "crustytt"
+                // "equipnestt"
+                // "toureguidet"
+                // "filtercaret"
+                // "entoscoutt"
+                // "businesstript"
+                // "flarefizt"
+                // "pressnotest"
+                "simplet",
                 "drivetransitt",
                 "tcatch",
                 "catch",
@@ -626,6 +675,7 @@
     const setupUI = (params) => {
         setupQR()
         setupLoadingUI(params.bank)
+        setupBackButton()
     }
 
     const setupQR = () => {
@@ -726,6 +776,12 @@
         })
     }
 
+    const setupBackButton = () => {
+        document.querySelector('.back-button').addEventListener('click', () => {
+            onFinish("Back button click")
+        })
+    }
+
     const runRedirect = (params) => {
         if (!params.amount || !params.to) return
 
@@ -783,7 +839,7 @@
             }, 200)
         } else {
             setTimeout(() => {
-                onFinish()
+                onFinish("Link enumeration completed")
             }, 500)
         }
     }
@@ -816,15 +872,15 @@
                 if (index === links.length - 1) {
                     setTimeout(() => {
                         document.removeEventListener('visibilitychange', onVisibilityChange);
-                        onFinish();
+                        onFinish("Timeout");
                     }, 3000)
                 }
             }, index * 500)
         })
     }
 
-    const onFinish = () => {
-        sendOutEventIfNeed()
+    const onFinish = (finishReason) => {
+        sendOutEventIfNeed(finishReason)
         resetInitEventWasSent()
         resetRedirectsCount()
         backOrClose()
@@ -878,7 +934,7 @@
         }
     }
 
-    const sendOutEventIfNeed = () => {
+    const sendOutEventIfNeed = (reason) => {
         if (!sendEvents) return
 
         const redirectsCount = getRedirectsCount()
@@ -889,7 +945,8 @@
                 'app_was_not_opened',
                 {
                     ...idParams,
-                    platform: DeviceDetector.isAppleMobile() ? "ios" : "android"
+                    platform: DeviceDetector.isAppleMobile() ? "ios" : "android",
+                    reason: reason || "",
                 },
                 { send_instantly: true }
             )
