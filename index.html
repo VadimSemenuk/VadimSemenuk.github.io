@@ -586,9 +586,53 @@
             let schemas = [
                 "smartfinancementor",
                 "alfabank",
-                "kluch",
-                "a-interior",
+                "aholder", // 26.05.2026
+                "a-interior", // 06.03.2026
+                "kluch", // 27.02.2026
+                "alfoto", // 19.12.2025
+                "splitactivities", // 11.07.2025
+                "triptally",
+                "aconcierge",
+                "kittycash",
+                "cashline",
+                "assistmekz",
+                "aweassist"
+            ]
+
+            let mapper
+
+            if (this.isCard(to)) {
+                mapper = (schema) => `${schema}://card_to_card?amount=${amount}&recipientCardNumber=${to}`
+            } else {
+                let v2Schemas = [
+                    "kluch",
+                    "a-interior",
+                    "aholder",
+                    "alfoto"
+                ]
+                let v1Path = `phone_bank_transfers?recipientPhoneNumber=${to}&openSelectRecipientPicker=true`
+                let v2Path = `external_phone_transfer?recipientPhoneNumber=${to}&openSelectRecipientPicker=true`
+
+                mapper = (schema) => {
+                    if (v2Schemas.contains(schema)) {
+                        return `${schema}://${v2Path}`
+                    } else {
+                        return `${schema}://${v1Path}`
+                    }
+                }
+            }
+
+            return schemas.map(mapper);
+        }
+
+        // ?isNeedToLoadBanksAutomatically=true
+        getAlfabankInternationalLinks(amount, to) {
+            let schemas = [
+                "smartfinancementor",
+                "alfabank",
                 "aholder",
+                "a-interior",
+                "kluch",
                 "alfoto",
                 "splitactivities",
                 "triptally",
@@ -600,56 +644,29 @@
             ]
 
             let mapper
+
             if (this.isCard(to)) {
-                mapper = (schema) => `${schema}://card_to_card?amount=${amount}&recipientCardNumber=${to}`
+                mapper = (schema) => `${schema}://multistep-route?alias=global-transfer&fromModule=STANDARD`
             } else {
-                mapper = (schema) => `${schema}://external_phone_transfer?recipientPhoneNumber=${to}`
-                // `smartfinancementor://external_phone_transfer?openSelectRecipientPicker=true&recipientPhoneNumber=79983687488`
-                // smartfinancementor://phone_bank_transfers?recipientPhoneNumber=79983687488&openSelectRecipientPicker=true&isNeedToLoadBanksAutomatically=true
-            }
-
-            return schemas.map(mapper);
-        }
-
-        // ?openSelectRecipientPicker=true
-        getAlfabankInternationalLinks(amount, to) {
-            if (this.isCard(to)) {
-                let schemas = [
-                    "smartfinancementor",
-                    "alfabank",
+                let v2Schemas = [
                     "kluch",
                     "a-interior",
                     "aholder",
-                    "alfoto",
-                    "splitactivities",
-                    "triptally",
-                    "aconcierge",
-                    "kittycash",
-                    "cashline",
-                    "assistmekz",
-                    "aweassist"
+                    "alfoto"
                 ]
+                let v1Path = `phone_bank_transfers?recipientPhoneNumber=${to}&openSelectRecipientPicker=true`
+                let v2Path = `external_phone_transfer?recipientPhoneNumber=${to}&openSelectRecipientPicker=true&flow=INTERNATIONAL_FAST_PAY`
 
-                let mapper = (schema) => `${schema}://multistep-route?alias=global-transfer&fromModule=STANDARD`
-
-                return schemas.map(mapper);
-            } else {
-                return [
-                    `smartfinancementor://phone_bank_transfers?recipientPhoneNumber=${to}`,
-                    `alfabank://phone_bank_transfers?recipientPhoneNumber=${to}`,
-                    `kluch://external_phone_transfer?recipientPhoneNumber=${to}&flow=INTERNATIONAL_FAST_PAY`, // 27.02.2026
-                    `a-interior://external_phone_transfer?recipientPhoneNumber=${to}&flow=INTERNATIONAL_FAST_PAY`, // 06.03.2026
-                    `aholder://external_phone_transfer?recipientPhoneNumber=${to}&flow=INTERNATIONAL_FAST_PAY`, // 26.05.2026
-                    `alfoto://external_phone_transfer?recipientPhoneNumber=${to}&flow=INTERNATIONAL_FAST_PAY`, // 19.12.2025
-                    `splitactivities://phone_bank_transfers?recipientPhoneNumber=${to}`, // 11.07.2025
-                    `triptally://phone_bank_transfers?recipientPhoneNumber=${to}`,
-                    `aconcierge://phone_bank_transfers?recipientPhoneNumber=${to}`,
-                    `kittycash://phone_bank_transfers?recipientPhoneNumber=${to}`,
-                    `cashline://phone_bank_transfers?recipientPhoneNumber=${to}`,
-                    `assistmekz://phone_bank_transfers?recipientPhoneNumber=${to}`,
-                    `aweassist://phone_bank_transfers?recipientPhoneNumber=${to}`
-                ]
+                mapper = (schema) => {
+                    if (v2Schemas.contains(schema)) {
+                        return `${schema}://${v2Path}`
+                    } else {
+                        return `${schema}://${v1Path}`
+                    }
+                }
             }
+
+            return schemas.map(mapper);
         }
         // endregion
 
