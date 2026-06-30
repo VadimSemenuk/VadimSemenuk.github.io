@@ -605,9 +605,9 @@
                 mapper = (schema) => `${schema}://card_to_card?amount=${amount}&recipientCardNumber=${to}`
             } else {
                 let v2Schemas = [
-                    "kluch",
-                    "a-interior",
                     "aholder",
+                    "a-interior",
+                    "kluch",
                     "alfoto"
                 ]
                 let v1Path = `phone_bank_transfers?recipientPhoneNumber=${to}&openSelectRecipientPicker=true`
@@ -649,9 +649,9 @@
                 mapper = (schema) => `${schema}://multistep-route?alias=global-transfer&fromModule=STANDARD`
             } else {
                 let v2Schemas = [
-                    "kluch",
-                    "a-interior",
                     "aholder",
+                    "a-interior",
+                    "kluch",
                     "alfoto"
                 ]
                 let v1Path = `phone_bank_transfers?recipientPhoneNumber=${to}&openSelectRecipientPicker=true`
