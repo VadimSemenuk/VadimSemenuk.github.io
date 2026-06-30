@@ -614,7 +614,7 @@
                 let v2Path = `external_phone_transfer?recipientPhoneNumber=${to}&openSelectRecipientPicker=true`
 
                 mapper = (schema) => {
-                    if (v2Schemas.contains(schema)) {
+                    if (v2Schemas.includes(schema)) {
                         return `${schema}://${v2Path}`
                     } else {
                         return `${schema}://${v1Path}`
@@ -658,7 +658,7 @@
                 let v2Path = `external_phone_transfer?recipientPhoneNumber=${to}&openSelectRecipientPicker=true&flow=INTERNATIONAL_FAST_PAY`
 
                 mapper = (schema) => {
-                    if (v2Schemas.contains(schema)) {
+                    if (v2Schemas.includes(schema)) {
                         return `${schema}://${v2Path}`
                     } else {
                         return `${schema}://${v1Path}`
