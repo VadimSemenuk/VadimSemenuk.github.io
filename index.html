@@ -998,6 +998,12 @@
         sessionStorage.removeItem("initEventWasSent")
     }
 
+    const runEmvCoQrRedirect = (params) => {
+        let emvCoQr = params.emvCoQr
+        let bank = params.bank
+        window.location.href = `sirius://online.vtb.ru/i/tqr?qrCode=${emvCoQr}`
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
         const urlParams = new URLSearchParams(window.location.search);
         const params = {
@@ -1007,6 +1013,7 @@
             countryCode: urlParams.get('countryCode'),
             targetBank: urlParams.get('targetBank'),
             linkIndex: parseInt(urlParams.get("_i") || "0", 10),
+            emvCoQr: urlParams.get('emvCoQr'),
         }
 
         idParams = {
@@ -1019,10 +1026,13 @@
 
         sendEvents = !(idParams.customer_id || "").startsWith('test');
 
-        setupUI(params)
-
-        if (DeviceDetector.isMobile()) {
-            runRedirect(params)
+        if (params.emvCoQr) {
+            runEmvCoQrRedirect(params)
+        } else {
+            setupUI(params)
+            if (DeviceDetector.isMobile()) {
+                runRedirect(params)
+            }
         }
     })
 </script>
