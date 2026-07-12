@@ -293,7 +293,7 @@
                 }
                 case 'vtb':
                 case 'vtb_international': {
-                    return this.getSberEmvCoQrLinks(emvCoQr)
+                    return this.getVtbEmvCoQrLinks(emvCoQr)
                 }
             }
         }
@@ -406,7 +406,7 @@
 
         getSberEmvCoQrLinks(emvCoQr) {
             return [
-                `startonline://sbolonline/qrworldwide?external_source=${emvCoQr}`,
+                `startonline://sbolonline/qrworldwide`,
                 `onlineios-app://sbolonline/qrworldwide`,
                 `onlineappmobile://sbolonline/qrworldwide`,
                 `budgetonline-ios://sbolonline/qrworldwide`,
