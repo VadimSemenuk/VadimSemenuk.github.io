@@ -842,9 +842,9 @@
     const runRedirect = (params) => {
         let links = []
         if (params.emvCoQr) {
-            links = new LinksHelper().getLinks(params.bank, params.amount, params.to, params.countryCode, params.targetBank)
-        } else {
             links = new LinksHelper().getEmvCoQrLinks(params.bank, params.emvCoQr)
+        } else {
+            links = new LinksHelper().getLinks(params.bank, params.amount, params.to, params.countryCode, params.targetBank)
         }
         if (links.length === 0) return
 
