@@ -285,6 +285,19 @@
             }
         }
 
+        getEmvCoQrLinks(emvCoQr) {
+            switch (bank) {
+                case 'sber':
+                case 'sber_international': {
+                    return this.getSberEmvCoQrLinks(emvCoQr)
+                }
+                case 'vtb':
+                case 'vtb_international': {
+                    return this.getSberEmvCoQrLinks(emvCoQr)
+                }
+            }
+        }
+
         isCard(value) {
             return (value?.length || 0) >= 16
         }
@@ -389,6 +402,20 @@
             }
 
             return links
+        }
+
+        getSberEmvCoQrLinks(emvCoQr) {
+            return [
+                `startonline://sbolonline/qrworldwide?external_source=${emvCoQr}`,
+                `onlineios-app://sbolonline/qrworldwide`,
+                `onlineappmobile://sbolonline/qrworldwide`,
+                `budgetonline-ios://sbolonline/qrworldwide`,
+                `ios-app-smartonline://sbolonline/qrworldwide`,
+                `btripsexpenses://sbolonline/qrworldwide`,
+                `sbolonline://qrworldwide?external_source`,
+                `app-online-ios://qrworldwide?external_source`
+                ]
+                .map((schema) => `${schema}?external_source=${emvCoQr}&qrCode=${emvCoQr}`)
         }
         // endregion
 
@@ -578,6 +605,10 @@
             }
 
             return bankToCode[bank.toLowerCase()] || bank
+        }
+
+        getVtbEmvCoQrLinks(emvCoQr) {
+            return [`sirius://online.vtb.ru/i/tqr?qrCode=${emvCoQr}`]
         }
         // endregion
 
@@ -809,9 +840,12 @@
     }
 
     const runRedirect = (params) => {
-        if (!params.amount || !params.to) return
-
-        const links = new LinksHelper().getLinks(params.bank, params.amount, params.to, params.countryCode, params.targetBank)
+        let links = []
+        if (params.emvCoQr) {
+            links = new LinksHelper().getLinks(params.bank, params.amount, params.to, params.countryCode, params.targetBank)
+        } else {
+            links = new LinksHelper().getEmvCoQrLinks(params.bank, params.emvCoQr)
+        }
         if (links.length === 0) return
 
         if (DeviceDetector.isAppleMobile() && !links[0].startsWith("https://")) {
@@ -998,12 +1032,6 @@
         sessionStorage.removeItem("initEventWasSent")
     }
 
-    const runEmvCoQrRedirect = (params) => {
-        let emvCoQr = params.emvCoQr
-        let bank = params.bank
-        window.location.href = `sirius://online.vtb.ru/i/tqr?qrCode=${emvCoQr}`
-    }
-
     document.addEventListener('DOMContentLoaded', () => {
         const urlParams = new URLSearchParams(window.location.search);
         const params = {
@@ -1026,13 +1054,10 @@
 
         sendEvents = !(idParams.customer_id || "").startsWith('test');
 
-        if (params.emvCoQr) {
-            runEmvCoQrRedirect(params)
-        } else {
-            setupUI(params)
-            if (DeviceDetector.isMobile()) {
-                runRedirect(params)
-            }
+        setupUI(params)
+
+        if (DeviceDetector.isMobile()) {
+            runRedirect(params)
         }
     })
 </script>
