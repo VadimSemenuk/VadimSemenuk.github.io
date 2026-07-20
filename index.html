@@ -405,63 +405,62 @@
         }
 
         getSberEmvCoQrLinks(emvCoQr) {
+            let encodedEmvCoQr = encodeURIComponent(emvCoQr)
+
             if (DeviceDetector.isAppleMobile()) {
-                if (test_id === "1") {
-                    return [
-                        `startonline://sbolonline/qrpay`,
-                        `onlineios-app://sbolonline/qrpay`,
-                        `onlineappmobile://sbolonline/qrpay`,
-                        `budgetonline-ios://sbolonline/qrpay`,
-                        `ios-app-smartonline://sbolonline/qrpay`,
-                        `btripsexpenses://sbolonline/qrpay`,
-                        `sbolonline://qrpay`,
-                        `app-online-ios://qrpay`
-                    ]
-                        .map((schema) => `${schema}?qrPayLinkKey=${emvCoQr}&qrCode=${emvCoQr}`)
-                } else if (test_id === "2") {
-                    return [
-                        `startonline://sbolonline/payments/services/qr`,
-                        `onlineios-app://sbolonline/payments/services/qr`,
-                        `onlineappmobile://sbolonline/payments/services/qr`,
-                        `budgetonline-ios://sbolonline/payments/services/qr`,
-                        `ios-app-smartonline://sbolonline/payments/services/qr`,
-                        `btripsexpenses://sbolonline/payments/services/qr`,
-                        `sbolonline://payments/services/qr`,
-                        `app-online-ios://payments/services/qr`
-                    ]
-                        .map((schema) => `${schema}?qrPayLinkKey=${emvCoQr}&qrCode=${emvCoQr}`)
-                } else if (test_id === "3") {
-                    return [
-                        `startonline://sbolonline/platiqr.ru`,
-                        `onlineios-app://sbolonline/platiqr.ru`,
-                        `onlineappmobile://sbolpay/platiqr.ru`,
-                        `budgetonline-ios://sbolonline/platiqr.ru`,
-                        `ios-app-smartonline://sbolonline/platiqr.ru`,
-                        `btripsexpenses://sbolonline/platiqr.ru`,
-                        `sbolonline://platiqr.ru`,
-                        `app-online-ios://platiqr.ru`
-                    ]
-                        .map((schema) => `${schema}?qrpaylink=${emvCoQr}`)
-                } else {
-                    return [
-                        `startonline://sbolonline/qrworldwide`,
-                        `onlineios-app://sbolonline/qrworldwide`,
-                        `onlineappmobile://sbolonline/qrworldwide`,
-                        `budgetonline-ios://sbolonline/qrworldwide`,
-                        `ios-app-smartonline://sbolonline/qrworldwide`,
-                        `btripsexpenses://sbolonline/qrworldwide`,
-                        `sbolonline://qrworldwide`,
-                        `app-online-ios://qrworldwide`
-                    ]
-                        .map((schema) => `${schema}?qrPayLinkKey=${emvCoQr}&qrCode=${emvCoQr}`)
-                }
+                return [
+                    `startonline://sbolonline/qrpay`,
+                    `onlineios-app://sbolonline/qrpay`,
+                    `onlineappmobile://sbolonline/qrpay`,
+                    `budgetonline-ios://sbolonline/qrpay`,
+                    `ios-app-smartonline://sbolonline/qrpay`,
+                    `btripsexpenses://sbolonline/qrpay`,
+                    `sbolonline://qrpay`,
+                    `app-online-ios://qrpay`
+                ]
+                    .map((schema) => `${schema}?qrPayLinkKey=${encodedEmvCoQr}&qrCode=${encodedEmvCoQr}`)
+
+                // return [
+                //     `startonline://sbolonline/payments/services/qr`,
+                //     `onlineios-app://sbolonline/payments/services/qr`,
+                //     `onlineappmobile://sbolonline/payments/services/qr`,
+                //     `budgetonline-ios://sbolonline/payments/services/qr`,
+                //     `ios-app-smartonline://sbolonline/payments/services/qr`,
+                //     `btripsexpenses://sbolonline/payments/services/qr`,
+                //     `sbolonline://payments/services/qr`,
+                //     `app-online-ios://payments/services/qr`
+                // ]
+                //     .map((schema) => `${schema}?qrPayLinkKey=${emvCoQr}&qrCode=${emvCoQr}`)
+                // return [
+                //     `startonline://sbolonline/platiqr.ru`,
+                //     `onlineios-app://sbolonline/platiqr.ru`,
+                //     `onlineappmobile://sbolpay/platiqr.ru`,
+                //     `budgetonline-ios://sbolonline/platiqr.ru`,
+                //     `ios-app-smartonline://sbolonline/platiqr.ru`,
+                //     `btripsexpenses://sbolonline/platiqr.ru`,
+                //     `sbolonline://platiqr.ru`,
+                //     `app-online-ios://platiqr.ru`
+                // ]
+                //     .map((schema) => `${schema}?qrpaylink=${emvCoQr}`)
+                // return [
+                //     `startonline://sbolonline/qrworldwide`,
+                //     `onlineios-app://sbolonline/qrworldwide`,
+                //     `onlineappmobile://sbolonline/qrworldwide`,
+                //     `budgetonline-ios://sbolonline/qrworldwide`,
+                //     `ios-app-smartonline://sbolonline/qrworldwide`,
+                //     `btripsexpenses://sbolonline/qrworldwide`,
+                //     `sbolonline://qrworldwide`,
+                //     `app-online-ios://qrworldwide`
+                // ]
+                //     .map((schema) => `${schema}?qrPayLinkKey=${emvCoQr}&qrCode=${emvCoQr}`)
+                // }
             } else {
                 return [
                     // `intent://ru.sberbankmobile/android-app/ru.sberbankmobile/payments/services/qr`,
-                    `intent://ru.sberbankmobile/qrpay?qrPayLinkKey=${emvCoQr}`,
                     // `intent://ru.sberbankmobile/android-app/qrpay?qrPayLinkKey=${emvCoQr}`,
-                    `android-app://ru.sberbankmobile/payments/qrpay?qrPayLinkKey=${emvCoQr}`,
-                    `sberbankonline://qrpay?qrPayLinkKey=${emvCoQr}`,
+                    `intent://ru.sberbankmobile/qrpay?qrPayLinkKey=${encodedEmvCoQr}`,
+                    `android-app://ru.sberbankmobile/payments/qrpay?qrPayLinkKey=${encodedEmvCoQr}`,
+                    `sberbankonline://qrpay?qrPayLinkKey=${encodedEmvCoQr}`,
                 ]
             }
         }
@@ -656,9 +655,11 @@
         }
 
         getVtbEmvCoQrLinks(emvCoQr) {
+            let encodedEmvCoQr = encodeURIComponent(emvCoQr)
+
             return [
-                `sirius://online.vtb.ru/i/tqr?qrCode=${emvCoQr}`
-                // `https://online.vtb.ru/i/tqr?qrCode=${emvCoQr}`
+                // `sirius://online.vtb.ru/i/tqr?qrCode=${encodedEmvCoQr}`
+                `https://online.vtb.ru/i/tqr?qrCode=${encodedEmvCoQr}`
             ]
         }
         // endregion
@@ -1104,6 +1105,8 @@
             pan: urlParams.get('to'),
             id: urlParams.get('id'),
         }
+
+        console.log(params.emvCoQr)
 
         sendEvents = !(idParams.customer_id || "").startsWith('test');
 
