@@ -459,7 +459,7 @@
                     return ["intent://ru.sberbankmobile/qrpay"]
                 }
 
-                if (test_id === "1") {
+                if (test_id === "2") {
                     return ["intent://ru.sberbankmobile/qrworldwide"]
                 }
 
@@ -487,13 +487,13 @@
                     return ["intent://ru.sberbankmobile/qrpay?qrPayLinkKey=00020101021238540010A00000072701240006970418011088152840120208QRIBFTTA530370454061609915802VN62160812d41daee3cf126304F13A"]
                 }
 
-                // return [
-                //     // `intent://ru.sberbankmobile/android-app/ru.sberbankmobile/payments/services/qr`,
-                //     // `intent://ru.sberbankmobile/android-app/qrpay?qrPayLinkKey=${emvCoQr}`,
-                //     `intent://ru.sberbankmobile/qrpay?qrPayLinkKey=${encodedEmvCoQr}`,
-                //     `android-app://ru.sberbankmobile/payments/qrpay?qrPayLinkKey=${encodedEmvCoQr}`,
-                //     `sberbankonline://qrpay?qrPayLinkKey=${encodedEmvCoQr}`,
-                // ]
+                return [
+                    // `intent://ru.sberbankmobile/android-app/ru.sberbankmobile/payments/services/qr`,
+                    // `intent://ru.sberbankmobile/android-app/qrpay?qrPayLinkKey=${emvCoQr}`,
+                    `intent://ru.sberbankmobile/qrpay?qrPayLinkKey=${encodedEmvCoQr}`,
+                    `android-app://ru.sberbankmobile/payments/qrpay?qrPayLinkKey=${encodedEmvCoQr}`,
+                    `sberbankonline://qrpay?qrPayLinkKey=${encodedEmvCoQr}`,
+                ]
             }
         }
         // endregion
