@@ -478,6 +478,21 @@
                 // if (test_id === "8") {
                 //     return ["intent://ru.sberbankmobile/qrpay?qrPayLinkKey=00020101021238540010A00000072701240006970418011088152840120208QRIBFTTA530370454061609915802VN62160812d41daee3cf126304F13A"]
                 // }
+                if (test_id === "9") {
+                    return [`intent://ru.sberbankmobile/android-app/ru.sberbankmobile/payments/services/qr`]
+                }
+                if (test_id === "10") {
+                    return [`intent://ru.sberbankmobile/android-app/ru.sberbankmobile/qr`]
+                }
+                if (test_id === "11") {
+                    return [`android-app://ru.sberbankmobile/payments/services/qr`]
+                }
+                if (test_id === "12") {
+                    return [`intent://ru.sberbankmobile/payments/services/qr`]
+                }
+                if (test_id === "13") {
+                    return [`intent://ru.sberbankmobile/qr`]
+                }
 
                 return [
                     `intent://ru.sberbankmobile/qrworldwide`,
