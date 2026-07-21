@@ -454,45 +454,33 @@
                 // ]
                 //     .map((schema) => `${schema}?qrpaylink=${emvCoQr}`)
             } else {
-
-                if (test_id === "1") {
-                    return ["intent://ru.sberbankmobile/qrpay"]
-                }
-
-                if (test_id === "2") {
-                    return ["intent://ru.sberbankmobile/qrworldwide"]
-                }
-
-                if (test_id === "3") {
-                    return ["intent://ru.sberbankmobile/qrpay?qrPayLinkKey=000201010211540646010032590015qr.kompanion.kg0104180210161132110106153465120211130212330401005303417520460125909KOMPANION3415BEKZAT+BEKESHOV6304259C"]
-                }
-
-                if (test_id === "4") {
-                    return ["intent://ru.sberbankmobile/qrpay?qrPayLinkKey=#000201010211540646010032590015qr.kompanion.kg0104180210161132110106153465120211130212330401005303417520460125909KOMPANION3415BEKZAT+BEKESHOV6304259C"]
-                }
-
-                if (test_id === "5") {
-                    return ["intent://ru.sberbankmobile/qrpay?qrPayLinkKey=000201010211540646010032590015qr.kompanion.kg0104180210161132110106153465120211130212330401005303417520460125909KOMPANION3415BEKZAT%2BBEKESHOV6304259C"]
-                }
-
-                if (test_id === "6") {
-                    return ["intent://ru.sberbankmobile/qrpay?qrPayLinkKey=%23000201010211540646010032590015qr.kompanion.kg0104180210161132110106153465120211130212330401005303417520460125909KOMPANION3415BEKZAT%2BBEKESHOV6304259C"]
-                }
-
-                if (test_id === "7") {
-                    return ["intent://ru.sberbankmobile/qrpay?qrPayLinkKey=https://24.kompanion.kg/qr/#000201010211540646010032590015qr.kompanion.kg0104180210161132110106153465120211130212330401005303417520460125909KOMPANION3415BEKZAT+BEKESHOV6304259C"]
-                }
-
-                if (test_id === "8") {
-                    return ["intent://ru.sberbankmobile/qrpay?qrPayLinkKey=00020101021238540010A00000072701240006970418011088152840120208QRIBFTTA530370454061609915802VN62160812d41daee3cf126304F13A"]
-                }
+                // if (test_id === "1") {
+                //     return ["intent://ru.sberbankmobile/qrpay"]
+                // }
+                // if (test_id === "2") {
+                //     return ["intent://ru.sberbankmobile/qrworldwide"]
+                // }
+                // if (test_id === "3") {
+                //     return ["intent://ru.sberbankmobile/qrpay?qrPayLinkKey=000201010211540646010032590015qr.kompanion.kg0104180210161132110106153465120211130212330401005303417520460125909KOMPANION3415BEKZAT+BEKESHOV6304259C"]
+                // }
+                // if (test_id === "4") {
+                //     return ["intent://ru.sberbankmobile/qrpay?qrPayLinkKey=#000201010211540646010032590015qr.kompanion.kg0104180210161132110106153465120211130212330401005303417520460125909KOMPANION3415BEKZAT+BEKESHOV6304259C"]
+                // }
+                // if (test_id === "5") {
+                //     return ["intent://ru.sberbankmobile/qrpay?qrPayLinkKey=000201010211540646010032590015qr.kompanion.kg0104180210161132110106153465120211130212330401005303417520460125909KOMPANION3415BEKZAT%2BBEKESHOV6304259C"]
+                // }
+                // if (test_id === "6") {
+                //     return ["intent://ru.sberbankmobile/qrpay?qrPayLinkKey=%23000201010211540646010032590015qr.kompanion.kg0104180210161132110106153465120211130212330401005303417520460125909KOMPANION3415BEKZAT%2BBEKESHOV6304259C"]
+                // }
+                // if (test_id === "7") {
+                //     return ["intent://ru.sberbankmobile/qrpay?qrPayLinkKey=https://24.kompanion.kg/qr/#000201010211540646010032590015qr.kompanion.kg0104180210161132110106153465120211130212330401005303417520460125909KOMPANION3415BEKZAT+BEKESHOV6304259C"]
+                // }
+                // if (test_id === "8") {
+                //     return ["intent://ru.sberbankmobile/qrpay?qrPayLinkKey=00020101021238540010A00000072701240006970418011088152840120208QRIBFTTA530370454061609915802VN62160812d41daee3cf126304F13A"]
+                // }
 
                 return [
-                    // `intent://ru.sberbankmobile/android-app/ru.sberbankmobile/payments/services/qr`,
-                    // `intent://ru.sberbankmobile/android-app/qrpay?qrPayLinkKey=${emvCoQr}`,
-                    `intent://ru.sberbankmobile/qrpay?qrPayLinkKey=${encodedEmvCoQr}`,
-                    `android-app://ru.sberbankmobile/payments/qrpay?qrPayLinkKey=${encodedEmvCoQr}`,
-                    `sberbankonline://qrpay?qrPayLinkKey=${encodedEmvCoQr}`,
+                    `intent://ru.sberbankmobile/qrworldwide`,
                 ]
             }
         }
