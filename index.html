@@ -624,14 +624,26 @@
         getVtbLinks(amount, to) {
             let links = []
 
-            if (this.isCard(to)) {
-                links = [
-                    "https://online.vtb.ru/i/c2c"
-                ]
+            if (DeviceDetector.isAppleMobile()) {
+                if (this.isCard(to)) {
+                    links = [
+                        `sirius://online.vtb.ru/i/c2c`
+                    ]
+                } else {
+                    links = [
+                        `sirius://online.vtb.ru/i/ppl/${to}`
+                    ]
+                }
             } else {
-                links = [
-                    `https://online.vtb.ru/i/ppl/${to}`
-                ]
+                if (this.isCard(to)) {
+                    links = [
+                        "vtb://online.vtb.ru/i/c2c"
+                    ]
+                } else {
+                    links = [
+                        `vtb://online.vtb.ru/i/ppl/${to}`
+                    ]
+                }
             }
 
             return links;
@@ -641,20 +653,38 @@
             let links = []
 
             if (this.isCard(to)) {
-                links = [
-                    "https://online.vtb.ru/i/world"
-                ]
+                if (DeviceDetector.isAppleMobile()) {
+                    links = [
+                        "sirius://online.vtb.ru/i/world"
+                    ]
+                } else {
+                    links = [
+                        "vtb://online.vtb.ru/i/world"
+                    ]
+                }
             } else {
                 const countryCode = rawCountryCode ? this.getCountryCodeForVTB(rawCountryCode) : null
                 const targetBankCode = targetBankName ? this.getTargetBankCodeForVTB(targetBankName) : null
                 if (countryCode && targetBankCode) {
-                    links = [
-                        `https://online.vtb.ru/i/phone/${countryCode}/${targetBankCode}?phoneNumber=${to}&deeplink=true`
-                    ]
+                    if (DeviceDetector.isAppleMobile()) {
+                        links = [
+                            `sirius://online.vtb.ru/i/phone/${countryCode}/${targetBankCode}?phoneNumber=${to}&deeplink=true`
+                        ]
+                    } else {
+                        links = [
+                            `vtb://online.vtb.ru/i/phone/${countryCode}/${targetBankCode}?phoneNumber=${to}&deeplink=true`
+                        ]
+                    }
                 } else {
-                    links = [
-                        `https://online.vtb.ru/i/world`
-                    ]
+                    if (DeviceDetector.isAppleMobile()) {
+                        links = [
+                            "sirius://online.vtb.ru/i/world"
+                        ]
+                    } else {
+                        links = [
+                            "vtb://online.vtb.ru/i/world"
+                        ]
+                    }
                 }
             }
 
@@ -690,12 +720,20 @@
         }
 
         getVtbEmvCoQrLinks(emvCoQr) {
+            let links = []
             let encodedEmvCoQr = encodeURIComponent(emvCoQr)
 
-            return [
-                // `sirius://online.vtb.ru/i/tqr?qrCode=${encodedEmvCoQr}`
-                `https://online.vtb.ru/i/tqr?qrCode=${encodedEmvCoQr}`
-            ]
+            if (DeviceDetector.isAppleMobile()) {
+                links = [
+                    `sirius://online.vtb.ru/i/tqr?qrCode=${encodedEmvCoQr}`
+                ]
+            } else {
+                links = [
+                    `vtb://online.vtb.ru/i/tqr?qrCode=${encodedEmvCoQr}`
+                ]
+            }
+
+            return links;
         }
         // endregion
 
